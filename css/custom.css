@@ -22,7 +22,8 @@ body {
 }
 
 /* uncertain, need to review*/
-.color-behind-tabs-off.address-top .toolbar-mainbar:after {
+.color-behind-tabs-off.address-top .toolbar-mainbar:after,
+.color-behind-tabs-on.address-top .toolbar-mainbar:after {
   background-color: transparent;
 }
 
@@ -284,7 +285,8 @@ body {
    --------------------------------------------- */
 
 /* Highlight bookmarks when they are hovered */
-.color-behind-tabs-off .bookmark-bar button.highlighted {
+.color-behind-tabs-off .bookmark-bar button.highlighted,
+.color-behind-tabs-on .bookmark-bar button.highlighted {
   background-color: rgba(255, 255, 255, 0.1);
 }
 
@@ -310,7 +312,8 @@ body {
 }
 
 /* Make bookmark bar links have the same background as the bar */
-.color-behind-tabs-off .bookmark-bar button {
+.color-behind-tabs-off .bookmark-bar button,
+.color-behind-tabs-on .bookmark-bar button {
   background-color: var(--colorAccentBg);
 }
 
