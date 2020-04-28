@@ -513,7 +513,7 @@ body {
   /* Custom */
   --lightColorAccent: #d45893;
   --selectedText: #f569acfa;
-  --newTabHoverColor: rgba(0, 199, 246, 0.28);
+  --newTabHoverColor: rgba(246, 0, 91, 0.28);
 }
 
 /* Make the address bar blend in with the background */
@@ -562,6 +562,11 @@ body {
 .private .UrlBar-UrlField.url.vivaldi-addressfield::selection {
   background-color: var(--selectedText);
   color: var(--colorAccentBg);
+}
+
+/* Make new tab button blend less with active tab */
+.private .toolbar .button-toolbar.newtab:hover {
+  background-color: var(--newTabHoverColor);
 }
 
 /* ==========================================================================================================
