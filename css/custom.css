@@ -5,110 +5,19 @@
 /* Change 1: Color variables for browser, non-private mode, changed values have: "!important" added to them */
 body {
   --colorBg: #191e22 !important;
-  --colorBgAlpha: rgba(46, 46, 46, 0.8);
-  --colorBgAlphaHeavy: rgba(38, 38, 38, 0.6);
-  --colorBgAlphaHeavier: rgba(31, 31, 31, 0.2);
-  --colorBgDark: #2a2a2a;
-  --colorBgDarker: #232323;
-  --colorBgLight: #343434;
-  --colorBgLighter: #3a3a3a;
-  --colorBgLightIntense: #343434;
-  --colorBgIntense: #262626;
-  --colorBgIntenser: #1f1f1f;
-  --colorBgInverse: #323232;
-  --colorBgInverser: #3a3a3a;
-  --colorBgFaded: #3a3a3a;
-  --colorFg: #cdc8c0;
-  --colorFgAlpha: rgba(205, 200, 192, 0.1);
   --colorFgIntense: #35444e !important;
-  --colorFgFaded: #a8a39c;
-  --colorFgFadedMore: #858079;
-  --colorHighlightBg: #0190f5;
-  --colorHighlightBgAlpha: rgba(1, 144, 245, 0.25);
-  --colorHighlightBgDark: #0079db;
-  --colorHighlightFg: #f6f6f6;
-  --colorHighlightFgAlpha: rgba(246, 246, 246, 0.5);
-  --colorHighlightFgAlphaHeavy: rgba(246, 246, 246, 0.25);
   --colorAccentBg: #28343c !important;
-  --colorAccentBgAlpha: rgba(139, 139, 139, 0.4);
-  --colorAccentBgAlphaHeavy: rgba(139, 139, 139, 0.25);
   --colorAccentBgDark: rgba(0, 0, 0, 0.19) !important;
-  --colorAccentBgDarker: #2c2c2c;
-  --colorAccentBgFaded: #626262;
-  --colorAccentBgFadedMore: #6b6b6b;
-  --colorAccentBgFadedMost: #8b8b8b;
-  --colorAccentBorder: #4a4a4a;
-  --colorAccentBorderDark: #3a3a3a;
-  --colorAccentFg: #f6f6f6;
-  --colorAccentFgFaded: #a6a6a6;
-  --colorAccentFgAlpha: rgba(246, 246, 246, 0.25);
-  --colorBorder: #242424;
-  --colorBorderHighlight: #087acb;
-  --colorBorderDisabled: #282828;
-  --colorBorderIntense: #161616;
-  --radiusRound: 100px;
-  --radiusRounded: 2px;
-  --radiusRoundedLess: 2px;
-  --radius: 2px;
-  --radiusHalf: calc(var(--radius) * 0.5);
-}
-
-/* Change 2: Change red hover color of browser close button */
-#browser.win.win10 #header #titlebar .window-buttongroup button.window-close:hover {
-  background-color: red;
-}
-
-/* Change 3: Disable white background behind favicon on active tab */
-.tab-position .tab.active .tab-header .favicon {
-  filter: none !important;
-}
-
-/* Change 4: Remove extra space above tabs. Necessitates changes 5-9 */
-#tabs-container.top {
-  padding-top: 0px !important;
-  height: 28px !important;
-}
-
-/* Change 5: remove space above menu, minamize, maximize, and close buttons */
-#titlebar button {
-  padding-top: 0 !important;
-}
-
-/* Change 10: make slimmer close button x for tabs */
-.close svg path {
-  d: path(
-    "M13.67 4.96l-.63-.63L9 8.37 4.96 4.33l-.63.63L8.37 9l-4.04 4.04.63.63L9 9.63l4.04 4.04.63-.63L9.63 9"
-  ) !important;
-}
-
-/* Change 11: options for tab close button changes */
-.close {
-  width: 18px;
-  height: 18px;
-  border-radius: 1px;
-  background-color: rgba(0, 0, 0, 0);
-  opacity: 1;
-}
-
-/* Change 12: make tab close button x red on hover */
-.close:hover svg path,
-.close:active svg path {
-  fill: red;
-}
-
-/* Change 13: make tab close button visible on tabs when the tabs are sufficiently big */
-.tab-position .tab .close {
-  display: block;
-}
-
-/* Change 14: make sure close button is visible on active tab when tabs are shrunk */
-.tab-position .tab.active.tab-small .close {
-  display: block;
-}
-
-/* Change 15: hide close button on non-active tabs when tabs are shrunk */
-.tab-position .tab.tab-small .close {
-  display: none;
+  /* not needed if radius set to 2px */
+  --radiusRounded: 2px !important;
+  --radiusRoundedLess: 2px !important;
+  --radius: 2px !important;
+  --radiusHalf: calc(var(--radius) * 0.5) !important;
+  /* Custom */
+  --closeBtnColor: red;
+  --lightColorAccent: #6db4cd;
+  --selectedText: #8de1fff2;
+  --newTabHoverColor: rgba(0, 199, 246, 0.28);
 }
 
 /* Change 16: uncertain, need to review*/
@@ -141,46 +50,52 @@ body {
   background-color: var(--colorAccentBg);
 }
 
-/* Change 20: removes background from https indicator padlock in address bar */
+/* ---------------------------------------------
+    Address Bar Mods
+   --------------------------------------------- */
+
+/* Removes background from https indicator padlock in address bar */
 .SiteInfoButton.secure,
 .SiteInfoButton.certified {
   background-color: unset;
 }
 
-/* Change 21: making address bar look more like Opera. changes 22 and 23 are for the same purpose */
+/* Make the address bar blend in with the background */
 .toolbar-addressbar .addressfield,
 .toolbar-addressbar .searchfield {
   background-color: var(--colorAccentBg);
   border-color: var(--colorAccentBg);
   color: var(--colorAccentFg);
   fill: var(--colorFg);
-  /* Divider at right edge of address bar */
-  /* border-right: 1px solid; */
 }
 
-/* Change 22:  */
+/* Highlight the whole address bar on hover */
 .toolbar-addressbar .addressfield:hover,
 .private .toolbar-addressbar .searchfield:hover {
   background-color: var(--colorFgIntense);
   border-color: var(--colorFgIntense);
 }
 
-/* Change 23: */
+/* Give a slight border around address bar to show focus */
 .toolbar-addressbar .addressfield:focus-within {
-  background-color: var(--colorAccentBg);
-  border-color: #6db4cd;
+  border-color: var(--lightColorAccent);
   box-shadow: unset;
+  /* prevent hover effect */
+  background-color: var(--colorAccentBg);
 }
 
+/* Color highlighted text in the address bar to match the border */
 .UrlBar-UrlField.url.vivaldi-addressfield::selection {
-  background-color: #8de1fff2;
+  background-color: var(--selectedText);
   color: var(--colorAccentBg);
 }
 
-.UrlBar-UrlField.url.vivaldi-addressfield {
+/* Adjust spacing from padlock */
+/* .UrlBar-UrlField.url.vivaldi-addressfield {
   padding-left: 3px !important;
-}
+} */
 
+/* Border to the right of the address bar */
 .toolbar-addressbar .addressfield::after {
   content: "";
   position: absolute;
@@ -193,14 +108,13 @@ body {
   transition: 0.25s;
 }
 
-.toolbar-addressbar .addressfield:hover::after {
-  background-color: transparent;
-}
-
+/* Remove border after the address bar on hover and focus */
+.toolbar-addressbar .addressfield:hover::after,
 .toolbar-addressbar .addressfield:focus-within::after {
   background-color: transparent;
 }
 
+/* Border to the left of the address bar */
 .toolbar-addressbar .addressfield::before {
   content: "";
   position: absolute;
@@ -213,67 +127,129 @@ body {
   transition: 0.25s;
 }
 
-.toolbar-addressbar .addressfield:hover::before {
-  background-color: transparent;
-}
-
+/* Remove border before the address bar on hover and focus*/
+.toolbar-addressbar .addressfield:hover::before,
 .toolbar-addressbar .addressfield:focus-within::before {
   background-color: transparent;
 }
 
+/* ---------------------------------------------
+    Vivaldi icon Oprification
+   --------------------------------------------- */
+
+/* Shrink  */
 #titlebar button.vivaldi {
   height: 28px !important;
 }
 
+/* Remove icon background */
 #titlebar button.vivaldi svg [fill="#ef3939"] {
   fill: none !important;
 }
 
+/* Fill the V red */
 #titlebar button.vivaldi svg [fill="#fff"] {
   fill: #ef3939 !important;
 }
 
+/* Hover matches address bar below */
 #titlebar button.vivaldi:hover {
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: var(--colorAccentBg);
 }
 
-/* #titlebar button.vivaldi svg [fill="none"]:hover {
-  fill: #ef3939 !important;
-  transition: 0.5s;
-}
+/* ---------------------------------------------
+    Tab Bar Mods
+   --------------------------------------------- */
 
-#titlebar button.vivaldi svg [fill="#ef3939"]:hover {
-  fill: #fff !important;
-  transition: 0.5s;
-} */
-
+/* Slim down new tab + */
 .toolbar .button-toolbar.newtab svg path {
   d: path("M13.45 6.73h-.9v5.82H6.73v.9h5.82v5.82h.9v-5.82h5.82v-.9h-5.82") !important;
   fill-rule: unset !important;
 }
 
+/* Disable white background behind favicon on active tab */
+.tab-position .tab.active .tab-header .favicon {
+  filter: none !important;
+}
+
+/* Remove extra space above tabs. Necessitates changes to window action buttons */
+#tabs-container.top {
+  padding-top: 0px !important;
+  height: 28px !important;
+}
+
+/* Make slimmer close button x for tabs */
+.close svg path {
+  d: path(
+    "M13.67 4.96l-.63-.63L9 8.37 4.96 4.33l-.63.63L8.37 9l-4.04 4.04.63.63L9 9.63l4.04 4.04.63-.63L9.63 9"
+  ) !important;
+}
+
+/* Make tab close button more visible */
+.close {
+  /* Pretty sure not needed... */
+  /* width: 18px;
+  height: 18px; */
+  border-radius: 1px;
+  background-color: rgba(0, 0, 0, 0);
+  opacity: 1;
+}
+
+/* Make tab close button x red on hover */
+.close:hover svg path,
+.close:active svg path {
+  fill: var(--closeBtnColor);
+}
+
+/* Make tab close button visible on tabs when the tabs are sufficiently big */
+/* Make sure close button is visible on active tab when tabs are shrunk */
+.tab-position .tab .close,
+.tab-position .tab.active.tab-small .close {
+  display: block;
+}
+
+/* Hide close button on non-active tabs when tabs are shrunk */
+.tab-position .tab.tab-small .close {
+  display: none;
+}
+
+/* Make new tab button blend less with active tab */
 .toolbar .button-toolbar.newtab:hover {
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: var(--newTabHoverColor);
 }
 
-.color-behind-tabs-off .bookmark-bar button.highlighted {
-  background-color: rgba(255, 255, 255, 0.1);
+/* ---------------------------------------------
+    Window Actions Button Mods
+   --------------------------------------------- */
+
+/* Remove space above menu, minamize, maximize, and close buttons */
+#titlebar button {
+  padding-top: 0 !important;
 }
 
-.window-buttongroup button.window-minimize {
-  height: 28px !important;
+/* Change red hover color of browser close button */
+#browser.win.win10 #header #titlebar .window-buttongroup button.window-close:hover {
+  background-color: var(--closeBtnColor);
 }
 
-.window-buttongroup button.window-maximize {
-  height: 28px !important;
-}
-
+/* Shrink height of all the window action buttons */
+.window-buttongroup button.window-minimize,
+.window-buttongroup button.window-maximize,
 .window-buttongroup button.window-close {
   height: 28px !important;
 }
 
+/* ---------------------------------------------
+    Bookmark Bar Mods
+   --------------------------------------------- */
+
+/* Highlight bookmarks when they are hovered */
+.color-behind-tabs-off .bookmark-bar button.highlighted {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
 #vivaldi-tooltip .tab-solo {
-  display: none;
+  /* display: none; */
 }
 
 .toolbar .button-toolbar [title="Go to homepage"] svg path {
