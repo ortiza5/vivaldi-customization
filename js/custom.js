@@ -703,7 +703,7 @@
       // addSettingsBtn();
       improveFaviconContrast();
       zoomControl();
-      openTabsOnStartup();
+      //   openTabsOnStartup();
     }
   }, 300);
 })();
