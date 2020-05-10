@@ -1,4 +1,4 @@
-(function() {
+(function () {
   function tempAlert(msg, duration, parent) {
     var el = document.createElement("div");
     el.setAttribute(
@@ -9,16 +9,16 @@
     el.innerHTML = msg;
     var toAddTo = document.querySelector(parent);
     toAddTo.appendChild(el);
-    setTimeout(function() {
+    setTimeout(function () {
       el.style.opacity = 0.9;
     }, 100);
     setTimeout(
-      function() {
+      function () {
         el.style.opacity = 0;
       },
       duration > 1000 ? duration - 1000 : duration / 2
     );
-    setTimeout(function() {
+    setTimeout(function () {
       if (el !== null && el.parentNode) {
         el.parentNode.removeChild(el);
       }
@@ -35,7 +35,7 @@
       var tabs = tabStrip.querySelectorAll(":scope > span > .tab-position");
       var isActiveTab;
       var isAfterActive;
-      tabs.forEach(tab => {
+      tabs.forEach((tab) => {
         tab.classList.remove("after-active");
         tab.classList.remove("before-active");
         isActiveTab = tab.querySelector(".tab").classList.contains("active");
@@ -58,7 +58,7 @@
     const observer = new MutationObserver(addBorders);
     const config = {
       childList: true,
-      subtree: true
+      subtree: true,
     };
     observer.observe(tabStrip, config);
 
@@ -88,7 +88,7 @@
 
     // get speed dial folder
     let speeddialFolder;
-    chrome.bookmarks.search("speed dial", function(bookmarks) {
+    chrome.bookmarks.search("speed dial", function (bookmarks) {
       for (let bookmark of bookmarks) {
         if (bookmark.speeddial === true && bookmark.trash === false && bookmark.partner === "") {
           speeddialFolder = bookmark;
@@ -123,27 +123,27 @@
     toolbar.appendChild(saveTabsBtn);
 
     // add click action for button
-    document.getElementById("vivaldiSaveTabsBtn").addEventListener("click", function() {
+    document.getElementById("vivaldiSaveTabsBtn").addEventListener("click", function () {
       let queryInfo = {
-        currentWindow: true
+        currentWindow: true,
       };
-      chrome.tabs.query(queryInfo, function(tabs) {
+      chrome.tabs.query(queryInfo, function (tabs) {
         // make the folder on the speed dial
         var dateFormat = { year: "numeric", month: "numeric", day: "numeric", hour: "numeric", minute: "numeric" };
         var date = new Date();
         let folderTitle = "Tabs: " + date.toLocaleDateString("en-US", dateFormat);
         let folderProperties = {
           parentId: speeddialFolder.id,
-          title: folderTitle
+          title: folderTitle,
         };
-        chrome.bookmarks.create(folderProperties, function(newFolder) {
+        chrome.bookmarks.create(folderProperties, function (newFolder) {
           // saveeach open tab to the new folder
           let folderId = newFolder.id;
-          tabs.forEach(function(tab) {
+          tabs.forEach(function (tab) {
             let bookmarkProperties = {
               parentId: folderId,
               title: tab.title,
-              url: tab.url
+              url: tab.url,
             };
             chrome.bookmarks.create(bookmarkProperties);
           });
@@ -151,7 +151,7 @@
           // open the Start Page if not already open
           let isStartPage = document.querySelector(".dials.speeddial");
           if (!isStartPage) {
-            chrome.tabs.create({ url: "chrome://vivaldi-webui/startpage" }, function() {
+            chrome.tabs.create({ url: "chrome://vivaldi-webui/startpage" }, function () {
               //! BUG: scroll down didn't work
               tempAlert("Current Tabs Saved", 4000, ".startpage");
             });
@@ -187,12 +187,12 @@
 
     toolbar.appendChild(settingsBtn);
 
-    document.getElementById("vivaldiSettingsBtn").addEventListener("click", function() {
+    document.getElementById("vivaldiSettingsBtn").addEventListener("click", function () {
       let isStartPage = document.querySelector(".dials.speeddial");
       var newURL = "vivaldi://settings/";
       if (isStartPage) {
         // window.location.href = newURL;
-        chrome.tabs.query({ currentWindow: true }, function(tab) {
+        chrome.tabs.query({ currentWindow: true }, function (tab) {
           chrome.tabs.update(tab.id, { url: newURL });
         });
       } else {
@@ -218,7 +218,7 @@
       let colorSum = 0;
       let alphaPixels = 0;
 
-      img.onload = function() {
+      img.onload = function () {
         // create canvas to hold the image for analysis
         let canvas = document.createElement("canvas");
         canvas.width = this.width;
@@ -273,7 +273,7 @@
       let factor = a ? parseInt(a) / 255 : 1;
       let colorBrightness = Math.floor((factor * (parseInt(r) * 299 + parseInt(g) * 587 + parseInt(b) * 114)) / 1000);
 
-      getImageBrightness(imageSrc, function(imageBrightness) {
+      getImageBrightness(imageSrc, function (imageBrightness) {
         // very simplistic contrast, seems to work well enough
         contrast = imageBrightness - colorBrightness;
         callback(contrast, colorBrightness, imageBrightness);
@@ -304,7 +304,7 @@
           .getComputedStyle(document.querySelector(elementInBackground))
           .getPropertyValue(property);
 
-        getImageToColorContrast(imageSrc, backgroundColor, function(contrast, colorBrightness, imageBrightness) {
+        getImageToColorContrast(imageSrc, backgroundColor, function (contrast, colorBrightness, imageBrightness) {
           DEBUG && console.log("----------");
           DEBUG && console.log(tabId + ": " + imageSrc);
           DEBUG && console.log("ColorBrightness: " + colorBrightness);
@@ -362,12 +362,12 @@
       DEBUG && console.log("===========================================");
       DEBUG && console.log("updating all tab favicons...");
       let queryInfo = {
-        currentWindow: true
+        currentWindow: true,
       };
-      chrome.tabs.query(queryInfo, function(tabs) {
-        tabs.forEach(function(tab) {
+      chrome.tabs.query(queryInfo, function (tabs) {
+        tabs.forEach(function (tab) {
           let wrapper = {
-            favIconUrl: tab.favIconUrl
+            favIconUrl: tab.favIconUrl,
           };
           improveContrast(tab.id, wrapper);
         });
@@ -468,7 +468,7 @@
         addressBar.insertBefore(zoomBtn, bookmarkBtn);
 
         // listener for the magnifying glass button to expand or collapse the control panel
-        document.getElementById("zoom-panel-btn").addEventListener("click", function() {
+        document.getElementById("zoom-panel-btn").addEventListener("click", function () {
           let nav = document.getElementsByClassName("zoom-panel")[0];
           let elementToTheLeft = nav.parentElement.parentElement.previousElementSibling;
           elementToTheLeft.style.transition = "0.5s";
@@ -546,7 +546,7 @@
 
     // Zooms in the page by the specified increment
     function incrementPercent() {
-      chrome.tabs.getZoom(function(zoomLevel) {
+      chrome.tabs.getZoom(function (zoomLevel) {
         let newZoomLevel = zoomLevel + ZOOM_INCREMENT_AMOUNT / 100;
 
         // Max zoom that Vivaldi allows is 500 %
@@ -558,7 +558,7 @@
 
     // Zooms out the page by the specified increment
     function decrementPercent() {
-      chrome.tabs.getZoom(function(zoomLevel) {
+      chrome.tabs.getZoom(function (zoomLevel) {
         let newZoomLevel = zoomLevel - ZOOM_INCREMENT_AMOUNT / 100;
 
         // Min zoom that Vivaldi allows is 20 %
@@ -596,7 +596,7 @@
       }
 
       // when the element is hovered, reset the interval counter and opens the controls if needed
-      hoverElement.onmouseover = function() {
+      hoverElement.onmouseover = function () {
         count = 0;
         isHovered = true;
         if (MODE !== 1) {
@@ -605,14 +605,14 @@
       };
 
       // when the element loses hover, closes the controls if enough time has passed
-      hoverElement.onmouseout = function() {
+      hoverElement.onmouseout = function () {
         // removes any previous counters (needed for if hover is lost and regained multiple times)
         if (intervalID) {
           clearInterval(intervalID);
         }
         isHovered = false;
         // start a counter to see how long it has been since the element was last hovered
-        intervalID = setInterval(function() {
+        intervalID = setInterval(function () {
           // only increment the counter as long as hover isn't regained
           if (isHovered === false) {
             count++;
@@ -628,9 +628,9 @@
 
     // updates zoom percentage on tab change
     function tabChangeUpdateZoomWrapper() {
-      chrome.tabs.getZoom(function(zoomLevel) {
+      chrome.tabs.getZoom(function (zoomLevel) {
         let zoomInfo = {
-          newZoomFactor: zoomLevel
+          newZoomFactor: zoomLevel,
         };
         updateZoomIcon(zoomInfo);
       });
@@ -643,17 +643,67 @@
     chrome.tabs.onActivated.addListener(tabChangeUpdateZoomWrapper);
   }
 
+  // ============================================================================================================
+  // Open a set of tabs on browser startup
+  //    - made by nomadic on the Vivaldi Forums
+  // ============================================================================================================
+  function openTabsOnStartup() {
+    // CONFIG: ------------
+
+    // Enter the URLs you want to open, Format: ["www.url1.com", "www.url2.com", "www.etc.com"]
+    const URLS = ["chrome://vivaldi-webui/startpage?section=Speed-dials"];
+
+    // Set to false if you want all new normal(not devtool/popup) windows to open the set of tabs
+    const IS_ONLY_OPENED_ON_INITIAL_WINDOW = true;
+
+    // --------------------
+
+    function openTabs() {
+      chrome.tabs.query({ currentWindow: true, active: true }, function (tab) {
+        // Replace a previously open speed dial with one of the urls
+        let currentTabUrl = tab[0].url;
+        if (tab[0].pendingUrl) currentTabUrl = tab[0].pendingUrl;
+
+        if (currentTabUrl.startsWith("chrome://vivaldi-webui/startpage?section=Speed-dials")) {
+          // put first url in speed dial
+          chrome.tabs.update(tab[0].id, { url: URLS[0] });
+          // put the rest in new tabs
+          URLS.slice(1).forEach((tabUrl) => {
+            chrome.tabs.create({ url: tabUrl });
+          });
+        } else {
+          // otherwise just open all the urls in new tabs
+          URLS.forEach((tabUrl) => {
+            chrome.tabs.create({ url: tabUrl });
+          });
+        }
+      });
+    }
+
+    if (IS_ONLY_OPENED_ON_INITIAL_WINDOW) {
+      // Check to see how many windows are open
+      chrome.windows.getAll(function (windows) {
+        if (windows.length <= 1) {
+          openTabs();
+        }
+      });
+    } else {
+      openTabs();
+    }
+  }
+
   // Loop waiting for the browser to load the UI
-  let intervalID = setInterval(function() {
+  let intervalID = setInterval(function () {
     const browser = document.getElementById("browser");
     if (browser) {
+      clearInterval(intervalID);
       tabBorders();
       addCustomButtons();
       // saveTabsToSpeeddialBtn();
       // addSettingsBtn();
       improveFaviconContrast();
       zoomControl();
-      clearInterval(intervalID);
+      openTabsOnStartup();
     }
   }, 300);
 })();
