@@ -576,18 +576,22 @@ body {
     Speed Dial
    ========================================================================================================== */
 
+/* Remove speed dial backgrounds */
 .startpage .dial .thumbnail-image {
   background-color: transparent;
 }
 
+/* Give slight shadow to speed dials */
 .thumbnail-image {
   box-shadow: rgba(0, 0, 0, 0.2) !important;
 }
 
+/* Reduce height of speed dials */
 .startpage .draggable.dial {
   height: 108px !important;
 }
 
+/* Speed dial title style */
 .startpage .dials .dial .button-title {
   background-color: unset;
   color: white;
@@ -595,103 +599,136 @@ body {
   opacity: 1;
 }
 
+/* Focus indicator for speed dial titles */
 .startpage .dials .dial .button-title:hover,
 .startpage .dials .dial .button-title:active,
 .dials .dial:focus-within .editable-title-container .button-title {
   background-color: var(--colorBgIntense);
 }
 
+/* Focus indicator for speed dials */
 .dials .dial:focus-within > .thumbnail-image:after {
   box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.1);
 }
 
-.startpage .startpage-navigation {
-  background-color: unset;
-  box-shadow: unset;
-}
-
-button.button-startpage {
-  min-height: unset;
-  border-radius: 14px !important;
-  border-bottom-width: unset;
-  border: 1.2px solid #ccc;
-  color: #ccc;
-  padding: 2.5px 9px 4px 9px;
-  margin: 25px 10px 15px 10px !important;
-  text-shadow: 0 0 2px #000, 0 0 3px #000, 0 0 5px #000;
-  box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2);
-  transition: 0.1s;
-  font-size: 11px;
-}
-
-button.button-startpage:hover {
-  color: black;
-  background-color: #ccc;
-  border-color: #ccc;
-  text-shadow: 0 0 1px black;
-  fill: black;
-}
-
-button.button-startpage svg {
-  fill: #ccc;
-  filter: drop-shadow(0 0 4px black);
-  margin-bottom: -3px;
-  height: 14px;
-}
-
-button.button-startpage:hover svg {
-  fill: black;
-  filter: unset;
-}
-
-.startpage .startpage-navigation .startpage-navigation-group:last-of-type {
-  border: unset;
-}
-
-.startpage .button-startpage.active {
-  border-color: #ccc;
-  background-color: #ccc;
-  color: black;
-  box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2);
-  margin: 25px 10px 15px 10px;
-  text-shadow: 0 0 1px black;
-  fill: black;
-}
-
-.startpage .startpage-navigation {
-  min-height: unset;
-  margin-left: auto;
-  margin-right: auto;
-  z-index: 1;
-}
-
-.speeddial {
-  margin: unset;
-}
-
-button.button-startpage:after {
-  background-image: unset;
-}
-
-.startpage .startpage-content .sdwrapper .dials-wrapper {
-  padding-top: 9px;
-}
-
-button.button-startpage.up svg {
+/* button.button-startpage.up svg {
   top: 2px;
-}
+} */
 
-.startpage .startpage-folder-navigation button:hover {
-  background-color: #ccc;
-}
-
+/* Remove speed dial folder flap */
 .dials .dial.folder .folder-flap {
   display: none;
 }
 
-.dials .dial .preview {
+/* Set speed dial folder style */
+.dials .dial.folder .preview {
   padding: 5% 5%;
   background-color: var(--colorAccentBg);
+}
+
+/* == Startpage Navigation Mod == */
+/* Config variables for Startpage Navigation Mod */
+:root {
+  --startpageNavBtnPrimary: #ccc;
+  --startpageNavBtnSecondary: #000;
+  --startpageNavBtnRounding: 14px;
+  --startpageNavBtnHeight: 23px;
+  --startpageNavBtnMargin: 10px;
+  --startpageNavBackground: unset;
+  --startpageNavBackgroundGradient: unset;
+  --startpageNavPaddingOnTop: 25px;
+  --startpageNavPaddingOnBottom: 25px;
+  --startpageNavTextShadow: 0 0 2px var(--startpageNavBtnSecondary), 0 0 3px var(--startpageNavBtnSecondary),
+    0 0 5px var(--startpageNavBtnSecondary);
+  --startpageNavIconShadow: drop-shadow(0 0 4px var(--startpageNavBtnSecondary));
+}
+
+/* Remove Startpage Nav Bar background color and shadow from bottom */
+.startpage .startpage-navigation {
+  background-color: var(--startpageNavBackground);
+  background-image: var(--startpageNavBackgroundGradient);
+  box-shadow: unset;
+  padding-top: var(--startpageNavPaddingOnTop);
+  /* *BUG-FIX: to show dial shadow in top row */
+  padding-bottom: calc(var(--startpageNavPaddingOnBottom) - 2px);
+  min-height: unset;
+}
+
+/* Format buttons for Startpage Nav Bar */
+.startpage .startpage-navigation .button-startpage {
+  height: var(--startpageNavBtnHeight);
+  min-height: unset;
+  border-radius: var(--startpageNavBtnRounding) !important;
+  border-bottom-width: unset;
+  border: 1.2px solid var(--startpageNavBtnPrimary);
+  color: var(--startpageNavBtnPrimary);
+  padding: 2.5px 9px 4px 9px;
+  margin: 0 var(--startpageNavBtnMargin) !important;
+  text-shadow: var(--startpageNavTextShadow);
+  box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2);
+  transition: 0.1s;
+  font-size: 11px;
+  font-weight: 500;
+}
+
+/* On hover or active class fill in background for Startpage Nav Bar buttons*/
+.startpage .startpage-navigation .button-startpage.active,
+.startpage .startpage-navigation .button-startpage:hover {
+  color: var(--startpageNavBtnSecondary);
+  background-color: var(--startpageNavBtnPrimary);
+  text-shadow: 0 0 0.5px var(--startpageNavBtnSecondary);
+}
+
+/* Format icons for Startpage Nav Bar buttons */
+.startpage .startpage-navigation .button-startpage svg {
+  fill: var(--startpageNavBtnPrimary);
+  filter: var(--startpageNavIconShadow);
+  margin-bottom: -3.5px;
+  margin-left: 0.1px;
+  height: 14px;
+}
+
+/* On hover or active class remove shadow and change icon color for Startpage Nav Bar buttons*/
+.startpage .startpage-navigation .button-startpage.active svg,
+.startpage .startpage-navigation .button-startpage:hover svg {
+  fill: var(--startpageNavBtnSecondary);
+  filter: unset;
+}
+
+/* Remove border between speed dial folders and internal pages for Startpage Nav Bar  */
+.startpage .startpage-navigation .startpage-navigation-group:last-of-type {
+  border: unset;
+}
+
+/* Remove color gradient after Startpage Nav Bar buttons */
+button.button-startpage:after {
+  content: unset;
+}
+
+/* Make new speed dial folder add button smaller */
+.startpage .startpage-navigation .button-startpage.add-set {
+  padding-left: 1px;
+  padding-right: 1px;
+}
+
+/* Fill the new speed dial add button icon correctly */
+button.button-startpage.add-set svg path {
+  fill: var(--startpageNavBtnPrimary);
+}
+button.button-startpage.add-set:hover svg path {
+  fill: var(--startpageNavBtnSecondary);
+}
+
+/* Remove gap from the top of the speed dial items */
+.speeddial {
+  margin-top: 0;
+  /* *BUG-FIX: to show dial shadow in top row */
+  padding-top: 2px;
+}
+
+/* Fix search enabled spacing */
+.sdwrapper .iconmenu-container.searchfield {
+  margin: 0px auto 25px;
 }
 
 /* ==========================================================================================================
