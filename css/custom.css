@@ -635,7 +635,6 @@ body {
   --startpageNavBtnHeight: 23px;
   --startpageNavBtnMargin: 10px;
   --startpageNavBackground: unset;
-  --startpageNavBackgroundGradient: unset;
   --startpageNavPaddingOnTop: 25px;
   --startpageNavPaddingOnBottom: 25px;
   --startpageNavTextShadow: 0 0 2px var(--startpageNavBtnSecondary), 0 0 3px var(--startpageNavBtnSecondary),
@@ -645,8 +644,8 @@ body {
 
 /* Remove Startpage Nav Bar background color and shadow from bottom */
 .startpage .startpage-navigation {
-  background-color: var(--startpageNavBackground);
-  background-image: var(--startpageNavBackgroundGradient);
+  background-color: unset;
+  background: var(--startpageNavBackground);
   box-shadow: unset;
   padding-top: var(--startpageNavPaddingOnTop);
   /* *BUG-FIX: to show dial shadow in top row */
