@@ -654,8 +654,14 @@ body {
   min-height: unset;
 }
 
+/* Remove background from folder nav */
+.startpage .startpage-folder-navigation button {
+  background-color: unset;
+}
+
 /* Format buttons for Startpage Nav Bar */
-.startpage .startpage-navigation .button-startpage {
+.startpage .startpage-navigation .button-startpage,
+.startpage .startpage-folder-navigation .button-startpage {
   height: var(--startpageNavBtnHeight);
   min-height: unset;
   border-radius: var(--startpageNavBtnRounding) !important;
@@ -673,26 +679,34 @@ body {
 
 /* On hover or active class fill in background for Startpage Nav Bar buttons*/
 .startpage .startpage-navigation .button-startpage.active,
-.startpage .startpage-navigation .button-startpage:hover {
+.startpage .startpage-navigation .button-startpage:hover,
+.startpage .startpage-folder-navigation .button-startpage:hover {
   color: var(--startpageNavBtnSecondary);
   background-color: var(--startpageNavBtnPrimary);
   text-shadow: 0 0 0.5px var(--startpageNavBtnSecondary);
 }
 
 /* Format icons for Startpage Nav Bar buttons */
-.startpage .startpage-navigation .button-startpage svg {
+.startpage .startpage-navigation .button-startpage svg,
+.startpage .startpage-folder-navigation .button-startpage svg {
   fill: var(--startpageNavBtnPrimary);
   filter: var(--startpageNavIconShadow);
-  margin-bottom: -3.5px;
+  margin-bottom: -3.1px;
   margin-left: 0.1px;
   height: 14px;
 }
 
 /* On hover or active class remove shadow and change icon color for Startpage Nav Bar buttons*/
 .startpage .startpage-navigation .button-startpage.active svg,
-.startpage .startpage-navigation .button-startpage:hover svg {
+.startpage .startpage-navigation .button-startpage:hover svg,
+.startpage .startpage-folder-navigation .button-startpage:hover svg {
   fill: var(--startpageNavBtnSecondary);
   filter: unset;
+}
+
+/* Fix for speed dial folder position */
+button.button-startpage.up svg {
+  position: unset;
 }
 
 /* Remove border between speed dial folders and internal pages for Startpage Nav Bar  */
