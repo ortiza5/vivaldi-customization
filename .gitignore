@@ -1,2 +1,5 @@
 # Shortcut to Vivaldi Files
 *.lnk
+
+# SVG assets
+/assets/*
