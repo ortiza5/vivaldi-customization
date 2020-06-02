@@ -364,6 +364,16 @@ body {
   content: url(data:image/png;base64,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);
 }
 
+/* ---------------------------------------------
+    Status Bar
+   --------------------------------------------- */
+
+/* When using the setting "Status Info Overlay", moves the status info all the way to the corner */
+#webview-container ~ .StatusInfo {
+  bottom: 0;
+  left: 0 !important;
+}
+
 /* ==========================================================================================================
     Popup Dialog Mods - NOT FINISHED AND MESSY
    ========================================================================================================== */
@@ -497,11 +507,6 @@ body {
 
 .cb-form-row select.bookmark-folders {
   cursor: pointer;
-}
-
-#webview-container ~ .StatusInfo {
-  bottom: 0;
-  left: 0 !important;
 }
 
 /* ==========================================================================================================
