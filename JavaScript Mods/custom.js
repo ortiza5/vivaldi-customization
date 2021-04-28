@@ -696,7 +696,7 @@
   // Optional: Adjust Startpage Nav Bar Style on Bookmarks and History Pages
   //    - made by nomadic on the Vivaldi Forums
   // ============================================================================================================
-  function adjustNav() {
+  function adjustStarpageNav() {
     // CONFIG: ------------
     const NAV_PADDING = "8px";
     const NAV_BACKGROUND = "var(--colorBg)";
@@ -742,6 +742,49 @@
     }, 600);
   }
 
+  // ============================================================================================================
+  // Limit history items in address bar dropdown
+  //    - made by nomadic on the Vivaldi Forums
+  // ============================================================================================================
+  function limitHistory() {
+    const SECTION_NAME = "History";
+    let config = {
+      childList: true,
+      subtree: true,
+      // attributes: true,
+    };
+    let urlField = document.querySelector(".UrlField");
+
+    function removeHistoryItemsFromDropdown(mutationRecord) {
+      if (mutationRecord[0].addedNodes.length >= 1) {
+        let dropdownSections = urlField.querySelectorAll(".OmniDropdown-Collection");
+        if (dropdownSections) {
+          dropdownSections.forEach((section) => {
+            sectionObserver.observe(section, config);
+          });
+        }
+      } else {
+        // remove when dropdown is closed
+        sectionObserver.disconnect();
+      }
+    }
+
+    function removeItemsFromSection(mutationRecord) {
+      console.log(mutationRecord);
+      // let section = mutationRecord.target;
+      // let sectionItems = mutationRecord.addedNodes;
+      // console.log(section);
+      // console.log(sectionItems);
+      // if (!section.classList.contains(".OmniLinkItem")) return;
+      // if(item.getAttribute("data-index"))
+    }
+
+    let addressBarObserver = new MutationObserver(removeHistoryItemsFromDropdown);
+    let sectionObserver = new MutationObserver(removeItemsFromSection);
+
+    addressBarObserver.observe(urlField, { childList: true });
+  }
+
   // Loop waiting for the browser to load the UI
   let intervalID = setInterval(function () {
     const browser = document.getElementById("browser");
@@ -754,7 +797,81 @@
       improveFaviconContrast();
       zoomControl();
       //   openTabsOnStartup();
-      adjustNav();
+      adjustStarpageNav();
+      limitHistory();
+    }
+  }, 300);
+})();
+
+function style() {
+  const style = document.createElement("style");
+  style.innerHTML = `
+  .button-toolbar > button[title="Reload current page"], .button-toolbar > button[title="Stop"] { order: 1 }
+  .button-toolbar > button[title="Reload current page"] svg, .button-toolbar > button[title="Stop"] svg { flex: 0 0 22px !important; width: 22px !important; height: 22px !important; margin-left: 4px; margin-top: 8px; }
+  .button-toolbar > button[title="Reload current page"] svg path { d: path('M14.997 6.063L15 1.409l-1.854 1.852-.203-.211A6.953 6.953 0 007.997 1C4.142 1 1 4.143 1 8c0 3.859 3.142 7 6.997 7 3.858 0 6.997-3.141 6.997-7h-1.355a5.647 5.647 0 01-5.642 5.645A5.648 5.648 0 012.355 8a5.647 5.647 0 015.642-5.641 5.6 5.6 0 013.989 1.65l.203.208-1.844 1.847 4.652-.001z') }
+  .button-toolbar > button[title="Stop"] svg path { d: path('M14 2.929L13.07 2 8 7.071 2.929 2 2 2.929 7.071 8 2 13.07l.929.93L8 8.93 13.07 14l.93-.932L8.932 8z') }
+  `;
+  document.getElementsByTagName("head")[0].appendChild(style);
+}
+
+setTimeout(function wait() {
+  const browser = document.getElementById("browser");
+  let urlField = document.querySelector(".toolbar.toolbar-small.toolbar-insideinput");
+  let reloadButton = document.querySelector(".button-toolbar.reload");
+  if (browser) {
+    urlField.appendChild(reloadButton);
+    style();
+  } else {
+    setTimeout(wait, 300);
+  }
+}, 300);
+
+(function () {
+  function moveReloadButton() {
+    function style() {
+      const style = document.createElement("style");
+      style.innerHTML = `
+      .button-toolbar > button[title="Reload current page"], .button-toolbar > button[title="Stop"] { order: 1 }
+      .button-toolbar > button[title="Reload current page"] svg, .button-toolbar > button[title="Stop"] svg { flex: 0 0 22px !important; width: 22px !important; height: 22px !important; margin-left: 4px; margin-top: 8px; }
+      .button-toolbar > button[title="Reload current page"] svg path { d: path('M14.997 6.063L15 1.409l-1.854 1.852-.203-.211A6.953 6.953 0 007.997 1C4.142 1 1 4.143 1 8c0 3.859 3.142 7 6.997 7 3.858 0 6.997-3.141 6.997-7h-1.355a5.647 5.647 0 01-5.642 5.645A5.648 5.648 0 012.355 8a5.647 5.647 0 015.642-5.641 5.6 5.6 0 013.989 1.65l.203.208-1.844 1.847 4.652-.001z') }
+      .button-toolbar > button[title="Stop"] svg path { d: path('M14 2.929L13.07 2 8 7.071 2.929 2 2 2.929 7.071 8 2 13.07l.929.93L8 8.93 13.07 14l.93-.932L8.932 8z') }
+   `;
+      document.getElementsByTagName("head")[0].appendChild(style);
+    }
+
+    function reload(reloadButton) {
+      let urlField = document.querySelector(".toolbar-small.toolbar-insideinput");
+
+      // make sure the buttons are not already added
+      if (urlField.querySelector(".button-toolbar.reload")) return;
+
+      urlField.appendChild(reloadButton);
+    }
+
+    // save the reload button for later usage.
+    const reloadButton = document.querySelector(".button-toolbar.reload");
+
+    let browser = document.getElementById("browser");
+    let observer = new MutationObserver(function (mutations) {
+      mutations.forEach(function (mutation) {
+        // only re-add on new nodes added. The list addedNodes will only have a length attribute when it contains added nodes
+        if (mutation.addedNodes.length) {
+          reload(reloadButton);
+          style();
+        }
+      });
+    });
+    // only need to check childList for added nodes
+    observer.observe(browser, { childList: true });
+
+    reload(reloadButton);
+  }
+
+  let intervalID = setInterval(() => {
+    const browser = document.getElementById("browser");
+    if (browser) {
+      clearInterval(intervalID);
+      moveReloadButton();
     }
   }, 300);
 })();

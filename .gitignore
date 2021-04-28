@@ -3,3 +3,9 @@
 
 # SVG assets
 /assets/*
+
+# Compilation script
+/compilation\ experiment
+
+# Forum tool
+/forum\ quoter/*

@@ -5,10 +5,6 @@
   width: 8px !important;
 }
 
-/**:not(select) {
-  scrollbar-width: 20px !important;
-}*/
-
 ::-webkit-scrollbar-thumb {
   background-clip: padding-box !important;
   background-color: rgb(106, 106, 106) !important;
@@ -32,29 +28,3 @@
 ::-webkit-scrollbar-button {
   display: none;
 }
-
-/*:-webkit-full-screen {
-  overflow: auto !important;
-}*/
-
-/*@media screen and (-webkit-min-device-pixel-ratio:0) { 
-	html {
-		background-color: rgba(255,0,0,0);
-		-webkit-background-clip: text;
-		transition: background-color .8s;
-	}
-	html:hover {
-		background-color: rgba(255,0,0,0.18);  
-	}
-	html::-webkit-scrollbar {
-		width: 8px;
-		height: 8px;
-	}
-	html::-webkit-scrollbar-track {
-		display: none;
-	}
-	html::-webkit-scrollbar-thumb {
-		border-radius: 10px;
-		background-color: inherit;
-	}
-}*/
