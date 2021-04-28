@@ -1,0 +1,63 @@
+/* Multirow Tabs - Modified by @nomadic. Original work by @fpdragon, @potmeklecbohdan, @alexander.gorbovets, and @barbudo2005 */
+
+/* Configuration */
+:root {
+  --tab-width: 200px;
+  --pinned-tab-width: 200px;
+  /* unset (to disable), format: style color thickness (ex.) solid var(--colorFgFadedMost) 1px*/
+  --tab-border: unset;
+  /* To ENABLE fillets on tab corners, use static. To DISABLE, use relative*/
+  --fillets: static;
+  /* Other options: "📌", "🔒", "*", and unset (to disable) */
+  --pinned-indicator: "🔒";
+}
+
+/* Changes to allow multiline tab bar */
+#tabs-tabbar-container {
+  height: auto !important;
+}
+.tab-strip > span,
+.tab-strip > .tab-position {
+  display: inline-block;
+}
+.tab-strip > span > .tab-position {
+  --PositionX: 0px !important;
+  height: 30px !important;
+  width: auto !important;
+}
+.tab-strip > span > .tab-position,
+.toolbar-tabbar > .newtab {
+  position: static;
+}
+
+/* Sets styles for all tabs based on configuration */
+.tab-strip > span > .tab-position > .tab {
+  width: var(--tab-width) !important;
+  position: var(--fillets);
+  border: var(--tab-border);
+}
+
+/* Allow pinned tabs to have seperate width */
+.tab-strip > span > .tab-position > .tab.pinned {
+  width: var(--pinned-tab-width) !important;
+}
+
+/* Indicator for pinned tabs */
+.tab-strip > span > .tab-position > .tab.pinned > .tab-header > span.title::before {
+  content: var(--pinned-indicator);
+  color: gray;
+  filter: grayscale(100%); /* make emoji indicators grayscale */
+  font-size: 12px;
+  width: 23px;
+}
+
+/* Keep title visible on tabs */
+#tabs-container .tab.tab-small.tab-mini .tab-header .title,
+#tabs-container .tab.pinned.tab-mini .tab-header .title {
+  display: flex !important;
+}
+
+/* Fix overflow issue on secondary bar */
+#tabs-subcontainer {
+  flex-basis: unset !important;
+}
