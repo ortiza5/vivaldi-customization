@@ -1,0 +1,79 @@
+.zoom-parent {
+  display: inline-block;
+  position: relative;
+}
+
+.zoom-panel {
+  width: 0;
+  height: 22px;
+  position: absolute;
+  z-index: 1;
+  bottom: -11.5px;
+  right: 0;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  transition: 0.5s;
+  background: var(--colorBgDark);
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.07) 0%,
+    rgba(255, 255, 255, 0.07) 96%,
+    rgba(0, 0, 0, 0) 100%
+  );
+  opacity: 0;
+}
+
+.page-zoom-controls-c {
+  display: inline-block;
+  height: 22px;
+}
+
+.reset-zoom-c {
+  display: inline-block;
+}
+
+.button-toolbar-c > button {
+  height: 22px;
+  border-radius: var(--radiusHalf);
+  border: unset !important;
+  padding-top: unset !important;
+  padding-bottom: unset !important;
+  color: inherit;
+  align-items: center;
+  justify-content: center;
+}
+
+.button-toolbar-c > button:hover {
+  background-color: #46535c;
+}
+
+.button-toolbar-c {
+  display: inline-block;
+}
+
+.button-textonly-c {
+  width: 100% !important;
+  padding-right: 6px !important;
+  padding-left: 6px !important;
+}
+
+#zoom-percent-c {
+  align-self: center;
+  text-align: center;
+  width: 40px;
+  display: inline-block;
+}
+
+.expanded-nav-c {
+  border-radius: var(--radiusHalf);
+  width: 140px !important;
+  opacity: 1;
+}
+
+.expanded-left-c {
+  margin-right: 140px !important;
+}
+
+#zoom-hover-target {
+  transition: 0.5s;
+}

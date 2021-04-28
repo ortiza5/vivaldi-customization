@@ -1,0 +1,44 @@
+.page-zoom-controls-s {
+  display: inline-block;
+  height: 34px;
+}
+
+.button-toolbar-s > button {
+  background-color: transparent;
+  height: 100%;
+  border-radius: var(--radiusHalf);
+  border: unset !important;
+  padding-top: unset !important;
+  padding-bottom: unset !important;
+  color: inherit;
+  align-items: center;
+  justify-content: center;
+}
+
+/* SVG's were slightly too high, couldn't figure out a better solution */
+.button-toolbar-s > button svg {
+  padding-top: 5px;
+  /* Edited to avoid confusion in the future */
+  height: 16px;
+  width: 16px;
+}
+
+.button-toolbar-s > button:hover {
+  background-color: var(--colorAccentBgDark);
+}
+
+.button-toolbar-s {
+  display: inline-block;
+  height: 100%;
+}
+
+.button-textonly-s {
+  width: 100% !important;
+  padding-right: 0 !important;
+  padding-left: 0 !important;
+}
+
+#zoom-percent-s {
+  display: inline-block;
+  width: 40px;
+}
