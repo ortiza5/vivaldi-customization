@@ -5,7 +5,7 @@
 /assets/*
 
 # Compilation script
-/compilation\ experiment
+/compilation\ experiment/*
 
 # Forum tool
 /forum\ quoter/*
