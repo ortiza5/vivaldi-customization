@@ -15,3 +15,7 @@
 ### 4. Open Additional Pages on Startup When Using Last Session Setting
 
 - Forum Link: &nbsp; https://forum.vivaldi.net/topic/46841/open-additional-pages-on-startup-when-using-last-session-setting
+
+### 5. Transparent Startpage Navigation Bar (Configurable)
+
+- Forum Link: &nbsp; https://forum.vivaldi.net/topic/47116/transparent-startpage-navigation-bar-configurable

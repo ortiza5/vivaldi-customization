@@ -1,0 +1,117 @@
+/* == Startpage Navigation Mod - made by nomadic on Vivaldi Forums == */
+/* Config variables for Startpage Navigation Mod */
+:root {
+  --startpageNavBtnPrimary: #ccc;
+  --startpageNavBtnSecondary: #000;
+  --startpageNavBtnRounding: 14px;
+  --startpageNavBtnHeight: 23px;
+  --startpageNavBtnMargin: 10px;
+  --startpageNavBackground: unset;
+  --startpageNavPaddingOnTop: 25px;
+  --startpageNavPaddingOnBottom: 25px;
+  --startpageNavTextShadow: 0 0 2px var(--startpageNavBtnSecondary), 0 0 3px var(--startpageNavBtnSecondary),
+    0 0 5px var(--startpageNavBtnSecondary);
+  --startpageNavIconShadow: drop-shadow(0 0 4px var(--startpageNavBtnSecondary));
+}
+
+/* Remove Startpage Nav Bar background color and shadow from bottom */
+.startpage .startpage-navigation {
+  background-color: unset;
+  background: var(--startpageNavBackground);
+  box-shadow: unset;
+  padding-top: var(--startpageNavPaddingOnTop);
+  /* *BUG-FIX: to show dial shadow in top row */
+  padding-bottom: calc(var(--startpageNavPaddingOnBottom) - 2px);
+  min-height: unset;
+}
+
+/* Remove background from folder nav */
+.startpage .startpage-folder-navigation button {
+  background-color: unset;
+}
+
+/* Format buttons for Startpage Nav Bar */
+.startpage .startpage-navigation .button-startpage,
+.startpage .startpage-folder-navigation .button-startpage {
+  height: var(--startpageNavBtnHeight);
+  min-height: unset;
+  border-radius: var(--startpageNavBtnRounding) !important;
+  border-bottom-width: unset;
+  border: 1.2px solid var(--startpageNavBtnPrimary);
+  color: var(--startpageNavBtnPrimary);
+  padding: 2.5px 9px 4px 9px;
+  margin: 0 var(--startpageNavBtnMargin) !important;
+  text-shadow: var(--startpageNavTextShadow);
+  box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2);
+  transition: 0.1s;
+  font-size: 11px;
+  font-weight: 500;
+}
+
+/* On hover or active class fill in background for Startpage Nav Bar buttons*/
+.startpage .startpage-navigation .button-startpage.active,
+.startpage .startpage-navigation .button-startpage:hover,
+.startpage .startpage-folder-navigation .button-startpage:hover {
+  color: var(--startpageNavBtnSecondary);
+  background-color: var(--startpageNavBtnPrimary);
+  text-shadow: 0 0 0.5px var(--startpageNavBtnSecondary);
+}
+
+/* Format icons for Startpage Nav Bar buttons */
+.startpage .startpage-navigation .button-startpage svg,
+.startpage .startpage-folder-navigation .button-startpage svg {
+  fill: var(--startpageNavBtnPrimary);
+  filter: var(--startpageNavIconShadow);
+  margin-bottom: -3.1px;
+  margin-left: 0.1px;
+  height: 14px;
+}
+
+/* On hover or active class remove shadow and change icon color for Startpage Nav Bar buttons*/
+.startpage .startpage-navigation .button-startpage.active svg,
+.startpage .startpage-navigation .button-startpage:hover svg,
+.startpage .startpage-folder-navigation .button-startpage:hover svg {
+  fill: var(--startpageNavBtnSecondary);
+  filter: unset;
+}
+
+/* Fix for speed dial folder back button icon position */
+button.button-startpage.up-level svg {
+  position: unset;
+}
+
+/* Remove border between speed dial folders and internal pages for Startpage Nav Bar  */
+.startpage .startpage-navigation .startpage-navigation-group:last-of-type {
+  border: unset;
+}
+
+/* Remove color gradient after Startpage Nav Bar buttons */
+button.button-startpage:after {
+  content: unset;
+}
+
+/* Make new speed dial folder add button smaller */
+.startpage .startpage-navigation .button-startpage.add-set {
+  padding-left: 1px;
+  padding-right: 1px;
+}
+
+/* Fill the new speed dial add button icon correctly */
+button.button-startpage.add-set svg path {
+  fill: var(--startpageNavBtnPrimary);
+}
+button.button-startpage.add-set:hover svg path {
+  fill: var(--startpageNavBtnSecondary);
+}
+
+/* Remove gap from the top of the speed dial items */
+.speeddial {
+  margin-top: 0;
+  /* *BUG-FIX: to show dial shadow in top row */
+  padding-top: 2px;
+}
+
+/* Fix search enabled spacing */
+.sdwrapper .iconmenu-container.searchfield {
+  margin: 0px auto 25px;
+}
