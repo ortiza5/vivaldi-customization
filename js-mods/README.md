@@ -11,3 +11,7 @@
 ### 3. Save All Tabs to Speed Dial Folder
 
 - Forum Link: &nbsp; https://forum.vivaldi.net/topic/45241/save-all-tabs-to-speed-dial-folder/
+
+### 4. Open Additional Pages on Startup When Using Last Session Setting
+
+- Forum Link: &nbsp; https://forum.vivaldi.net/topic/46841/open-additional-pages-on-startup-when-using-last-session-setting
