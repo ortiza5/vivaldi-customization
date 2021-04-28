@@ -24,3 +24,7 @@
 
 - Forum Link: &nbsp; https://forum.vivaldi.net/topic/47728/context-menu-option-to-go-to-parent-tab
 - Extension: &nbsp; &nbsp; https://github.com/ortiza5/go-to-parent-tab
+
+### 6. Open Local Program from the Start Page/ a Bookmark
+
+- Forum Link: &nbsp; https://forum.vivaldi.net/topic/55260/open-local-program-from-the-start-page-a-bookmark

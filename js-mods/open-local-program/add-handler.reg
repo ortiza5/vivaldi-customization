@@ -1,0 +1,15 @@
+Windows Registry Editor Version 5.00
+
+[HKEY_CLASSES_ROOT\example]
+@="URL:Vivaldi Program Launch example Protocol"
+"URL Protocol"=""
+
+[HKEY_CLASSES_ROOT\example\DefaultIcon]
+@="appurl.ps1,1"
+
+[HKEY_CLASSES_ROOT\example\shell]
+
+[HKEY_CLASSES_ROOT\example\shell\open]
+
+[HKEY_CLASSES_ROOT\example\shell\open\command]
+@="\"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\" -ExecutionPolicy Bypass -File \"C:\\appurl.ps1\" \"%1\""
