@@ -19,3 +19,8 @@
 ### 5. Transparent Startpage Navigation Bar (Configurable)
 
 - Forum Link: &nbsp; https://forum.vivaldi.net/topic/47116/transparent-startpage-navigation-bar-configurable
+
+### 6. Context Menu Option to Go to "Parent Tab"
+
+- Forum Link: &nbsp; https://forum.vivaldi.net/topic/47728/context-menu-option-to-go-to-parent-tab
+- Extension: &nbsp; &nbsp; https://github.com/ortiza5/go-to-parent-tab
