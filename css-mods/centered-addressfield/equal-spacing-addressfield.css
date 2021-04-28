@@ -1,0 +1,38 @@
+/* Version with equal spacing on both sides o */
+/* --- START CONFIGURATION --- */
+.UrlBar {
+  --widthOfAddressBar: 60%;
+}
+/* --- END CONFIGURATION --- */
+
+.UrlBar {
+  -webkit-app-region: drag; /* Allow dragging window from UrlBar */
+  display: grid;
+  grid-template-areas: "nav space1 url space2 search profile extensions";
+  grid-template-columns: auto 1fr minmax(min-content, var(--widthOfAddressBar)) 1fr auto auto auto;
+}
+
+.UrlBar > div:first-child {
+  grid-area: nav;
+  min-width: fit-content;
+}
+
+.UrlBar-AddressField {
+  grid-area: url;
+}
+
+.UrlBar > .button-toolbar:not(.profile-popup), /* search field button */
+.UrlBar-SearchField {
+  grid-area: search;
+  min-width: fit-content;
+}
+
+.UrlBar .profile-popup {
+  grid-area: profile;
+  min-width: fit-content;
+}
+
+.UrlBar .toolbar-extensions {
+  grid-area: extensions;
+  min-width: fit-content;
+}

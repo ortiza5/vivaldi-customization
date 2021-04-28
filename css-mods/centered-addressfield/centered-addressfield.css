@@ -1,0 +1,70 @@
+/* Title:       UrlBar Spacing - Centered Address Field [CSS Only Version]
+ * URL:         https://forum.vivaldi.net/topic/60045/urlbar-spacing-centered-address-field-css-only-version
+ * Description: Adds a flexible margin around the Addressfield, depending on width of the window. The window can be dragged by clicking the margins.
+ * Author(s):   @nomadic, @luetage, and @sjudenim
+ * CopyRight:   No Copyright Reserved
+*/
+
+/* --- START CONFIGURATION --- */
+.UrlBar {
+  --widthOfAddressBar: 55%;
+  /* Number of extensions including the hidden toggle button */
+  --numberOfExtensions: 1;
+}
+/* --- END CONFIGURATION --- */
+
+.UrlBar {
+  -webkit-app-region: drag; /* Allow dragging window from UrlBar */
+  display: grid;
+  grid-template-columns: 1fr minmax(min-content, var(--widthOfAddressBar)) 1fr;
+  /* Do Not Edit */
+  --buttonWidth: 34px;
+  --extensionsLeftBorderWidth: min(6px, calc(var(--numberOfExtensions) * 6px));
+  --extensionsWidth: calc(max(var(--numberOfExtensions), 1) * var(--buttonWidth) + var(--extensionsLeftBorderWidth));
+}
+
+/* prevent navigation controls from being squished on window resize */
+.UrlBar div:first-child {
+  min-width: fit-content;
+}
+
+/* Place the right elements in the same grid cell and space accordingly */
+.UrlBar .toolbar-extensions,
+.UrlBar .profile-popup,
+.UrlBar > .button-toolbar:not(.profile-popup), /* search field button */
+.UrlBar .UrlBar-SearchField {
+  grid-column: 3 / 4;
+  grid-row: 1 / 2;
+  width: min-content;
+  margin-left: auto;
+}
+.UrlBar > div:nth-last-child(2).profile-popup,
+.UrlBar > div:nth-last-child(2).button-toolbar:not(.profile-popup) {
+  margin-right: var(--extensionsWidth);
+}
+.UrlBar > div:nth-last-child(2).UrlBar-SearchField {
+  margin-right: calc(var(--extensionsWidth) - var(--extensionsLeftBorderWidth));
+}
+.UrlBar > div:nth-last-child(3).button-toolbar:not(.profile-popup) {
+  margin-right: calc(var(--extensionsWidth) + var(--buttonWidth));
+}
+.UrlBar > div:nth-last-child(3).UrlBar-SearchField {
+  margin-right: calc(var(--extensionsWidth) + var(--buttonWidth) + 3px);
+}
+
+/* Add border between search field button and extensions */
+.UrlBar
+  > div:nth-last-child(2).button-toolbar:not(.profile-popup)
+  + .toolbar-extensions
+  .button-toolbar:not(.button-narrow):first-of-type:before {
+  content: "";
+  position: absolute;
+  display: block;
+  top: 6px;
+  left: -3px;
+  width: 1px;
+  height: 22px;
+  border-radius: 100%;
+  background: var(--colorAccentFg);
+  opacity: 0.2;
+}
