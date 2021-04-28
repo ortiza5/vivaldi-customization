@@ -1,0 +1,4 @@
+/* Removes the white outline around the active tab's favicon*/
+.tab-position .tab.active .tab-header .favicon {
+  filter: none !important;
+}
