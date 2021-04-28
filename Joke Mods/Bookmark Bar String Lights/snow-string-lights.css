@@ -1,0 +1,10 @@
+.bookmark-bar:after {
+  content: "";
+  position: absolute;
+  top: 47px;
+  width: 100%;
+  height: 46px;
+  background-size: 530px;
+  background-image: url("https://i.imgur.com/t6tf078.png");
+  z-index: 1;
+}
