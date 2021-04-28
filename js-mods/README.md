@@ -24,3 +24,11 @@
 
 - Forum Link: &nbsp; https://forum.vivaldi.net/topic/47728/context-menu-option-to-go-to-parent-tab
 - Extension: &nbsp; &nbsp; https://github.com/ortiza5/go-to-parent-tab
+
+### 7. Hibernate Background Tabs - Status Bar Button Version
+
+- Forum Link: &nbsp; https://forum.vivaldi.net/post/396130
+
+### 8. Hibernate Background Tabs - Keyboard Shortcut / Hotkey Version
+
+- Forum Link: &nbsp; https://forum.vivaldi.net/topic/60172/hibernate-background-tabs-keyboard-shortcut-hotkey
