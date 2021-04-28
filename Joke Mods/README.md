@@ -1,7 +1,5 @@
 # Vivaldi Customization:
 
----
-
 ## Joke Mods:
 
 ### 1. Bookmark Bar String Lights
