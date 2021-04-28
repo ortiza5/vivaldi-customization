@@ -7,3 +7,7 @@
 ### 2. Improved FavIcon Contrast in Tab Bar
 
 - Forum Link: &nbsp; https://forum.vivaldi.net/topic/45100/improved-favicon-contrast-in-tab-bar
+
+### 3. Save All Tabs to Speed Dial Folder
+
+- Forum Link: &nbsp; https://forum.vivaldi.net/topic/45241/save-all-tabs-to-speed-dial-folder/
