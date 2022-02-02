@@ -77,9 +77,11 @@
           break;
 
         case "new-window":
+          chrome.windows.create({ url: bookmark.url });
           break;
 
         case "new-private-window":
+          chrome.windows.create({ incognito: true, url: bookmark.url });
           break;
 
         default:
