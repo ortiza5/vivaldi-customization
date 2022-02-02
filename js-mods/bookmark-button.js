@@ -76,6 +76,12 @@
           });
           break;
 
+        case "new-window":
+          break;
+
+        case "new-private-window":
+          break;
+
         default:
           break;
       }
