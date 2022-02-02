@@ -37,14 +37,37 @@
       removeBookmarkListeners();
     }
 
-    function handleBoormarkOpenEvents(event) {
+    async function handleBoormarkOpenEvents(event) {
+      const isOpenedInBackgroundTab = !event.background;
+      const bookmarkListFromID = await chrome.bookmarks.get(event.id);
+      const bookmark = bookmarkListFromID[0];
+
       switch (event.disposition) {
+        // Depends on the setting for whether the bookmark is opened in a new tab or not
         case "setting":
+          const shouldOpenInNewTab = await vivaldi.prefs.get("vivaldi.bookmarks.open_in_new_tab");
+
+          if (shouldOpenInNewTab) {
+            chrome.tabs.create({ active: isOpenedInBackgroundTab, url: bookmark.url });
+          } else {
+            chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+              const currentTab = tabs[0];
+              chrome.tabs.update(currentTab.id, { url: bookmark.url });
+            });
+          }
           break;
+
         case "new-tab":
+          chrome.tabs.create({ active: isOpenedInBackgroundTab, url: bookmark.url });
           break;
+
         case "current":
+          chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+            const currentTab = tabs[0];
+            chrome.tabs.update(currentTab.id, { url: bookmark.url });
+          });
           break;
+
         default:
           break;
       }
