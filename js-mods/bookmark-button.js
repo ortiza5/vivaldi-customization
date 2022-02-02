@@ -77,11 +77,15 @@
           break;
 
         case "new-window":
-          chrome.windows.create({ url: bookmark.url });
+          chrome.windows.getCurrent((window) => {
+            chrome.windows.create({ url: bookmark.url, height: window.height, width: window.width, top: window.top, left: window.left });
+          });
           break;
 
         case "new-private-window":
-          chrome.windows.create({ incognito: true, url: bookmark.url });
+          chrome.windows.getCurrent((window) => {
+            chrome.windows.create({ incognito: true, url: bookmark.url, height: window.height, width: window.width, top: window.top, left: window.left });
+          });
           break;
 
         default:
