@@ -10,7 +10,59 @@
     // Config ------------
 
     // -------------------
+
+    function handleBookmarkMenuEvents(event) {
+      switch (event.command) {
+        case "addactivetab":
+          break;
+        case "addbookmark":
+          break;
+        case "addfolder":
+          break;
+        case "addseparator":
+          break;
+        case "edit":
+          break;
+        case "cut":
+          break;
+        case "copy":
+          break;
+        case "paste":
+          break;
+        case "delete":
+          break;
+        default:
+          break;
+      }
+      removeBookmarkListeners();
+    }
+
+    function handleBoormarkOpenEvents(event) {
+      switch (event.disposition) {
+        case "setting":
+          break;
+        case "new-tab":
+          break;
+        case "current":
+          break;
+        default:
+          break;
+      }
+      removeBookmarkListeners();
+    }
+
+    function removeBookmarkListeners() {
+      vivaldi.menubarMenu.onBookmarkAction.removeListener(handleBookmarkMenuEvents);
+      vivaldi.menubarMenu.onOpenBookmark.removeListener(handleBoormarkOpenEvents);
+    }
+
     async function openBookmarkDropdown(event) {
+      // clear any existing listeners
+      removeBookmarkListeners();
+
+      vivaldi.menubarMenu.onBookmarkAction.addListener(handleBookmarkMenuEvents);
+      vivaldi.menubarMenu.onOpenBookmark.addListener(handleBoormarkOpenEvents);
+
       const windowID = await vivaldi.windowPrivate.getCurrentId();
       const rect = event.target.getBoundingClientRect();
 
@@ -96,46 +148,6 @@
       });
     });
     addressBarObserver.observe(main, { childList: true });
-
-    //listeners for bookmark menu events
-    vivaldi.menubarMenu.onBookmarkAction.addListener((event) => {
-      switch (event.command) {
-        case "addactivetab":
-          break;
-        case "addbookmark":
-          break;
-        case "addfolder":
-          break;
-        case "addseparator":
-          break;
-        case "edit":
-          break;
-        case "cut":
-          break;
-        case "copy":
-          break;
-        case "paste":
-          break;
-        case "delete":
-          break;
-        default:
-          break;
-      }
-    });
-
-    //listeners for bookmark open events
-    vivaldi.menubarMenu.onBookmarkAction.addListener((event) => {
-      switch (event.disposition) {
-        case "setting":
-          break;
-        case "new-tab":
-          break;
-        case "current":
-          break;
-        default:
-          break;
-      }
-    });
 
     addBookmarkButton();
   }
