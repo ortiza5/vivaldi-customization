@@ -97,6 +97,46 @@
     });
     addressBarObserver.observe(main, { childList: true });
 
+    //listeners for bookmark menu events
+    vivaldi.menubarMenu.onBookmarkAction.addListener((event) => {
+      switch (event.command) {
+        case "addactivetab":
+          break;
+        case "addbookmark":
+          break;
+        case "addfolder":
+          break;
+        case "addseparator":
+          break;
+        case "edit":
+          break;
+        case "cut":
+          break;
+        case "copy":
+          break;
+        case "paste":
+          break;
+        case "delete":
+          break;
+        default:
+          break;
+      }
+    });
+
+    //listeners for bookmark open events
+    vivaldi.menubarMenu.onBookmarkAction.addListener((event) => {
+      switch (event.disposition) {
+        case "setting":
+          break;
+        case "new-tab":
+          break;
+        case "current":
+          break;
+        default:
+          break;
+      }
+    });
+
     addBookmarkButton();
   }
 
