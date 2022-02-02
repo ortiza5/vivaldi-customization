@@ -70,9 +70,7 @@
       customBookmarkBtn.addEventListener("click", openBookmarkDropdown);
     }
 
-    // ==============================================================================
-    // Mutation Observer for Address Bar Changes
-    // ==============================================================================
+    // mutation Observer for Address Bar Changes
     let main = document.getElementById("main");
     // get the initial state of the addressbar as either urlbar or mailbar
     let oldIsMailBarActive = main.firstChild.classList.contains("toolbar-mailbar");
