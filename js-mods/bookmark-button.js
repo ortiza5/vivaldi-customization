@@ -27,9 +27,11 @@
           break;
 
         case "addbookmark":
+          // TODO: No current solution, can't open bookmark dialog
           break;
 
         case "addfolder":
+          // TODO: No current solution, can't open bookmark dialog
           break;
 
         case "addseparator":
@@ -37,18 +39,23 @@
           break;
 
         case "edit":
+          // TODO: No current solution, can't open bookmark dialog
           break;
 
         case "cut":
+          // TODO: No current solution, can't make work with built in function in panel and page
           break;
 
         case "copy":
+          // TODO: No current solution, can't make work with built in function in panel and page
           break;
 
         case "paste":
+          // TODO: No current solution, can't make work with built in function in panel and page
           break;
 
         case "delete":
+          // function works without special handling
           break;
 
         default:
