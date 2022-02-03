@@ -11,7 +11,10 @@
 
     // -------------------
 
-    function handleBookmarkMenuEvents(event) {
+    async function handleBookmarkMenuEvents(event) {
+      const bookmarkListFromID = await chrome.bookmarks.get(event.id);
+      const bookmark = bookmarkListFromID[0];
+
       switch (event.command) {
         case "addactivetab":
           break;
@@ -20,6 +23,7 @@
         case "addfolder":
           break;
         case "addseparator":
+          chrome.bookmarks.create({ index: bookmark.index + 1, parentId: bookmark.parentId, title: "---", url: "http://bookmark.placeholder.url/", description: "separator" });
           break;
         case "edit":
           break;
