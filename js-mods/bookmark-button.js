@@ -17,24 +17,40 @@
 
       switch (event.command) {
         case "addactivetab":
+          const isItemAFolder = bookmark.url === undefined;
+          const parentId = isItemAFolder ? bookmark.id : bookmark.parentId;
+          const index = isItemAFolder ? null : bookmark.index + 1;
+          chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+            const currentTab = tabs[0];
+            chrome.bookmarks.create({ parentId: parentId, index: index, title: currentTab.title, url: currentTab.url });
+          });
           break;
+
         case "addbookmark":
           break;
+
         case "addfolder":
           break;
+
         case "addseparator":
           chrome.bookmarks.create({ index: bookmark.index + 1, parentId: bookmark.parentId, title: "---", url: "http://bookmark.placeholder.url/", description: "separator" });
           break;
+
         case "edit":
           break;
+
         case "cut":
           break;
+
         case "copy":
           break;
+
         case "paste":
           break;
+
         case "delete":
           break;
+
         default:
           break;
       }
