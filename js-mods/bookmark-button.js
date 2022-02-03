@@ -43,15 +43,15 @@
           break;
 
         case "cut":
-          // TODO: No current solution, can't make work with built in function in panel and page
+          // TODO: No current solution, can't make work with built in function in bookmark panel and page
           break;
 
         case "copy":
-          // TODO: No current solution, can't make work with built in function in panel and page
+          // TODO: No current solution, can't make work with built in function in bookmark panel and page
           break;
 
         case "paste":
-          // TODO: No current solution, can't make work with built in function in panel and page
+          // TODO: No current solution, can't make work with built in function in bookmark panel and page
           break;
 
         case "delete":
