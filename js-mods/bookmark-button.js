@@ -67,56 +67,68 @@
     async function handleBoormarkOpenEvents(event) {
       let isOpenedInBackgroundTab = event.background;
       const bookmarkListFromID = await chrome.bookmarks.get(event.id);
-      const bookmark = bookmarkListFromID[0];
+      const bookmarkClicked = bookmarkListFromID[0];
 
-      switch (event.disposition) {
-        // Depends on the setting for whether the bookmark is opened in a new tab or not
-        case "setting":
-          let shouldOpenInNewTab = await vivaldi.prefs.get("vivaldi.bookmarks.open_in_new_tab");
-          const crtlKeyState = event.state.ctrl;
-          const middleMouseState = event.state.center;
+      // determine the bookmarks to open, an individual or a folder of bookmarks
+      const bookmarkChildren = await chrome.bookmarks.getChildren(bookmarkClicked.id);
+      let bookmarksToOpen;
 
-          // adjust whether opened in the background depending on ctrl key or middle mouse press
-          isOpenedInBackgroundTab = isOpenedInBackgroundTab || crtlKeyState || middleMouseState;
+      if (bookmarkChildren.length === 0) {
+        bookmarksToOpen = [bookmarkClicked];
+      } else {
+        bookmarksToOpen = bookmarkChildren;
+      }
 
-          // adjust whether opened in new tab depending on ctrl key or middle mouse press
-          shouldOpenInNewTab = shouldOpenInNewTab || crtlKeyState || middleMouseState;
+      for (bookmark of bookmarksToOpen) {
+        switch (event.disposition) {
+          // Depends on the setting for whether the bookmark is opened in a new tab or not
+          case "setting":
+            let shouldOpenInNewTab = await vivaldi.prefs.get("vivaldi.bookmarks.open_in_new_tab");
+            const crtlKeyState = event.state.ctrl;
+            const middleMouseState = event.state.center;
 
-          if (shouldOpenInNewTab) {
+            // adjust whether opened in the background depending on ctrl key or middle mouse press
+            isOpenedInBackgroundTab = isOpenedInBackgroundTab || crtlKeyState || middleMouseState;
+
+            // adjust whether opened in new tab depending on ctrl key or middle mouse press
+            shouldOpenInNewTab = shouldOpenInNewTab || crtlKeyState || middleMouseState;
+
+            if (shouldOpenInNewTab) {
+              chrome.tabs.create({ active: !isOpenedInBackgroundTab, url: bookmark.url });
+            } else {
+              chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+                const currentTab = tabs[0];
+                chrome.tabs.update(currentTab.id, { url: bookmark.url });
+              });
+            }
+            break;
+
+          case "new-tab":
             chrome.tabs.create({ active: !isOpenedInBackgroundTab, url: bookmark.url });
-          } else {
+            break;
+
+          case "current":
             chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
               const currentTab = tabs[0];
               chrome.tabs.update(currentTab.id, { url: bookmark.url });
             });
-          }
-          break;
+            break;
 
-        case "new-tab":
-          chrome.tabs.create({ active: !isOpenedInBackgroundTab, url: bookmark.url });
-          break;
+          case "new-window":
+            chrome.windows.getCurrent((window) => {
+              chrome.windows.create({ url: bookmark.url, height: window.height, width: window.width, top: window.top, left: window.left });
+            });
+            break;
 
-        case "current":
-          chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-            const currentTab = tabs[0];
-            chrome.tabs.update(currentTab.id, { url: bookmark.url });
-          });
-          break;
+          case "new-private-window":
+            chrome.windows.getCurrent((window) => {
+              chrome.windows.create({ incognito: true, url: bookmark.url, height: window.height, width: window.width, top: window.top, left: window.left });
+            });
+            break;
 
-        case "new-window":
-          chrome.windows.getCurrent((window) => {
-            chrome.windows.create({ url: bookmark.url, height: window.height, width: window.width, top: window.top, left: window.left });
-          });
-          break;
-
-        case "new-private-window":
-          chrome.windows.getCurrent((window) => {
-            chrome.windows.create({ incognito: true, url: bookmark.url, height: window.height, width: window.width, top: window.top, left: window.left });
-          });
-          break;
-
-        default:
-          break;
+          default:
+            break;
+        }
       }
       removeBookmarkListeners();
     }
