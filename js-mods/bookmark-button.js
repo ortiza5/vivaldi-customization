@@ -8,8 +8,12 @@
   // ============================================================================================================
   function bookmarkButton() {
     // Config ------------
+    // The default icon line thickness is 2 for the navigation buttons. The panel icons have a thickness of 1.
+    const BUTTON_ICON_LINE_THICKNESS = 1;
 
     // -------------------
+    // figured out by plotting different stroke widths compared to scale factor needed to reach height of 15px
+    const scaleFactorToMaintainIconHeight = BUTTON_ICON_LINE_THICKNESS * -0.077 + 1.154;
 
     async function handleBookmarkMenuEvents(event) {
       const bookmarkListFromID = await chrome.bookmarks.get(event.id);
@@ -192,8 +196,8 @@
       customBookmarkBtn.innerHTML = `
         <button draggable="true" tabindex="-1" title="Toggle tab bar" type="button" class="ToolbarButton-Button">
           <span>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 26 26">
-              <path d="M12.49 16.54a1 1 0 011.03 0l3.48 2.1V6.41a.26.26 0 000-.02H9.02a.29.29 0 00-.02 0v12.23zM9 19.8l-1 .6v-14c0-1 1-1 1-1h8c1 0 1 1 1 1v14l-1-.6-4-2.4zm8.05-13.4zM9 6.35z"/>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 26 26" style="transform: scale(${scaleFactorToMaintainIconHeight}); transform-origin: 50% 50%;">
+              <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="${BUTTON_ICON_LINE_THICKNESS}" d="M9.3 6.4h7.4v13L13 15.7l-3.7 3.7z"/>
             </svg>
           <span>
         </button>
