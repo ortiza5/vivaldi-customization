@@ -10,18 +10,61 @@
     // Config ------------
     // -------------------
 
-    function fetchQuote() {
-      fetch("https://quotes.rest/qod?language=en")
-        .then((response) => response.json())
-        .then((data) => console.log(data));
+    async function getQuotesFromStorage() {
+      return new Promise((resolve) => {
+        chrome.storage.local.get(["speeddialQuotes"], function (result) {
+          if (result["speeddialQuotes"] === undefined) {
+            resolve([]);
+          } else {
+            resolve(result["speeddialQuotes"]);
+          }
+        });
+      });
     }
 
-    function addQuoteToPage(tabId, changeInfo) {
+    async function fetchNewQuotes() {
+      return new Promise((resolve) => {
+        fetch("https://zenquotes.io/api/quotes/")
+          .then((response) => response.json())
+          .then(async (quotes) => {
+            let newQuotes = [];
+            for (const quote of quotes) {
+              const formatedQuote = { q: quote.q, a: quote.a };
+              newQuotes.push(formatedQuote);
+            }
+
+            const oldQuotes = await getQuotesFromStorage();
+            const allQuotes = oldQuotes.concat(newQuotes);
+
+            chrome.storage.local.set({ speeddialQuotes: allQuotes });
+
+            if (allQuotes.length >= 1) {
+              resolve(allQuotes);
+            } else {
+              resolve([{ q: "APIs are great, but sometimes they break.", q: "nomadic" }]);
+            }
+          });
+      });
+    }
+
+    async function addQuoteToPage(tabId, changeInfo) {
       // if the change wasn't to the URL, ignore it
       if (!changeInfo.url) return;
 
       // inject quote if it is the startpage
       if (changeInfo.url.startsWith("chrome://vivaldi-webui/startpage?section=Speed-dials")) {
+        let quotes = await getQuotesFromStorage();
+
+        // left 10 quotes as a buffer for possible API issues
+        if (quotes.length < 10) {
+          quotes = await fetchNewQuotes();
+        }
+
+        const quote = quotes.shift();
+        console.log(quote);
+
+        // update storage to remove quote already used
+        chrome.storage.local.set({ speeddialQuotes: quotes });
       }
     }
 
