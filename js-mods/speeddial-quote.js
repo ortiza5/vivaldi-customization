@@ -155,14 +155,13 @@
             const currentDaysOnly = new Date(currentTime.getFullYear(), currentTime.getMonth(), currentTime.getDate());
             const oldDaysOnly = new Date(oldTime.getFullYear(), oldTime.getMonth(), oldTime.getDate());
             const daysBetween = (currentDaysOnly.getTime() - oldDaysOnly.getTime()) / millisecondsPerDay;
-            console.log("days: " + daysBetween);
+
             if (daysBetween >= 1) useNewQuoteNextTime = true;
             break;
 
           case "interval":
             const millisecondsBetween = currentTime.getTime() - oldTime.getTime();
             const hoursBetween = (millisecondsBetween / millisecondsPerDay) * 24;
-            console.log("hours: " + hoursBetween);
 
             if (hoursBetween >= NEW_QUOTE_INTERVAL) useNewQuoteNextTime = true;
             break;
