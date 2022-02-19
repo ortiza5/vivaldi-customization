@@ -10,6 +10,7 @@
     // Config ------------
     const QUOTE_WIDTH = "max(50%, 500px)";
     const QUOTE_BACKGROUND = "var(--colorBgAlphaBlur)";
+    const QUOTE_BACKGROUND_BLUR = "var(--backgroundBlur)";
     const QUOTE_FORGROUND_COLOR = "var(--colorFg);";
     const QUOTE_TEXT = "400 1.5rem 'Segoe UI', system-ui, sans-serif;";
     const QUOTE_AUTHOR_TEXT = "400 13px 'Segoe UI', system-ui, sans-serif;";
@@ -34,7 +35,7 @@
           margin: auto;
           padding: 9px 9px 6px 9px;
           margin-top: 36px;
-          backdrop-filter: var(--backgroundBlur);
+          backdrop-filter: ${QUOTE_BACKGROUND_BLUR};
           border-radius: var(--radius);
           animation: 0.4s ease-in fadein;
         }
