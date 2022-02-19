@@ -1,21 +1,28 @@
 (function () {
   // ============================================================================================================
-  // Quote on Speeddial
+  // Quote on Startpage
   // URL:         https://forum.vivaldi.net/
-  // Description: Adds a quote of the day above the speed dials on the startpage
+  // Description: Adds an inspirational quote from zenquotes.io above the speed dials on the startpage
   // Author(s):   @nomadic
   // CopyRight:   No Copyright Reserved
   // ============================================================================================================
   function quotesToSpeeddial() {
     // Config ------------
+    // Variables exposed for easy styling of how the quote looks, but you can also just edit the style.innerHTML
+    //   if you want to do more in depth restyling.
     const QUOTE_WIDTH = "max(50%, 500px)";
     const QUOTE_BACKGROUND = "var(--colorBgAlphaBlur)";
     const QUOTE_BACKGROUND_BLUR = "var(--backgroundBlur)";
     const QUOTE_FORGROUND_COLOR = "var(--colorFg);";
-    const QUOTE_TEXT = "400 1.5rem 'Segoe UI', system-ui, sans-serif;";
-    const QUOTE_AUTHOR_TEXT = "400 13px 'Segoe UI', system-ui, sans-serif;";
+    const QUOTE_FONT = "400 1.5rem 'Segoe UI', system-ui, sans-serif;";
+    const QUOTE_AUTHOR_FONT = "400 13px 'Segoe UI', system-ui, sans-serif;";
 
-    const NEW_QUOTE_FREQUENCY = "daily"; // Options["daily", "interval", "every"]
+    // These options affect how often quotes are refreshed
+    // Options:
+    //   - "daily":    You will only get one quote per day. After midnight, a new quote should load
+    //   - "interval": You get a new quote every n hours, where n is set with NEW_QUOTE_INTERVAL
+    //   - "every":    Every time you open a startpage tab or switch back to one, there will be a new quote
+    const NEW_QUOTE_FREQUENCY = "daily";
     const NEW_QUOTE_INTERVAL = 1;
     // -------------------
 
@@ -41,7 +48,7 @@
         }
 
         #quoteText {
-          font: ${QUOTE_TEXT};
+          font: ${QUOTE_FONT};
           margin: auto;
           width: 90%;
           padding: 10px 10px 0 10px;
@@ -49,7 +56,7 @@
         }
 
         #quoteAuthor {
-          font: ${QUOTE_AUTHOR_TEXT};
+          font: ${QUOTE_AUTHOR_FONT};
           text-align: right;
           margin-top: auto;
         }
@@ -87,6 +94,7 @@
       document.getElementsByTagName("head")[0].appendChild(style);
     }
 
+    // gets all quotes from storage and fails more nicely with an empty array
     async function getQuotesFromStorage() {
       return new Promise((resolve) => {
         chrome.storage.local.get(["speeddialQuotes"], function (result) {
@@ -99,6 +107,7 @@
       });
     }
 
+    // gets a set of 50 new quotes from zenquotes.io and adds them to the end of the collection
     async function fetchNewQuotes() {
       return new Promise((resolve) => {
         fetch("https://zenquotes.io/api/quotes/")
@@ -124,7 +133,8 @@
       });
     }
 
-    async function insertNewQuoteText(wasManuallyrefreshed) {
+    // inputs the actual quote while determining if it should be new or the same as before
+    async function insertQuoteText(wasManuallyrefreshed) {
       const quoteText = document.getElementById("quoteText");
       const quoteAuthor = document.getElementById("quoteAuthor");
 
@@ -186,6 +196,7 @@
       });
     }
 
+    // adds all the html necessary to view the quote
     async function addQuoteStructureToPage() {
       const startpage = document.querySelector(".startpage");
       const oldQuote = document.getElementById("quoteContainer");
@@ -223,18 +234,20 @@
       `;
 
       refrenceElement.insertAdjacentElement(position, quoteContainer);
-      insertNewQuoteText();
+      insertQuoteText();
 
       document.getElementById("attributionLink").addEventListener("click", () => {
         chrome.tabs.create({ url: "https://zenquotes.io/" });
       });
-      document.getElementById("refreshQuote").addEventListener("click", insertNewQuoteText);
+      document.getElementById("refreshQuote").addEventListener("click", insertQuoteText);
     }
 
     injectStyle();
 
+    // only reliable way to detect new tabs including new windows with a single startpage tab
     vivaldi.tabsPrivate.onTabUpdated.addListener(addQuoteStructureToPage);
 
+    // catches all redrawings of the startpage including theme changes and switching back to a tab
     const appendChild = Element.prototype.appendChild;
     Element.prototype.appendChild = function () {
       if (arguments[0].tagName === "DIV") {
