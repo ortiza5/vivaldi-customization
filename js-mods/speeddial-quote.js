@@ -8,14 +8,6 @@
   // ============================================================================================================
   function quotesToSpeeddial() {
     // Config ------------
-    // Variables exposed for easy styling of how the quote looks, but you can also just edit the style.innerHTML
-    //   if you want to do more in depth restyling.
-    const QUOTE_WIDTH = "max(50%, 500px)";
-    const QUOTE_BACKGROUND = "var(--colorBgAlphaBlur)";
-    const QUOTE_BACKGROUND_BLUR = "var(--backgroundBlur)";
-    const QUOTE_FORGROUND_COLOR = "var(--colorFg);";
-    const QUOTE_FONT = "400 1.5rem 'Segoe UI', system-ui, sans-serif;";
-    const QUOTE_AUTHOR_FONT = "400 13px 'Segoe UI', system-ui, sans-serif;";
 
     // These options affect how often quotes are refreshed
     // Options:
@@ -24,6 +16,15 @@
     //   - "every":    Every time you open a startpage tab or switch back to one, there will be a new quote
     const NEW_QUOTE_FREQUENCY = "daily";
     const NEW_QUOTE_INTERVAL = 1;
+
+    // Variables exposed for easy styling of how the quote looks, but you can also just edit the style.innerHTML
+    //   if you want to do more in depth restyling.
+    const QUOTE_WIDTH = "max(50%, 500px)";
+    const QUOTE_BACKGROUND = "var(--colorBgAlphaBlur)";
+    const QUOTE_BACKGROUND_BLUR = "var(--backgroundBlur)";
+    const QUOTE_FORGROUND_COLOR = "var(--colorFg);";
+    const QUOTE_FONT = "400 1.5rem 'Segoe UI', system-ui, sans-serif;";
+    const QUOTE_AUTHOR_FONT = "400 13px 'Segoe UI', system-ui, sans-serif;";
     // -------------------
 
     function injectStyle() {
