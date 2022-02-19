@@ -22,6 +22,11 @@
       const style = document.createElement("style");
       style.id = "quoteStyle";
       style.innerHTML = `
+        @keyframes fadein {
+          from { opacity: 0; }
+          to { opacity: 1; }
+        }
+
         #quoteContainer {
           background: ${QUOTE_BACKGROUND};
           color: ${QUOTE_FORGROUND_COLOR};
@@ -31,13 +36,14 @@
           margin-top: 36px;
           backdrop-filter: var(--backgroundBlur);
           border-radius: var(--radius);
+          animation: 0.4s ease-in fadein;
         }
 
         #quoteText {
           font: ${QUOTE_TEXT};
           margin: auto;
           width: 90%;
-          padding: 10px;
+          padding: 10px 10px 0 10px;
           text-align: center;
         }
 
