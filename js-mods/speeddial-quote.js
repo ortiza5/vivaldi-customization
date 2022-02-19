@@ -200,6 +200,13 @@
     async function addQuoteStructureToPage() {
       const startpage = document.querySelector(".startpage");
       const oldQuote = document.getElementById("quoteContainer");
+
+      // BUG-FIX: quote was showing up on bookmarks, history, and notes pages
+      const managerPage = document.querySelector(".webpageview.active .sdwrapper .manager");
+      if (managerPage) {
+        if (oldQuote) oldQuote.remove();
+      }
+
       // check if already exists and elements are valid
       if (oldQuote || !startpage) return;
 
