@@ -33,41 +33,47 @@
           border-radius: var(--radius);
         }
 
-        .quote {
-          margin: auto;
-          width: 90%;
-          padding-bottom: 10px;
-        }
-
         #quoteText {
           font: ${QUOTE_TEXT};
-          margin: unset;
+          margin: auto;
+          width: 90%;
           padding: 10px;
+          text-align: center;
         }
 
         #quoteAuthor {
           font: ${QUOTE_AUTHOR_TEXT};
           text-align: right;
+          margin-top: auto;
         }
 
-        .quoteHelper {
+        .quoteBottomRow {
           display: flex;
           justify-content: space-between;
         }
 
-        .quoteHelper > p {
+        .quoteBottomRow > p {
           margin-top: auto;
           font-size: 11px;
           color: gray;
           opacity: 0.9;
         }
-        .quoteHelper > p > a {
+        .quoteBottomRow > p > a {
           color: unset;
         }
 
         #refreshQuote {
+          height: 20px;
           background-color: unset;
           border: unset;
+          transition: transform 0.5s;
+        }
+        #refreshQuote:active {
+          transform: rotate(360deg);
+        }
+
+        .quoteBottomRight {
+          display: flex;
         }
       `;
 
@@ -195,16 +201,18 @@
       quoteContainer.id = "quoteContainer";
       quoteContainer.innerHTML = `
         <div class="quote">
-          <blockquote id="quoteText">"${quote.q}"</blockquote>
-          <p id="quoteAuthor">- ${quote.a}</p>
-        </div>
-        <div class="quoteHelper">
-          <p>provided by <a href="https://zenquotes.io/" target="_blank">ZenQuotes API</a></p>
-          <button id="refreshQuote">
-            <svg viewBox="0 0 26 26" height="20px" xmlns="http://www.w3.org/2000/svg">
-              <path d="M20 6.20711C20 5.76166 19.4614 5.53857 19.1464 5.85355L17.2797 7.72031C16.9669 7.46165 16.632 7.22741 16.2774 7.02069C14.7393 6.12402 12.9324 5.80372 11.1799 6.1171C9.4273 6.43048 7.84336 7.35709 6.71134 8.73121C5.57932 10.1053 4.97303 11.8373 5.00092 13.6175C5.02881 15.3976 5.68905 17.1098 6.86356 18.4478C8.03807 19.7858 9.65025 20.6623 11.4118 20.9206C13.1733 21.179 14.9693 20.8022 16.4785 19.8578C17.5598 19.1812 18.4434 18.2447 19.0553 17.1439C19.0803 17.099 19.1048 17.0538 19.1288 17.0084C19.1844 16.9033 19.2376 16.7968 19.2883 16.689C19.5213 16.193 19.2261 15.6315 18.7038 15.466C18.2666 15.3274 17.81 15.5117 17.5224 15.8594C17.4823 15.9079 17.4455 15.9596 17.4125 16.014C17.3994 16.0356 17.3869 16.0576 17.375 16.0801C16.9237 16.9329 16.2535 17.6577 15.4259 18.1757C14.3159 18.8702 12.9951 19.1473 11.6997 18.9573C10.4042 18.7673 9.21861 18.1227 8.35485 17.1387C7.49109 16.1547 7.00554 14.8955 6.98503 13.5864C6.96452 12.2772 7.41039 11.0035 8.24291 9.99293C9.07542 8.98238 10.2403 8.30093 11.5291 8.07047C12.818 7.84001 14.1468 8.07556 15.278 8.73499C15.4839 8.85508 15.6809 8.9878 15.868 9.13202L13.8536 11.1464C13.5386 11.4614 13.7617 12 14.2071 12H20V6.20711Z"></path>
-            </svg>
-          </button>
+          <blockquote id="quoteText"></blockquote>
+          <div class="quoteBottomRow">
+            <p>provided by <a href="https://zenquotes.io/" target="_blank" id="attributionLink">ZenQuotes API</a></p>
+            <div class="quoteBottomRight">
+              <p id="quoteAuthor"></p>
+              <button id="refreshQuote">
+                <svg viewBox="0 0 26 26" height="20px" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M20 6.20711C20 5.76166 19.4614 5.53857 19.1464 5.85355L17.2797 7.72031C16.9669 7.46165 16.632 7.22741 16.2774 7.02069C14.7393 6.12402 12.9324 5.80372 11.1799 6.1171C9.4273 6.43048 7.84336 7.35709 6.71134 8.73121C5.57932 10.1053 4.97303 11.8373 5.00092 13.6175C5.02881 15.3976 5.68905 17.1098 6.86356 18.4478C8.03807 19.7858 9.65025 20.6623 11.4118 20.9206C13.1733 21.179 14.9693 20.8022 16.4785 19.8578C17.5598 19.1812 18.4434 18.2447 19.0553 17.1439C19.0803 17.099 19.1048 17.0538 19.1288 17.0084C19.1844 16.9033 19.2376 16.7968 19.2883 16.689C19.5213 16.193 19.2261 15.6315 18.7038 15.466C18.2666 15.3274 17.81 15.5117 17.5224 15.8594C17.4823 15.9079 17.4455 15.9596 17.4125 16.014C17.3994 16.0356 17.3869 16.0576 17.375 16.0801C16.9237 16.9329 16.2535 17.6577 15.4259 18.1757C14.3159 18.8702 12.9951 19.1473 11.6997 18.9573C10.4042 18.7673 9.21861 18.1227 8.35485 17.1387C7.49109 16.1547 7.00554 14.8955 6.98503 13.5864C6.96452 12.2772 7.41039 11.0035 8.24291 9.99293C9.07542 8.98238 10.2403 8.30093 11.5291 8.07047C12.818 7.84001 14.1468 8.07556 15.278 8.73499C15.4839 8.85508 15.6809 8.9878 15.868 9.13202L13.8536 11.1464C13.5386 11.4614 13.7617 12 14.2071 12H20V6.20711Z"></path>
+                </svg>
+              </button>
+            </div>
+          </div>
         </div>
       `;
 
