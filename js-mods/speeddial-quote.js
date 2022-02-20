@@ -13,6 +13,9 @@
     const QUOTE_FORGROUND_COLOR = "var(--colorFg);";
     const QUOTE_TEXT = "400 1.5rem 'Segoe UI', system-ui, sans-serif;";
     const QUOTE_AUTHOR_TEXT = "400 13px 'Segoe UI', system-ui, sans-serif;";
+
+    const NEW_QUOTE_FREQUENCY = "daily"; // Options["daily", "interval", "every"]
+    const NEW_QUOTE_INTERVAL = 1;
     // -------------------
 
     function injectStyle() {
@@ -108,16 +111,11 @@
       });
     }
 
-    async function addQuoteToPage(tabId, changeInfo) {
-      // if the change wasn't to the URL, ignore it
-      if (!changeInfo.url) return;
-      // don't inject quote if it is not the startpage
-      if (!changeInfo.url.startsWith("chrome://vivaldi-webui/startpage?section=Speed-dials")) return;
+    async function insertNewQuoteText(wasManuallyrefreshed) {
+      const quoteText = document.getElementById("quoteText");
+      const quoteAuthor = document.getElementById("quoteAuthor");
 
-      const startpage = document.querySelector(".startpage");
-      const oldQuote = document.getElementById("quoteContainer");
-      // check if already exists and elements are valid
-      if (oldQuote || !startpage) return;
+      if (!quoteText || !quoteAuthor) return;
 
       // getting the quote text
       let quotes = await getQuotesFromStorage();
@@ -125,9 +123,62 @@
       if (quotes.length < 10) {
         quotes = await fetchNewQuotes();
       }
-      const quote = quotes.shift();
-      // update storage to remove quote already used
-      chrome.storage.local.set({ speeddialQuotes: quotes });
+
+      chrome.storage.local.get("speeddialQuotesLastUpdated", (result) => {
+        const millisecondsPerDay = 1000 * 60 * 60 * 24;
+        const currentTime = new Date();
+        let oldTime;
+        if (Object.keys(result).length === 0) {
+          oldTime = new Date();
+          chrome.storage.local.set({ speeddialQuotesLastUpdated: Date.now() });
+        } else {
+          oldTime = new Date(result.speeddialQuotesLastUpdated);
+        }
+
+        let useNewQuoteNextTime = false;
+
+        switch (NEW_QUOTE_FREQUENCY) {
+          default:
+          case "daily":
+            const currentDaysOnly = new Date(currentTime.getFullYear(), currentTime.getMonth(), currentTime.getDate());
+            const oldDaysOnly = new Date(oldTime.getFullYear(), oldTime.getMonth(), oldTime.getDate());
+            const daysBetween = (currentDaysOnly.getTime() - oldDaysOnly.getTime()) / millisecondsPerDay;
+            console.log("days: " + daysBetween);
+            if (daysBetween >= 1) useNewQuoteNextTime = true;
+            break;
+
+          case "interval":
+            const millisecondsBetween = currentTime.getTime() - oldTime.getTime();
+            const hoursBetween = (millisecondsBetween / millisecondsPerDay) * 24;
+            console.log("hours: " + hoursBetween);
+
+            if (hoursBetween >= NEW_QUOTE_INTERVAL) useNewQuoteNextTime = true;
+            break;
+
+          case "every":
+            useNewQuoteNextTime = true;
+            break;
+        }
+
+        // BUG-FIX: update condition wouldn't update the shown quote until next render
+        const quote = wasManuallyrefreshed || useNewQuoteNextTime ? quotes[1] : quotes[0];
+        quotes.shift();
+
+        // update storage to remove quote already used
+        if (useNewQuoteNextTime || wasManuallyrefreshed) {
+          chrome.storage.local.set({ speeddialQuotes: quotes, speeddialQuotesLastUpdated: Date.now() });
+        }
+
+        quoteText.innerHTML = '"' + quote.q + '"';
+        quoteAuthor.innerHTML = "- " + quote.a;
+      });
+    }
+
+    async function addQuoteStructureToPage() {
+      const startpage = document.querySelector(".startpage");
+      const oldQuote = document.getElementById("quoteContainer");
+      // check if already exists and elements are valid
+      if (oldQuote || !startpage) return;
 
       const startpageNav = document.querySelector(".startpage .startpage-navigation");
       let refrenceElement, position;
@@ -158,11 +209,31 @@
       `;
 
       refrenceElement.insertAdjacentElement(position, quoteContainer);
+      insertNewQuoteText();
+
+      document.getElementById("attributionLink").addEventListener("click", () => {
+        chrome.tabs.create({ url: "https://zenquotes.io/" });
+      });
+      document.getElementById("refreshQuote").addEventListener("click", insertNewQuoteText);
     }
 
     injectStyle();
-    // listener for url change
-    chrome.tabs.onUpdated.addListener(addQuoteToPage);
+
+    vivaldi.tabsPrivate.onTabUpdated.addListener(addQuoteStructureToPage);
+
+    const appendChild = Element.prototype.appendChild;
+    Element.prototype.appendChild = function () {
+      if (arguments[0].tagName === "DIV") {
+        setTimeout(
+          function () {
+            if (this.classList.contains("startpage")) {
+              addQuoteStructureToPage();
+            }
+          }.bind(this, arguments[0])
+        );
+      }
+      return appendChild.apply(this, arguments);
+    };
   }
 
   let intervalID = setInterval(() => {
@@ -171,5 +242,5 @@
       clearInterval(intervalID);
       quotesToSpeeddial();
     }
-  }, 300);
+  }, 100);
 })();
