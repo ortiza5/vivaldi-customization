@@ -30,25 +30,32 @@
     function updateZoomIcon(zoomInfo) {
       let newZoom = zoomInfo.newZoomFactor;
       let zoomIconPath;
+      const isMailBar = document.querySelector(".toolbar-mailbar");
+
+      if (isMailBar) return;
 
       // create the button if it isn't already there
       let alreadyExists = document.getElementById("zoomIcon-c");
-      if (!alreadyExists) {
-        // CHANGE: Added in Update #4
-        // a guaranteed div to the left of the button
-        let elementToTheLeft = document.createElement("div");
-        elementToTheLeft.style.transition = "0.5s";
-        elementToTheLeft.id = "el2left";
+      if (alreadyExists) {
+        alreadyExists.remove();
+        document.getElementById("el2left").remove();
+      }
 
-        let zoomBtn = document.createElement("div");
-        zoomBtn.id = "zoom-hover-target";
-        zoomBtn.innerHTML = `
+      // CHANGE: Added in Update #4
+      // a guaranteed div to the left of the button
+      let elementToTheLeft = document.createElement("div");
+      elementToTheLeft.style.transition = "0.5s";
+      elementToTheLeft.id = "el2left";
+
+      let zoomBtn = document.createElement("div");
+      zoomBtn.id = "zoom-hover-target";
+      zoomBtn.innerHTML = `
           <div class="zoom-parent">
             <div class="zoom-panel">
               <div class="page-zoom-controls-c">
                 <div class="button-toolbar button-toolbar-c reset-zoom-c" title="Reset Zoom">
                   <button tabindex="-1" class="button-textonly-c" id="zoom-reset-c">
-                    <span class="button-title">Reset</span>
+                    <span class="button-title-c">Reset</span>
                   </button>
                 </div>
                 <div class="button-toolbar button-toolbar-c" title="Zoom Out">
@@ -83,38 +90,36 @@
           </div>
         `;
 
-        // inserts the button to the left of the bookmark icon
-        const addressBar = document.querySelector(".UrlBar-AddressField");
-        const bookmarkBtn = addressBar.getElementsByClassName("BookmarkButton")[0];
-        let before = bookmarkBtn;
-        if (!bookmarkBtn) {
-          const lastAddressBarElement = document.querySelector(".toolbar-insideinput.toolbar-insideinput.toolbar-insideinput:last-of-type");
-          before = lastAddressBarElement;
-        }
-        addressBar.insertBefore(zoomBtn, before);
-        // CHANGE:Added in Update #4
-        // divs next to the button aren't static,so created my own div to push
-        addressBar.insertBefore(elementToTheLeft, zoomBtn);
+      // inserts the button to the left of the bookmark icon
+      const addressBarEnd = document.querySelector(".UrlBar-AddressField .toolbar-insideinput:last-of-type");
+      const bookmarkBtn = addressBarEnd.getElementsByClassName("BookmarkButton")[0];
+      if (!bookmarkBtn) {
+        addressBarEnd.appendChild(zoomBtn);
+      } else {
+        addressBarEnd.insertBefore(zoomBtn, bookmarkBtn);
+      }
+      // CHANGE:Added in Update #4
+      // divs next to the button aren't static,so created my own div to push
+      addressBarEnd.insertBefore(elementToTheLeft, zoomBtn);
 
-        // listener for the magnifying glass button to expand or collapse the control panel
-        document.getElementById("zoom-panel-btn").addEventListener("click", function () {
-          let nav = document.getElementsByClassName("zoom-panel")[0];
-          navToggle(nav, elementToTheLeft);
-        });
+      // listener for the magnifying glass button to expand or collapse the control panel
+      document.getElementById("zoom-panel-btn").addEventListener("click", function () {
+        let nav = document.getElementsByClassName("zoom-panel")[0];
+        navToggle(nav, elementToTheLeft);
+      });
 
-        // listener for the zoom in button in the zoom control panel
-        document.getElementById("zoom-in-c").addEventListener("click", incrementPercent);
+      // listener for the zoom in button in the zoom control panel
+      document.getElementById("zoom-in-c").addEventListener("click", incrementPercent);
 
-        // listener for the zoom out button in the zoom control panel
-        document.getElementById("zoom-out-c").addEventListener("click", decrementPercent);
+      // listener for the zoom out button in the zoom control panel
+      document.getElementById("zoom-out-c").addEventListener("click", decrementPercent);
 
-        // listener for the zoom reset button in the zoom control panel
-        document.getElementById("zoom-reset-c").addEventListener("click", resetZoom);
+      // listener for the zoom reset button in the zoom control panel
+      document.getElementById("zoom-reset-c").addEventListener("click", resetZoom);
 
-        // starts esentially a hover listener that modes 1 and 2 need
-        if (MODE === 1 || MODE === 2) {
-          zoomPanelHoverTracker();
-        }
+      // starts esentially a hover listener that modes 1 and 2 need
+      if (MODE === 1 || MODE === 2) {
+        zoomPanelHoverTracker();
       }
 
       // set the icon based on the new zoom level
@@ -281,6 +286,33 @@
       };
       updateZoomIcon(zoomInfo);
     });
+
+    // mutation Observer for Address Bar Changes
+    let main = document.getElementsByClassName("mainbar")[0];
+    // get the initial state of the addressbar as either urlbar or mailbar
+    let oldIsMailBarActive = main.firstChild.classList.contains("toolbar-mailbar");
+    let addressBarObserver = new MutationObserver(function (mutations) {
+      mutations.forEach(function (mutation) {
+        // only re-add on new nodes added. The list addedNodes will only have a
+        // length attribute when it contains added nodes
+        if (mutation.addedNodes.length) {
+          // get the new state of the addressbar
+          let isMailBarActive = mutation.addedNodes[0].classList.contains("toolbar-mailbar");
+
+          // if it is different from the previous state, we need to act on it
+          if (oldIsMailBarActive !== isMailBarActive) {
+            // update the old value for comparisons on future mutations
+            oldIsMailBarActive = isMailBarActive;
+            // if the addressbar isn't the mailbar, we can re-add the button
+            if (!isMailBarActive) {
+              // Run all changes that are only in the url bar and not the mail bar
+              tabChangeUpdateZoomWrapper();
+            }
+          }
+        }
+      });
+    });
+    addressBarObserver.observe(main, { childList: true });
   }
 
   // Loop waiting for the browser to load the UI
