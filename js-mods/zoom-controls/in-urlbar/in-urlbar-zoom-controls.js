@@ -35,7 +35,7 @@
       if (isMailBar) return;
 
       // create the button if it isn't already there
-      let alreadyExists = document.getElementById("zoomIcon-c");
+      let alreadyExists = document.getElementById("zoom-hover-target");
       if (alreadyExists) {
         alreadyExists.remove();
         document.getElementById("el2left").remove();
