@@ -42,17 +42,16 @@
 
         let zoomBtn = document.createElement("div");
         zoomBtn.id = "zoom-hover-target";
-        zoomBtn.setAttribute("class", "button-toolbar");
         zoomBtn.innerHTML = `
           <div class="zoom-parent">
             <div class="zoom-panel">
               <div class="page-zoom-controls-c">
-                <div class="button-toolbar-c reset-zoom-c" title="Reset Zoom">
+                <div class="button-toolbar button-toolbar-c reset-zoom-c" title="Reset Zoom">
                   <button tabindex="-1" class="button-textonly-c" id="zoom-reset-c">
                     <span class="button-title">Reset</span>
                   </button>
                 </div>
-                <div class="button-toolbar-c" title="Zoom Out">
+                <div class="button-toolbar button-toolbar-c" title="Zoom Out">
                   <button tabindex="-1" id="zoom-out-c">
                     <span>
                       <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
@@ -62,7 +61,7 @@
                   </button>
                 </div>
                 <span id="zoom-percent-c"></span>
-                <div class="button-toolbar-c" title="Zoom In">
+                <div class="button-toolbar button-toolbar-c" title="Zoom In">
                   <button tabindex="-1" id="zoom-in-c">
                     <span>
                       <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
@@ -74,18 +73,25 @@
               </div>
             </div>
           </div>
-          <button tabindex="-1" title="Adjust Zoom" id="zoom-panel-btn">
-            <span>
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewbox="0 0 16 16" id="zoomIcon-c">
-              </svg>
-            </span>
-          </button>
+          <div class="button-toolbar ZoomButton-Button">
+            <button tabindex="-1" title="Adjust Zoom" id="zoom-panel-btn" type="button" class="ToolbarButton-Button">
+              <span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewbox="0 0 16 16" id="zoomIcon-c">
+                </svg>
+              </span>
+            </button>
+          </div>
         `;
 
         // inserts the button to the left of the bookmark icon
-        let addressBar = document.querySelector(".toolbar.toolbar-small.toolbar-insideinput");
-        let bookmarkBtn = addressBar.getElementsByClassName("create-bookmark")[0];
-        addressBar.insertBefore(zoomBtn, bookmarkBtn);
+        const addressBar = document.querySelector(".UrlBar-AddressField");
+        const bookmarkBtn = addressBar.getElementsByClassName("BookmarkButton")[0];
+        let before = bookmarkBtn;
+        if (!bookmarkBtn) {
+          const lastAddressBarElement = document.querySelector(".toolbar-insideinput.toolbar-insideinput.toolbar-insideinput:last-of-type");
+          before = lastAddressBarElement;
+        }
+        addressBar.insertBefore(zoomBtn, before);
         // CHANGE:Added in Update #4
         // divs next to the button aren't static,so created my own div to push
         addressBar.insertBefore(elementToTheLeft, zoomBtn);
@@ -109,10 +115,6 @@
         if (MODE === 1 || MODE === 2) {
           zoomPanelHoverTracker();
         }
-      } else {
-        // CHANGE: Added in Update #4
-        // make sure button hasn't been moved
-        checkPosition(zoomInfo);
       }
 
       // set the icon based on the new zoom level
@@ -144,12 +146,14 @@
     // Makes the zoom controls slide out
     function openNav(nav, elToLeft) {
       nav.classList.add("expanded-nav-c");
+      nav.parentElement.parentElement.classList.add("zoom-hover-target--active");
       elToLeft.classList.add("expanded-left-c");
     }
 
     // Hides the zoom controls
     function closeNav(nav, elToLeft) {
       nav.classList.remove("expanded-nav-c");
+      nav.parentElement.parentElement.classList.remove("zoom-hover-target--active");
       elToLeft.classList.remove("expanded-left-c");
     }
 
@@ -261,31 +265,6 @@
         updateZoomIcon(zoomInfo);
       });
     }
-
-    // CHANGE: Added in Update #4
-    function checkPosition(zoomInfo) {
-      let zoomBtn = document.getElementById("zoom-hover-target");
-      let elementToTheRight = zoomBtn.nextSibling;
-      if (!elementToTheRight.classList.contains("create-bookmark")) {
-        let elementToTheLeft = document.getElementById("el2left");
-        zoomBtn.remove();
-        elementToTheLeft.remove();
-        updateZoomIcon(zoomInfo);
-      }
-    }
-
-    // CHANGE: Added in Update #4
-    // Watch for buttons being inserted between zoom and bookmark button
-    let observer = new MutationObserver(() => {
-      chrome.tabs.getZoom(function (zoomLevel) {
-        let zoomInfo = {
-          newZoomFactor: zoomLevel,
-        };
-        checkPosition(zoomInfo);
-      });
-    });
-    let addressBar = document.querySelector(".toolbar.toolbar-small.toolbar-insideinput");
-    observer.observe(addressBar, { childList: true });
 
     // zoom change listener
     chrome.tabs.onZoomChange.addListener(updateZoomIcon);
