@@ -1067,7 +1067,7 @@ button.button-startpage.add-set:hover svg path {
 .UrlFragment-HostFragment-Basedomain,
 .UrlFragment-HostFragment-TLD {
   color: #ccc !important;
-  font-weight: bold;
+  text-shadow: 0px 0px 1px #ccc;
 }
 
 .UrlBar-AddressField > .secure + .UrlBar-UrlFieldWrapper,
