@@ -1066,7 +1066,7 @@ button.button-startpage.add-set:hover svg path {
 /* URL Base-domain  */
 .UrlFragment-HostFragment-Basedomain,
 .UrlFragment-HostFragment-TLD {
-  color: #ffe63b !important;
+  color: #ccc !important;
   font-weight: bold;
 }
 
