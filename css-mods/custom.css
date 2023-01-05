@@ -328,6 +328,11 @@
   flex: 0 0 var(--tabContentsHeight);
 }
 
+/* Fix for added height in 5.6 */
+#browser.tabs-top #header {
+  min-height: calc(25px / var(--uiZoomLevel));
+}
+
 /* ---------------------------------------------
     Window Actions Button Mods
    --------------------------------------------- */
@@ -384,10 +389,9 @@
   background-color: rgba(255, 255, 255, 0.1);
 }
 
-/* Remove line between address bar and bookmark bar */
 /* Remove line under address bar and extensions bar */
-.address-top .mainbar > .toolbar-mainbar .toolbar-extensions:after,
-.address-top .mainbar > .toolbar-mainbar:after {
+.address-top .mainbar > .toolbar-mainbar .toolbar-extensions:before,
+.address-top .mainbar > .toolbar-mainbar:before {
   content: unset;
 }
 
@@ -442,6 +446,27 @@
 /* Fix extensions popup border misalignment */
 .extension-popup {
   box-shadow: 0 0 0 1px var(--colorBorder), 0 2px 8px rgba(0, 0, 0, 0.25), 0 0 0 1px var(--colorBorder) inset;
+}
+
+/* Extensions button */
+.toolbar-extensions svg path {
+  d: path("M10 13l3.634-3.634c.504-.504 1.366-.147 1.366.566v6.137c0 .713-.862 1.07-1.366.566l-3.634-3.634z");
+  opacity: 0.5;
+}
+/* Extensions button expanded*/
+.toolbar-extensions .button-toolbar.ExtensionIcon--Hidden + .button-toolbar svg path {
+  transform-origin: center;
+  transform: scaleX(-1);
+}
+
+/* Extensions popup button */
+.toolbar-extensions .extensionPopupIcons svg path {
+  d: path("M 12.5 16 L 8.86568 12.3657 C 8.36171 11.8617 8.71865 11 9.43137 11 L 15.5686 11 C 16.2814 11 16.6383 11.8617 16.1343 12.3657 L 12.5 16 Z");
+}
+/* Extensions popup button expanded */
+.toolbar-extensions .extensionPopupIcons .button-pressed svg path {
+  transform-origin: center;
+  transform: scaleY(-1);
 }
 
 /* ---------------------------------------------
@@ -664,6 +689,9 @@
   text-shadow: 0 0 2px #000, 0 0 3px #000, 0 0 5px #000;
   opacity: 1;
   text-align: center;
+}
+.speeddial .dial > .thumbnail-title {
+  flex-flow: column;
 }
 
 /* Fix title color that was broken by overriding the fg intense color */
