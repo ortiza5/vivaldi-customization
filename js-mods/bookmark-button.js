@@ -1,7 +1,7 @@
 (function () {
   // ============================================================================================================
   // Bookmarks button in front of the address field
-  // URL:         https://forum.vivaldi.net/
+  // URL:         https://forum.vivaldi.net/post/555475
   // Description: Adds a bookmark button in front of the address field that opens a dropdown menu of all bookamrks
   // Author(s):   @nomadic
   // CopyRight:   No Copyright Reserved
@@ -15,7 +15,7 @@
     // figured out by plotting different stroke widths compared to scale factor needed to reach height of 15px
     const scaleFactorToMaintainIconHeight = BUTTON_ICON_LINE_THICKNESS * -0.077 + 1.154;
 
-    async function handleBookmarkMenuEvents(event) {
+    async function handleBookmarkMenuEvents(windowId, event) {
       const bookmarkListFromID = await chrome.bookmarks.get(event.id);
       const bookmark = bookmarkListFromID[0];
 
@@ -68,7 +68,7 @@
       removeBookmarkListeners();
     }
 
-    async function handleBoormarkOpenEvents(event) {
+    async function handleBoormarkOpenEvents(windowId, event) {
       let isOpenedInBackgroundTab = event.background;
       const bookmarkListFromID = await chrome.bookmarks.get(event.id);
       const bookmarkClicked = bookmarkListFromID[0];
@@ -184,17 +184,18 @@
     }
 
     function addBookmarkButton() {
-      const navButtonGroup = document.querySelector(".UrlBar > .toolbar-mainbar.toolbar-droptarget");
+      const addressBar = document.querySelector(".mainbar > .toolbar-mainbar.toolbar-droptarget");
+      const urlField = document.querySelector(".UrlBar-AddressField");
       const oldButton = document.getElementById("customBookmarkBtn");
 
       // check if already exists and elements are valid
-      if (oldButton || !navButtonGroup) return;
+      if (oldButton || !addressBar || !urlField) return;
 
       const customBookmarkBtn = document.createElement("div");
       customBookmarkBtn.id = "customBookmarkBtn";
       customBookmarkBtn.classList.add("button-toolbar");
       customBookmarkBtn.innerHTML = `
-        <button draggable="true" tabindex="-1" title="Toggle tab bar" type="button" class="ToolbarButton-Button">
+        <button draggable="false" tabindex="-1" title="Toggle tab bar" type="button" class="ToolbarButton-Button" name="Bookmarks">
           <span>
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 26 26" style="transform: scale(${scaleFactorToMaintainIconHeight}); transform-origin: 50% 50%;">
               <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="${BUTTON_ICON_LINE_THICKNESS}" d="M9.3 6.4h7.4v13L13 15.7l-3.7 3.7z"/>
@@ -203,13 +204,13 @@
         </button>
       `;
 
-      navButtonGroup.insertAdjacentElement("beforeend", customBookmarkBtn);
+      addressBar.insertBefore(customBookmarkBtn, urlField);
 
       customBookmarkBtn.addEventListener("click", openBookmarkDropdown);
     }
 
     // mutation Observer for Address Bar Changes
-    let main = document.getElementById("main");
+    let main = document.getElementsByClassName("mainbar")[0];
     // get the initial state of the addressbar as either urlbar or mailbar
     let oldIsMailBarActive = main.firstChild.classList.contains("toolbar-mailbar");
     let addressBarObserver = new MutationObserver(function (mutations) {

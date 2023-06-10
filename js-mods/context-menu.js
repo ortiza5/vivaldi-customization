@@ -132,3 +132,8 @@
     }
   }, 300);
 })();
+
+(() => {
+  console.log("hello");
+  return false;
+})();

@@ -5,6 +5,7 @@
   // Description: Adds a status bar button and keyboard shortcut that will hibernate all tabs except the active one
   // Author(s):   @nomadic   [ keyboard shortcut based on a mod by @LonM "Custom Keyboard Shortcuts Mod" ]
   // CopyRight:   No Copyright Reserved
+  // Tested on:   Stable 3.7.2218.58  and  Snapshot 3.8.2259.32
   // ============================================================================================================
   function hibernateBackgroundTabsCombined() {
     // Config ------------

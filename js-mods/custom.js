@@ -300,9 +300,7 @@
           property = "background";
         }
 
-        let backgroundColor = window
-          .getComputedStyle(document.querySelector(elementInBackground))
-          .getPropertyValue(property);
+        let backgroundColor = window.getComputedStyle(document.querySelector(elementInBackground)).getPropertyValue(property);
 
         getImageToColorContrast(imageSrc, backgroundColor, function (contrast, colorBrightness, imageBrightness) {
           DEBUG && console.log("----------");
@@ -321,8 +319,7 @@
             // scale the contrast value onto a new range for filter values that work better
             brightnessAmount = ((contrast - oldMin) * (newMax - newMin)) / (oldMax - oldMin) + newMin;
             // constrain the filter values to stay within the bounds
-            brightnessAmount =
-              brightnessAmount > newMin ? newMin : brightnessAmount < newMax ? newMax : brightnessAmount;
+            brightnessAmount = brightnessAmount > newMin ? newMin : brightnessAmount < newMax ? newMax : brightnessAmount;
             // invert the color if it is too dark for a brightness filter to work
             if (imageBrightness < 10) {
               inverted = "invert(1) ";
@@ -337,8 +334,7 @@
             // scale the contrast value onto a new range for filter values that work better
             brightnessAmount = ((contrast - oldMin) * (newMax - newMin)) / (oldMax - oldMin) + newMin;
             // constrain the filter values to stay within the bounds
-            brightnessAmount =
-              brightnessAmount > newMax ? newMax : brightnessAmount < newMin ? newMin : brightnessAmount;
+            brightnessAmount = brightnessAmount > newMax ? newMax : brightnessAmount < newMin ? newMin : brightnessAmount;
             // invert the color if it is too light for a brightness filter to work
             if (imageBrightness > 245) {
               inverted = "invert(1) ";
@@ -347,9 +343,7 @@
           }
 
           // add the filters to the favicon
-          tab
-            .querySelector("img")
-            .setAttribute("style", `filter: brightness(${brightnessAmount}) ${inverted}!important`);
+          tab.querySelector("img").setAttribute("style", `filter: brightness(${brightnessAmount}) ${inverted}!important`);
 
           DEBUG && console.log("Filter: " + brightnessAmount);
           DEBUG && console.log("Inverted: " + (inverted === "" ? "False" : "True"));
@@ -707,10 +701,7 @@
       if (!changeInfo.url) return;
 
       // Inject new values on bookmarks and history pages
-      if (
-        changeInfo.url.startsWith("chrome://vivaldi-webui/startpage?section=bookmarks") ||
-        changeInfo.url.startsWith("chrome://vivaldi-webui/startpage?section=history")
-      ) {
+      if (changeInfo.url.startsWith("chrome://vivaldi-webui/startpage?section=bookmarks") || changeInfo.url.startsWith("chrome://vivaldi-webui/startpage?section=history")) {
         let el = document.querySelector(".webpageview.active");
         el.style.setProperty("--startpageNavBackground", NAV_BACKGROUND);
         el.style.setProperty("--startpageNavPaddingOnTop", NAV_PADDING);
