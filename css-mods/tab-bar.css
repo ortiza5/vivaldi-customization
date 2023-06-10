@@ -1,0 +1,154 @@
+#tabs-tabbar-container .button-toolbar > button {
+  height: var(--tabBarHeight) !important;
+}
+.tab-position .tab .tab-header {
+  flex: 0 0 var(--tabBarHeight);
+}
+.tab-position .tab .favicon {
+  --tabContentsHeight: calc(0.6 * var(--tabBarHeight));
+  height: var(--tabContentsHeight);
+  flex: 0 0 var(--tabContentsHeight);
+  min-width: var(--tabContentsHeight);
+  padding: unset;
+  margin-top: -1px;
+}
+/* Shrink recently closed tab button */
+/* TODO: Make a new icon, not necessarily copying Opera */
+.toolbar-tabbar > .button-toolbar > button,
+#tabs-subcontainer.visible {
+  min-height: var(--tabBarHeight);
+  min-width: var(--tabBarHeight);
+}
+
+/* Let children elements determine size */
+#tabs-tabbar-container.top {
+  height: unset !important;
+}
+
+/* Hide 2nd row tab stack if not hovered */
+#tabs-subcontainer {
+  transition: 0.5s;
+}
+#header:not(:hover) #tabs-subcontainer.visible {
+  min-height: 0;
+}
+
+/* Prevent new tab button from shifting up */
+.toolbar .button-toolbar.newtab {
+  top: unset !important;
+}
+
+/* Slim down new tab + */
+/* .toolbar .button-toolbar.newtab svg path {
+  d: path("M13.45 6.73h-.9v5.82H6.73v.9h5.82v5.82h.9v-5.82h5.82v-.9h-5.82") !important;
+  fill-rule: unset !important;
+} */
+
+/* Disable white background behind favicon on active tab */
+.tab-position .tab.active .tab-header .favicon {
+  filter: none !important;
+}
+
+#tabs-tabbar-container.top {
+  padding-top: 0 !important;
+}
+
+/* Make slimmer close button x for tabs */
+/* .close svg path {
+  d: path("M13.67 4.96l-.63-.63L9 8.37 4.96 4.33l-.63.63L8.37 9l-4.04 4.04.63.63L9 9.63l4.04 4.04.63-.63L9.63 9") !important;
+} */
+
+/* Make tab close button more visible */
+/* .close {
+  border-radius: 1px;
+  background-color: rgba(0, 0, 0, 0);
+  opacity: 1;
+  margin-top: -1px; */
+/* Pretty sure not needed... */
+/* width: 18px;
+  height: 18px; */
+/* } */
+
+/* Make tab close button x red on hover */
+/* .close:hover svg path,
+.close:active svg path {
+  fill: var(--closeBtnColor);
+} */
+
+/* Make tab close button visible on tabs when the tabs are sufficiently big */
+/* Make sure close button is visible on active tab when tabs are shrunk */
+/* .tab-position .tab .close,
+.tab-position .tab.active.tab-small .close {
+  display: block;
+} */
+
+/* Hide close button on non-active tabs when tabs are shrunk */
+/* .tab-position .tab.tab-small .close {
+  display: none;
+} */
+
+/* Make new tab button blend less with active tab */
+.toolbar .button-toolbar.newtab:hover {
+  background-color: var(--newTabHoverColor);
+}
+
+/* Really not sure... */
+/* TODO: Figure out */
+#vivaldi-tooltip .tab-solo {
+  display: none;
+}
+
+/* Make speeddial tab favicon look like Opera */
+/* .tab-position .tab[title="Start Page"] .tab-header .favicon img {
+  content: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAABMSURBVFhH7ZQxCgAgDANTH+hj/WBd4uaggxThbgk4HTQxMjNUSHOWgQACCJz8A8O56M7b9y2c4IsOPIUVUEJWwAooISvgBAggUCwgTSL8HixilnmfAAAAAElFTkSuQmCC);
+} */
+
+.tab[title="Start Page"] .favicon.jstest-favicon-image.svg svg path {
+  d: path(
+    "M 0 0 h4 v4 h-4 Z M 0 6 h4 v4 h-4 Z M 0 12 h4 v4 h-4 Z M 6 0 h4 v4 h-4 Z M 6 6 h4 v4 h-4 Z M 6 12 h4 v4 h-4 Z M 12 0 h4 v4 h-4 Z M 12 6 h4 v4 h-4 Z M 12 12 h4 v4 h-4 Z"
+  );
+}
+
+/* Move tab stack indicators down */
+.tab-group-indicator {
+  top: -3px;
+}
+
+.color-behind-tabs-off .tab-indicator {
+  background-color: var(--colorFgIntense);
+  margin-left: 2px;
+  margin-right: 2px;
+}
+
+.color-behind-tabs-off .tab.active + .tab-group-indicator .tab-indicator.active,
+.color-behind-tabs-off .tab-indicator.active {
+  background-color: var(--lightColorAccent);
+}
+
+.tab-indicator.active {
+  height: 12px;
+  border-bottom-width: 6px;
+}
+
+.tab-position .tab .thumbnail-image {
+  display: none;
+}
+
+#tabs-container {
+  min-height: unset;
+}
+
+/* Stop tab title disapearing on hover */
+#browser:not(.alt-tabs) .tab-position .tab:hover.tab-small:not(.tab-mini).active .title,
+#browser:not(.alt-tabs) .tab-position .tab.force-hover.tab-small:not(.tab-mini).active .title {
+  display: flex;
+}
+#browser:not(.alt-tabs) .tab-position .tab:hover.tab-small:not(.tab-mini).active .favicon,
+#browser:not(.alt-tabs) .tab-position .tab.force-hover.tab-small:not(.tab-mini).active .favicon {
+  flex: 0 0 var(--tabContentsHeight);
+}
+
+/* Fix for added height in 5.6 */
+#browser.tabs-top #header {
+  min-height: calc(25px / var(--uiZoomLevel));
+}

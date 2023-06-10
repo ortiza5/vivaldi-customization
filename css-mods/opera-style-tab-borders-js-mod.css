@@ -1,0 +1,31 @@
+/* Remove slight space between tabs, made pseudo elements offcenter */
+.tabs-top .tab-position .tab,
+.tabs-bottom .tab-position .tab {
+  margin-right: 0;
+}
+
+.before-active::before {
+  content: "";
+  position: absolute;
+  width: 1px;
+  height: 50%;
+  bottom: 25%;
+  left: -0.5px;
+  background-color: var(--colorAccentFgFaded);
+  opacity: 0.5;
+  overflow: hidden;
+  /* transition: 0.15s; */
+}
+
+.after-active::after {
+  content: "";
+  position: absolute;
+  width: 1px;
+  height: 50%;
+  bottom: 25%;
+  right: -0.5px;
+  background-color: var(--colorAccentFgFaded);
+  opacity: 0.5;
+  overflow: hidden;
+  /* transition: 0.15s; */
+}

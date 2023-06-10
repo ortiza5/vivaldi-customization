@@ -1,0 +1,27 @@
+@import "css-mods/custom.css";
+
+/* Variables for other mods */
+@import "css-mods/global-vars.css";
+
+/* UI Specific Components */
+@import "css-mods/address-bar.css";
+@import "css-mods/tab-bar.css";
+@import "css-mods/title-bar.css";
+@import "css-mods/bookmarks-bar.css";
+@import "css-mods/extensions-bar.css";
+@import "css-mods/status-bar.css";
+@import "css-mods/speed-dial.css";
+@import "css-mods/quick-commands.css";
+@import "css-mods/icons.css";
+@import "css-mods/panels.css";
+@import "css-mods/popups.css";
+@import "css-mods/private-mode.css";
+
+/* Standalone Mods */
+@import "css-mods/startpage-navigation-mod.css";
+@import "css-mods/make-ui-text-selectable.css";
+/* @import "css-mods/custom-buttons-js-mod.css"; */
+/* @import "css-mods/opera-style-tab-borders-js-mod.css"; */
+/* @import "css-mods/slide-out-zoom-js-mod.css"; */
+/* @import "css-mods/tabs-below-addressbar.css"; */
+/* @import "css-mods/multi-row-tabs.css"; */

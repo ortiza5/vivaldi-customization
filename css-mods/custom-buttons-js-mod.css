@@ -1,0 +1,8 @@
+.button-toolbar.custom-button button {
+  min-width: 28px !important;
+  height: 28px;
+}
+
+.custom-btn-container {
+  padding: 3px 0 3px 4px;
+}

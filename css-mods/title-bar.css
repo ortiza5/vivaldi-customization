@@ -1,0 +1,45 @@
+/* ---------------------------------------------
+    Window Actions Button Mods
+   --------------------------------------------- */
+
+/* Remove space above menu, minamize, maximize, and close buttons */
+#titlebar button {
+  padding-top: 0 !important;
+}
+
+/* Change red hover color of browser close button */
+#browser.win.win10 #header #titlebar .window-buttongroup button.window-close:hover {
+  background-color: var(--closeBtnColor);
+}
+
+/* Shrink height of all the window action buttons */
+.window-buttongroup button.window-minimize,
+.window-buttongroup button.window-maximize,
+.window-buttongroup button.window-close {
+  height: var(--tabBarHeight) !important;
+}
+
+/* ---------------------------------------------
+    Vivaldi Icon Oprification
+   --------------------------------------------- */
+
+/* Shrink */
+#titlebar button.vivaldi {
+  height: var(--tabBarHeight) !important;
+}
+
+/* Hover matches address bar below */
+#titlebar button.vivaldi:hover {
+  background-color: var(--colorAccentBg);
+}
+
+.vivaldi-v {
+  opacity: 1 !important;
+}
+
+#titlebar .vivaldi .vivaldi-v > svg > path {
+  d: path(
+    "M16.42 8.64l-4.17 7.23a1.39 1.39 0 0 1-1.15.76 1.33 1.33 0 0 1-1.32-.7c-.88-1.51-1.75-3-2.62-4.54l-1.6-2.77A1.4 1.4 0 0 1 6.7 6.51a1.34 1.34 0 0 1 1.3.72l1.17 2c.28.48.55 1 .84 1.45a2.2 2.2 0 0 0 1.84 1.14 2.24 2.24 0 0 0 2.36-2v-.23a2.34 2.34 0 0 0-.24-1 1.4 1.4 0 1 1 2.62-.87 1.46 1.46 0 0 1-.17.92z"
+  ) !important;
+  fill: #ef3939 !important;
+}

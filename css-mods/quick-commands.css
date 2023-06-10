@@ -1,0 +1,8 @@
+.quick-command-container,
+.quick-command-container .quick-commands > div {
+  min-width: 100vw;
+  cursor: auto;
+}
+.quick-command-container .quick-commands > div > div {
+  max-width: 100% !important;
+}

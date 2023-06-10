@@ -1,0 +1,76 @@
+/* Highlight bookmarks when they are hovered */
+.color-behind-tabs-off .bookmark-bar button.highlighted,
+.color-behind-tabs-on .bookmark-bar button.highlighted {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Remove line under address bar and extensions bar */
+.address-top .mainbar > .toolbar-mainbar .toolbar-extensions:before,
+.address-top .mainbar > .toolbar-mainbar:before {
+  content: unset;
+}
+
+/* Make bookmark bar the same color as the toolbar and remove bottom border from bookmark bar */
+.bookmark-bar-top .bookmark-bar {
+  background-color: var(--colorAccentBg);
+  border: 0;
+  height: var(--bookmarkBarHeight);
+  margin: -1px 0;
+}
+
+/* Before pseudo element prevented shrinking height */
+.bookmark-bar button:before {
+  height: var(--bookmarkBarHeight) !important;
+}
+
+/* Make bookmark bar links have the same background as the bar */
+.color-behind-tabs-off .bookmark-bar button,
+.color-behind-tabs-on .bookmark-bar button {
+  background-color: var(--colorAccentBg);
+}
+
+/* .bookmark-bar [data-id="1201"] svg.folder-icon .fill-override {
+  fill: #faca4c !important;
+  stroke: #faca4c !important;
+}
+
+.bookmark-bar [data-id="1201"] svg.folder-icon .fill-override path {
+  fill-opacity: 1 !important;
+}
+
+.vivaldi-tree [data-id="2583"] .tree-row svg,
+.vivaldi-tree [data-id="2583"] .tree-row[data-selected] svg,
+.vivaldi-tree [data-id="2583"] .tree-row[data-selected]:hover svg {
+  fill: #faca4c !important;
+  stroke: #faca4c !important;
+  margin-right: 5px !important;
+}
+.vivaldi-tree [data-id="2583"] .tree-row svg path {
+  fill-opacity: 1;
+}
+
+.vivaldi-tree [data-id="2648"] .tree-row svg,
+.vivaldi-tree [data-id="2648"] .tree-row[data-selected] svg,
+.vivaldi-tree [data-id="2648"] .tree-row[data-selected]:hover svg {
+  fill: #fa4c4c !important;
+  stroke: #fa4a4c !important;
+  margin-right: 5px !important;
+}
+.vivaldi-tree [data-id="2648"] .tree-row svg path {
+  fill-opacity: 1;
+}
+
+.vivaldi-tree [data-id="1006"] .tree-row svg,
+.vivaldi-tree [data-id="1006"] .tree-row[data-selected] svg,
+.vivaldi-tree [data-id="1006"] .tree-row[data-selected]:hover svg {
+  fill: #4cface !important;
+  stroke: #4cface !important;
+  margin-right: 5px !important;
+}
+.vivaldi-tree [data-id="1006"] .tree-row svg path {
+  fill-opacity: 1;
+} */
+
+/* .bookmark-bar button.folder[data-id="1780"] svg {
+  fill: #3f81ea !important;
+} */

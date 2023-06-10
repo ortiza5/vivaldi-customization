@@ -1,0 +1,101 @@
+/* TODO: Rewrite popup dialog mods */
+
+/* .create-bookmark > .button-popup {
+  width: 250px !important;
+  --popupLeftOffset: -21px !important;
+  --popupWidth: 250px !important;
+  border: 1.1px solid #3c4851;
+  border-radius: 6px;
+}
+
+.button-popup-wrapper {
+  border-radius: 6px !important;
+}
+
+.create-bookmark > .button-popup .thumbnail-image img {
+  width: 235px;
+  border-radius: 6px;
+  margin: 20px auto 10px auto;
+}
+
+.addbookmark-cardwrapper {
+  background-color: #161b1f;
+}
+
+.thumbnail-image {
+  background-color: unset;
+}
+
+.addbookmark-cardwrapper .dialog-content {
+  min-height: unset !important;
+}
+
+.addbookmark-cardwrapper .dialog-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.addbookmark-cardwrapper .dialog-content .cb-form-row:nth-child(1) {
+  order: 1;
+}
+
+.addbookmark-cardwrapper .dialog-content .cb-form-row:nth-child(2) {
+  order: 2;
+}
+
+.addbookmark-cardwrapper .dialog-content .cb-form-row:nth-child(3) {
+  order: 4;
+}
+
+.addbookmark-cardwrapper .dialog-content .cb-form-row:nth-child(4) {
+  display: none;
+}
+
+.addbookmark-cardwrapper .dialog-content .cb-form-row:nth-child(5) {
+  order: 3;
+}
+
+
+.button-popup footer {
+  border-bottom-left-radius: 6px !important;
+  border-bottom-right-radius: 6px !important;
+  border-top: unset !important;
+  padding-top: 0 !important;
+  padding-bottom: 10px !important;
+}
+
+.dialog-add-bookmark .dialog-footer input {
+  border: 1px solid #3c4851 !important;
+  border-radius: 4px;
+  box-sizing: border-box;
+  color: #fff;
+  background-color: #28343c !important;
+  padding: 2px 18px;
+  display: inline-block;
+  font-size: 13px;
+  line-height: unset;
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
+  background-image: unset;
+}
+
+.dialog-add-bookmark .dialog-footer input:hover {
+  background-color: #3c4851 !important;
+}
+
+.dialog-add-bookmark .dialog-footer .primary {
+  background-color: #00b2e3 !important;
+}
+
+.dialog-add-bookmark .dialog-footer .primary:hover {
+  background-color: #009eca !important;
+}
+
+.dialog-content .cardview .bookmark-folder-picker input[type="text"] {
+  background-color: #28343c;
+}
+
+.cb-form-row select.bookmark-folders {
+  cursor: pointer;
+} */

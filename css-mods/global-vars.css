@@ -1,0 +1,13 @@
+#browser {
+  /* Toolbar heights */
+  --addressBarHeight: 30px;
+  --bookmarkBarHeight: 22px;
+  --tabBarHeight: 26px;
+
+  /* Colors */
+  --closeBtnColor: red;
+  --lightColorAccent: #6db4cd;
+  --selectedText: #8de1fff2;
+  --newTabHoverColor: rgba(0, 199, 246, 0.28);
+  --bookmarkColorFill: rgb(218, 93, 93);
+}

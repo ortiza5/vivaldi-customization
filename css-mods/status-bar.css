@@ -1,0 +1,5 @@
+/* When using the setting "Status Info Overlay", moves the status info all the way to the corner */
+#webview-container ~ .StatusInfo {
+  bottom: 0;
+  left: 0 !important;
+}

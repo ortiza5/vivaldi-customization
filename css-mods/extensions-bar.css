@@ -1,0 +1,59 @@
+/* Adjust height of extensions and remove left spacing */
+/* .mainbar .toolbar-extensions {
+  padding: 3px 3px 3px 0;
+  height: 34px;
+} */
+
+/* border to right of extensions bar */
+/* .mainbar .toolbar-extensions::before {
+  content: "";
+  position: absolute;
+  width: 1.5px;
+  height: 42.36%;
+  bottom: 28.82%;
+  right: 0px;
+  background-color: var(--colorAccentFgFaded);
+  z-index: 5;
+  overflow: hidden;
+} */
+
+/* Shrink extensions buttons */
+/* .toolbar-extensions .button-toolbar button {
+  min-width: 28px !important;
+  height: 28px;
+} */
+
+/* Fix extensions popup border misalignment */
+.extension-popup {
+  box-shadow: 0 0 0 1px var(--colorBorder), 0 2px 8px rgba(0, 0, 0, 0.25), 0 0 0 1px var(--colorBorder) inset;
+}
+
+/* Extensions button expanded*/
+.toolbar-extensions .button-toolbar.ExtensionIcon--Hidden + .button-toolbar svg path {
+  transform-origin: center;
+  transform: scaleX(-1);
+}
+
+/* Extensions popup button expanded */
+.toolbar-extensions .extensionPopupIcons .button-pressed svg path {
+  transform-origin: center;
+  transform: scaleY(-1);
+}
+
+/* ---------------------------------------------
+    uBlock Orgin Mods - probably going to remove in favor of styling Vivaldi Content Blocker
+   --------------------------------------------- */
+/* Change : Ad block on image */
+.toolbar-extensions .button-toolbar button[title^="uBlock Origin"] img {
+  content: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADzsAAA87AUV+OSYAAATHSURBVFhHxZdpbFRVFMfPOW+WpkzKYm1K6bCUNhAaU0QMEVEwqX4gIZiYmqiJ4IoQq4mo0aSxjBsRYjAuiTVaPpiYlOoXNfpFo8IH0aiJNsXQFkohRahQu02n7cy7x/97PMYu09epTNJf8mbuvHvuOf+7nXuHVZXmElcAM3s/x6HKNUSy5jyFQ3GdZ1Oy1ISs9ZTkjcJaqaLL0DRCSmG0/gtOOkjkWIDouzGhkxTgvsoSGr2XyKAuYy/d2JMF1BxRq/pWCveMJq43EiznlG5SkrtguRZ2+dDsWWYG/uL4/B1OvxbLOp4y1DE8opfzL3AidgenPDOXCQLwzQcuaWR4gFYwmypUbEKw22FWxiwhr03WqJokqZzGAPykzD/Dxy8jSmdeL+MexHNHZIKA2jYTXkT2ZgnKw6i5CfVRJg47hteEE4DoIoK0oHQ8EuT9e5dK4mqVOAWHRfM5yMI34u3dCFyek+AOTu+Yi1G6Ex3fPWBP9JsWkN+rLCKhnAXOCBfmycRFlBYwV+RUABYeZlV7UPgVTxeeCas+EzkTgAXlrKlzZPgjbN0XjNJhrP6zjirPJCO5EYDQ2Mh/s0pTMMSNBWwdg+OTakwcI+KbamclYDpXhnTIMH1uwvxBeZQ7e3k0arNuEaYlWNS+MXwroX4UMT8U5q1YwYeJzaBXlQYjnMJO+0HVOngCwVtPJ5ZYHHrEIt4GwQvdbeiDrwC0bEfQr8L9F4/azM9gozYhoJtEroKc1mbGrOeojDvWnNLrmAIPKJn7IX4x9rV/3gb+I6BUitktHZpfHIwtp/7Fl+Vp5K5mzG3SNTB6wQ5YNbHVOHzaNWKJQRKTh9DrKFLvjMEd/EeAeYGQPmuxVr95TvN2redhTchjRuVTMqYbub46tlxO1LZpyArYWyB2D9pU4MkquIOvgCvIUrLtQ3HbbK+/ZAr2VVKypFx2iG1teKlCWutVA8VB2ojtV4ewVV6jrMlCAGApRY55hwbNo6+1DZd800ymbpV013dqXuiUbrZts5+Eb/asZ0V2AgDmtFCM1tmBUO3aW7TyldbhZUGhbSk2BxB8g2c2a7IW4AARC/G1OzVmYiYvvM+27Zcx3euu1P4/JglA1vRPXI6IAqyw7UzmQSSZ1d7rrHBy9WTSAmQBNhXTIEymJJspOKscm9z7lTUQ0NWXcnr5H2knBcU8hqzSAgG/OdnNe51DzAAyakPJCh3xXrikBTxOlAqMWX+g2IxTrB1qfU+x2QBfceSMRkzfJ08xOjqOtACMqlZUcK/F8iUOgY/RrBMtr1kEXAzB+fvOk+ribieOV+Uy5Vp+BKdK6xmKijE70XonqqIwmPV8O8D3P/DdQEFutEu5M8Y+1/Lx1EBEVZcWIcHcB727cCqthJHlVWcF/HZhUb8HV010ls5P/k/gMK0Al3qVd/fgrhq3tyILvggRN2AgZhbhOqQW3A/eioSsLwZLqBc9zziV/gI8GlSDFzqT69TIq5i+2yBi2lsz5juJ/fkjiXUoHNFvny/kIfieNrFkJcAFo/HGkzpvdNA8gdHYC/ui8Y3gw6EPLz5jst62V/Kfk+c7E2iTpYBxHOwwRQkxO3DpvEdUV6F76LV8z2oaU/2BozEc2Z7pjKQFzB1E/wImbUHcrGYyeQAAAABJRU5ErkJggg==);
+}
+
+/* Change : Ad block off image */
+.toolbar-extensions .button-toolbar button[title="uBlock Origin (off)"] img {
+  content: url(data:image/png;base64,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);
+}
+
+/* Remove border below extensions toolbar */
+.address-top .toolbar-mainbar .toolbar-extensions::after {
+  content: unset;
+}

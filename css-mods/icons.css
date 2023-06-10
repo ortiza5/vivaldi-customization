@@ -1,0 +1,46 @@
+/* Slim Icon - Zoom Buttons - Status Bar */
+.toolbar-statusbar .button-toolbar > button svg path[d^="M7 7V5C7 4.44772 7.44772"] {
+  /* zoom in */
+  d: path("M8 4c-.3 0-.5.2-.5.5v3h-3c-.3 0-.5.2-.5.5s.2.5.5.5h3v3c0 .3.2.5.5.5s.5-.2.5-.5v-3h3c.3 0 .5-.2.5-.5s-.2-.5-.5-.5h-3v-3c0-.3-.2-.5-.5-.5z");
+}
+.toolbar-statusbar .button-toolbar > button svg path[d^="M4 8C4 8.55228 4.44772"] {
+  /* zoom out */
+  d: path("M4.5 7.5c-.3 0-.5.2-.5.5s.2.5.5.5h7c.3 0 .5-.2.5-.5s-.2-.5-.5-.5z");
+}
+
+/* Slim Icon - Trash Button - Tab Bar */
+.toolbar-tabbar .button-toolbar.toggle-trash path.trashicon-lid {
+  d: path(
+    "M10.4 6c-.45.01-.42.56-.4.88.05.52-.32 1.05-.86 1.1-.76.05-1.53-.02-2.3.04-.56.14-.35 1.11.23.98h10.98c.6 0 .56-1.06-.05-1-.75 0-1.5.04-2.25-.03-.55-.13-.82-.73-.75-1.25.1-.4-.16-.83-.63-.72H10.4z"
+  );
+}
+.toolbar-tabbar .button-toolbar.toggle-trash path.trashicon-bin {
+  d: path(
+    "M8 10c-.36-.01-.56.36-.5.67v8.4c.01.83.8 1.5 1.62 1.43h7.04c.8-.06 1.42-.85 1.34-1.64v-8.42c-.03-.47-.74-.6-.94-.18-.12.3-.03.64-.06.96v7.4c.04.6-.56.95-1.1.88H9.38c-.6.04-.95-.56-.88-1.1v-7.96A.5.5 0 008 10z"
+  );
+}
+
+/* Slim Icon - Sync Button - Tab Bar */
+.toolbar-tabbar .button-toolbar.synced-tabs-button > button svg path {
+  d: path(
+    "M15 8a4 4 0 00-3.77 2.69 2.5 2.5 0 00-4.2 1.48A3 3 0 008.02 18H18a3 3 0 001-5.83V12a4 4 0 00-4-4zm0 1c1.68 0 3 1.33 3 3v.15a1 1 0 00.67.97A2 2 0 0118 17H8a2 2 0 01-2-2 2 2 0 011.35-1.9 1 1 0 00.65-.8c.1-.74.72-1.3 1.49-1.3.4 0 .76.15 1.03.4a1 1 0 001.63-.4A3 3 0 0115 9z"
+  );
+}
+
+/* Slim Icon - New Tab Button - Tab Bar */
+.toolbar .button-toolbar.newtab svg path {
+  d: path("M12.5 5v7.5H5v1h7.5V21h1v-7.5H21v-1h-7.5V5z");
+}
+
+/* Adapt the dowload progress bar to the new style */
+.button-toolbar div.progress {
+  background-color: unset;
+  border: unset;
+  left: 10.7px;
+  top: 20.23px;
+  width: 40%;
+}
+.button-toolbar div.progress div.loaded {
+  background-color: var(--colorHighlightBg);
+  height: 1.5px;
+}

@@ -1,0 +1,124 @@
+.toolbar-mainbar,
+.toolbar-mainbar > .button-toolbar > button,
+.toolbar-mainbar > .toolbar-group > .button-toolbar > button {
+  height: var(--addressBarHeight);
+}
+.toolbar .profile-popup + .toolbar-extensions .button-toolbar:not(.button-narrow):first-of-type:before {
+  --spacerHeight: calc(34px - var(--addressBarHeight) + 15px);
+  height: var(--spacerHeight);
+  top: calc((var(--addressBarHeight) - var(--spacerHeight)) / 2);
+}
+
+/* Removes background from https indicator padlock in address bar */
+.SiteInfoButton.secure,
+.SiteInfoButton.certified {
+  background-color: unset;
+}
+
+/* Make the address bar blend in with the background */
+.mainbar .UrlBar-AddressField,
+.mainbar .searchfield {
+  background-color: var(--colorAccentBg);
+  border-color: var(--colorAccentBg);
+  color: var(--colorAccentFg);
+  fill: var(--colorFg);
+}
+
+/* Highlight the whole address bar on hover */
+.mainbar .UrlBar-AddressField:hover,
+#browser[style*="--colorAccentBg:#6b2d4a;"] .mainbar .searchfield:hover {
+  background-color: var(--colorFgIntense);
+  border-color: var(--colorFgIntense);
+}
+
+/* Give a slight border around address bar to show focus */
+.mainbar .UrlBar-AddressField:focus-within {
+  border-color: var(--lightColorAccent);
+  box-shadow: unset;
+  outline: unset;
+  /* prevent hover effect */
+  background-color: var(--colorAccentBg);
+}
+
+/* Color highlighted text in the address bar to match the border */
+.UrlBar-UrlField.url.vivaldi-addressfield::selection {
+  background-color: var(--selectedText);
+  color: var(--colorAccentBg);
+}
+
+/* Adjust spacing from padlock */
+/* .UrlBar-UrlField.url.vivaldi-addressfield {
+  padding-left: 3px !important;
+} */
+
+/* Border to the right of the address bar */
+/* Border to the left of the address bar */
+.mainbar .UrlBar-AddressField::after,
+.mainbar .UrlBar-AddressField::before {
+  content: "";
+  position: absolute;
+  width: 1px;
+  height: 80%;
+  bottom: 10%;
+  background-color: var(--colorAccentFg);
+  overflow: hidden;
+  transition: 0.25s;
+  opacity: 0.2;
+}
+.mainbar .UrlBar-AddressField::after {
+  right: -3px;
+}
+.mainbar .UrlBar-AddressField::before {
+  left: -4px;
+}
+.toolbar .profile-popup + .toolbar-extensions .button-toolbar:not(.button-narrow):first-of-type:before {
+  height: 66%;
+  bottom: 17%;
+}
+
+/* Remove border after the address bar on hover and focus */
+.mainbar .UrlBar-AddressField:hover::after,
+.mainbar .UrlBar-AddressField:focus-within::after,
+.mainbar .UrlBar-AddressField:hover::before,
+.mainbar .UrlBar-AddressField:focus-within::before {
+  background-color: transparent;
+}
+
+/* NO LONGER USED - Color pageload progress bar in address bar */
+.UrlBar-AddressField .pageload.progressing,
+.UrlBar-AddressField .pageload.progressing .pageload-ticker {
+  color: var(--colorAccentFg) !important;
+}
+
+/* Compensate spacing for pseudo elements on address bar */
+.toolbar .profile-popup {
+  margin-left: 4px;
+}
+
+/* Color bookmark button like Opera */
+.UrlBar-AddressField .toolbar .create-bookmark [title="Edit bookmark"] svg path {
+  fill: var(--bookmarkColorFill);
+}
+
+/* Hide address field dropdown items after 7 */
+.OmniLinkItem:nth-child(n + 7) {
+  display: none;
+}
+
+/* URL Base-domain styling */
+.UrlFragment-HostFragment-Basedomain,
+.UrlFragment-HostFragment-TLD {
+  color: #ccc !important;
+  text-shadow: 0px 0px 1px #ccc;
+}
+
+/* URL protocol styling */
+.UrlBar-AddressField > .secure + .UrlBar-UrlFieldWrapper,
+.UrlFragment-Wrapper > .UrlFragment--Lowlight:first-of-type {
+  color: #46c235 !important;
+}
+
+.UrlFragment-Wrapper:not(.UrlFragment-Wrapper--ShouldHighlight) {
+  --HighlightColor: #f3eee6;
+  --LowlightColor: var(--colorFgIntense);
+}

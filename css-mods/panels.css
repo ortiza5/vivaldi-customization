@@ -1,0 +1,4 @@
+/* Left side scroll issue with panel */
+#panels-container.left[style="width: 0px;"] #panels {
+  padding-right: unset;
+}
