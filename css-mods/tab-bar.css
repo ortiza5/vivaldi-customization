@@ -89,7 +89,7 @@
 
 /* Make new tab button blend less with active tab */
 .toolbar .button-toolbar.newtab:hover {
-  background-color: var(--newTabHoverColor);
+  background-color: var(--colorAccentBg);
 }
 
 /* Really not sure... */
@@ -115,14 +115,14 @@
 }
 
 .color-behind-tabs-off .tab-indicator {
-  background-color: var(--colorFgIntense);
+  background-color: var(--colorAccentBgFadedMore);
   margin-left: 2px;
   margin-right: 2px;
 }
 
 .color-behind-tabs-off .tab.active + .tab-group-indicator .tab-indicator.active,
 .color-behind-tabs-off .tab-indicator.active {
-  background-color: var(--lightColorAccent);
+  background-color: var(--colorHighlightBg);
 }
 
 .tab-indicator.active {
@@ -148,7 +148,6 @@
   flex: 0 0 var(--tabContentsHeight);
 }
 
-/* Fix for added height in 5.6 */
 #browser.tabs-top #header {
-  min-height: calc(25px / var(--uiZoomLevel));
+  min-height: unset !important;
 }

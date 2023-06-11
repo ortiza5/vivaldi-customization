@@ -1,21 +1,19 @@
-@import "css-mods/custom.css";
-
-/* Variables for other mods */
+/* Global Variables for Mods */
 @import "css-mods/global-vars.css";
 
 /* UI Specific Components */
+@import "css-mods/private-mode.css";
 @import "css-mods/address-bar.css";
 @import "css-mods/tab-bar.css";
 @import "css-mods/title-bar.css";
-@import "css-mods/bookmarks-bar.css";
-@import "css-mods/extensions-bar.css";
+@import "css-mods/bookmark-bar.css";
+@import "css-mods/extension-bar.css";
 @import "css-mods/status-bar.css";
 @import "css-mods/speed-dial.css";
 @import "css-mods/quick-commands.css";
 @import "css-mods/icons.css";
 @import "css-mods/panels.css";
 @import "css-mods/popups.css";
-@import "css-mods/private-mode.css";
 
 /* Standalone Mods */
 @import "css-mods/startpage-navigation-mod.css";

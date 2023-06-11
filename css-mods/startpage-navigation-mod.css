@@ -62,11 +62,13 @@
 }
 
 /* Format icons for Startpage Nav Bar buttons */
+.startpage .startpage-navigation .button-startpage svg {
+  height: 2.1em;
+}
 .startpage .startpage-navigation .button-startpage svg,
 .startpage .startpage-folder-navigation .button-startpage svg {
-  fill: var(--startpageNavBtnPrimary);
+  color: var(--startpageNavBtnPrimary);
   filter: var(--startpageNavIconShadow);
-  height: 1.7em;
   width: auto;
 }
 .startpage .startpage-navigation .button-startpage.add-set svg {
@@ -79,7 +81,7 @@
 .startpage .startpage-navigation .button-startpage.active svg,
 .startpage .startpage-navigation .button-startpage:hover svg,
 .startpage .startpage-folder-navigation .button-startpage:hover svg {
-  fill: var(--startpageNavBtnSecondary);
+  color: var(--startpageNavBtnSecondary);
   filter: unset;
 }
 

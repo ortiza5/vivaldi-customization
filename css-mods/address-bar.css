@@ -1,4 +1,4 @@
-.toolbar-mainbar,
+.mainbar > .toolbar-mainbar,
 .toolbar-mainbar > .button-toolbar > button,
 .toolbar-mainbar > .toolbar-group > .button-toolbar > button {
   height: var(--addressBarHeight);
@@ -7,12 +7,6 @@
   --spacerHeight: calc(34px - var(--addressBarHeight) + 15px);
   height: var(--spacerHeight);
   top: calc((var(--addressBarHeight) - var(--spacerHeight)) / 2);
-}
-
-/* Removes background from https indicator padlock in address bar */
-.SiteInfoButton.secure,
-.SiteInfoButton.certified {
-  background-color: unset;
 }
 
 /* Make the address bar blend in with the background */
@@ -27,13 +21,13 @@
 /* Highlight the whole address bar on hover */
 .mainbar .UrlBar-AddressField:hover,
 #browser[style*="--colorAccentBg:#6b2d4a;"] .mainbar .searchfield:hover {
-  background-color: var(--colorFgIntense);
-  border-color: var(--colorFgIntense);
+  background-color: var(--colorAccentBgFadedMore);
+  border-color: var(--colorAccentBgFadedMore);
 }
 
 /* Give a slight border around address bar to show focus */
 .mainbar .UrlBar-AddressField:focus-within {
-  border-color: var(--lightColorAccent);
+  border-color: var(--colorHighlightBg);
   box-shadow: unset;
   outline: unset;
   /* prevent hover effect */
@@ -42,7 +36,7 @@
 
 /* Color highlighted text in the address bar to match the border */
 .UrlBar-UrlField.url.vivaldi-addressfield::selection {
-  background-color: var(--selectedText);
+  background-color: color-mix(in hsl, var(--colorHighlightBg) 50%, var(--colorHighlightBgFaded));
   color: var(--colorAccentBg);
 }
 
@@ -96,8 +90,8 @@
 }
 
 /* Color bookmark button like Opera */
-.UrlBar-AddressField .toolbar .create-bookmark [title="Edit bookmark"] svg path {
-  fill: var(--bookmarkColorFill);
+.BookmarkButton .button-on .bookmark-animated-fill {
+  fill: var(--bookmarkColorFill) !important;
 }
 
 /* Hide address field dropdown items after 7 */
@@ -121,4 +115,9 @@
 .UrlFragment-Wrapper:not(.UrlFragment-Wrapper--ShouldHighlight) {
   --HighlightColor: #f3eee6;
   --LowlightColor: var(--colorFgIntense);
+}
+
+/* Remove border under address bar */
+.address-top .mainbar > .toolbar-mainbar {
+  border-bottom: unset;
 }
