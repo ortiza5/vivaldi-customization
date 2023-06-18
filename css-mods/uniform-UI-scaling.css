@@ -1,0 +1,193 @@
+/* Make all UI elements follow the UI Zoom setting */
+/* A replacement of most instances of var(--uiZoomLevel) from common.css */
+#browser:not(.fullscreen, .disable-titlebar) #header {
+  min-height: 28px;
+}
+.tabs-top#browser:not(.fullscreen, .disable-titlebar) #header {
+  min-height: 36px;
+}
+.tabs-top.address-top#browser:not(.fullscreen, .disable-titlebar) #header {
+  min-height: 34px;
+}
+.tabs-top.tabs-at-edge#browser:not(.fullscreen, .disable-titlebar) #header {
+  min-height: 30px;
+}
+
+#titlebar #pagetitle {
+  scale: unset;
+}
+
+#browser .window-buttongroup {
+  scale: unset;
+}
+
+#browser.win #header button.vivaldi,
+#browser.linux #header button.vivaldi {
+  scale: unset;
+}
+
+#browser.win.address-top .toolbar:has(.window-buttongroup.on-mainbar),
+#browser.linux.address-top .toolbar:has(.window-buttongroup.on-mainbar) {
+  min-height: 46px;
+}
+
+#browser.win:not(.fullscreen, .disable-titlebar) #header {
+  min-height: 25px;
+}
+.tabs-top#browser.win:not(.fullscreen, .disable-titlebar) #header {
+  min-height: 40px;
+}
+.tabs-top.address-top#browser.win:not(.fullscreen, .disable-titlebar) #header {
+  min-height: 36px;
+}
+.tabs-top.tabs-at-edge#browser.win:not(.fullscreen, .disable-titlebar) #header {
+  min-height: 30px;
+}
+
+#browser.win.address-top .toolbar:has(.window-buttongroup.on-mainbar) {
+  padding-left: 34px;
+  padding-right: calc(46px * 3);
+}
+
+#browser.mac:not(.is-settingspage, .popup, .native) #titlebar.tabless .window-buttongroup {
+  margin-top: 8px;
+}
+#browser.mac.address-top .toolbar:has(.window-buttongroup.on-mainbar) {
+  padding: 0 12px;
+  min-height: 53px;
+}
+#browser.mac .window-buttongroup {
+  width: 54px;
+  margin-top: 13px;
+  margin-left: 8px;
+}
+
+.tabs-top#browser.mac .window-buttongroup {
+  margin-left: 13px;
+}
+
+#browser.is-settingspage#browser.mac .window-buttongroup,
+#browser.popup#browser.mac .window-buttongroup {
+  margin-top: 8px;
+}
+
+#browser.mac.fullscreen:not(.mac-menubar-permanent).mac-fullscreen-hover:not(.tabs-top) #header,
+#browser.mac.fullscreen:not(.mac-menubar-permanent).mac-fullscreen-hover-notch:not(.tabs-top) #header {
+  min-height: 28px;
+}
+#browser.mac.fullscreen:not(.mac-menubar-permanent).mac-fullscreen-hover #header {
+  transform: translateY(24px);
+}
+.address-top#browser.mac.fullscreen:not(.mac-menubar-permanent).mac-fullscreen-hover #header .window-buttongroup {
+  margin-top: calc(6px * 2);
+}
+
+#browser.mac.fullscreen:not(.mac-menubar-permanent).mac-fullscreen-hover.address-top-off:focus-within .mainbar,
+#browser.mac.fullscreen:not(.mac-menubar-permanent).mac-fullscreen-hover.address-bottom-off:focus-within .mainbar,
+#browser.mac.fullscreen:not(.mac-menubar-permanent).mac-fullscreen-hover.address-top .mainbar {
+  transform: translateY(24px);
+}
+:not(.tabs-top)#browser.mac.fullscreen:not(.mac-menubar-permanent).mac-fullscreen-hover.address-top-off:focus-within .mainbar,
+:not(.tabs-top)#browser.mac.fullscreen:not(.mac-menubar-permanent).mac-fullscreen-hover.address-bottom-off:focus-within .mainbar,
+:not(.tabs-top)#browser.mac.fullscreen:not(.mac-menubar-permanent).mac-fullscreen-hover.address-top .mainbar,
+.native#browser.mac.fullscreen:not(.mac-menubar-permanent).mac-fullscreen-hover.address-top-off:focus-within .mainbar,
+.native#browser.mac.fullscreen:not(.mac-menubar-permanent).mac-fullscreen-hover.address-bottom-off:focus-within .mainbar,
+.native#browser.mac.fullscreen:not(.mac-menubar-permanent).mac-fullscreen-hover.address-top .mainbar {
+  transform: translateY(52px);
+}
+#browser.mac.fullscreen:not(.mac-menubar-permanent).mac-fullscreen-hover.bookmark-bar-top .bookmark-bar {
+  transform: translateY(24px);
+}
+:not(.tabs-top)#browser.mac.fullscreen:not(.mac-menubar-permanent).mac-fullscreen-hover.bookmark-bar-top .bookmark-bar,
+.native#browser.mac.fullscreen:not(.mac-menubar-permanent).mac-fullscreen-hover.bookmark-bar-top .bookmark-bar {
+  transform: translateY(52px);
+}
+
+#browser.mac.fullscreen:not(.mac-menubar-permanent):not(.mac-fullscreen-hover, .mac-fullscreen-hover-notch):not(.native).tabs-top #tabs-container .workspace-popup,
+#browser.mac.fullscreen:not(.mac-menubar-permanent):not(.mac-fullscreen-hover, .mac-fullscreen-hover-notch):not(.native).tabs-top #tabs-container .resize {
+  transform: translateX(-78px);
+}
+#browser.mac.fullscreen:not(.mac-menubar-permanent):not(.mac-fullscreen-hover, .mac-fullscreen-hover-notch):not(.tabs-top) #header {
+  transform: translateY(-28px);
+}
+
+#browser.linux.address-top #titlebar #pagetitle {
+  top: 3px;
+}
+#browser.linux.address-top.popup #titlebar #pagetitle {
+  padding-left: 12px;
+}
+#browser.linux:not(.native).address-top .toolbar:has(.window-buttongroup.on-mainbar) {
+  padding-left: 34px;
+  padding-right: 100px;
+}
+.alt#browser.linux:not(.native).address-top .toolbar:has(.window-buttongroup.on-mainbar) {
+  padding-left: 100px;
+  padding-right: 34px;
+}
+#browser.linux .window-buttongroup {
+  right: 5px;
+  top: 5px;
+}
+#browser.linux.alt .window-buttongroup {
+  right: auto;
+  left: 5px;
+}
+
+.popup#browser.linux #header,
+.is-settingspage#browser.linux #header {
+  min-height: 30px;
+}
+
+#tabs-tabbar-container.top {
+  padding-top: 7px;
+}
+
+.win #tabs-container:not(.none).top {
+  padding-left: 34px;
+  padding-right: 140px;
+}
+.linux #tabs-container:not(.none).top {
+  padding-left: 34px;
+  padding-right: 90px;
+}
+.alt #tabs-container:not(.none).top {
+  padding-left: 100px;
+  padding-right: 38px;
+}
+.mac #tabs-container:not(.none).top {
+  padding-left: 78px;
+}
+.native.alt #tabs-container:not(.none).top {
+  padding-right: 38px;
+}
+
+#browser.tabs-off.popup:not(.fullscreen) #header {
+  height: calc(34px - 3);
+}
+.win#browser.tabs-off.popup #titlebar {
+  height: 30px;
+  margin-right: 140px;
+}
+.mac#browser.tabs-off.popup #titlebar,
+.mac#browser.tabs-off.popup #header,
+.mac#browser.tabs-off.popup .settings-header {
+  height: 28px;
+}
+
+.is-settingspage.fullscreen.mac-menubar-permanent .settings-header,
+.is-settingspage:not(.fullscreen, .native) .settings-header {
+  top: 6px;
+  left: 100px;
+  right: 100px;
+  scale: unset;
+}
+#browser.win .settings-header {
+  top: 4px;
+  left: 140px;
+  right: 140px;
+}
+
+.topmenu .horizontal-menu-pagetitle {
+  scale: unset;
+}
