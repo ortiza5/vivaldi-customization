@@ -1,5 +1,6 @@
 /* Make all UI elements follow the UI Zoom setting */
 /* A replacement of most instances of var(--uiZoomLevel) from common.css */
+/* https://forum.vivaldi.net/post/676483 */
 #browser:not(.fullscreen, .disable-titlebar) #header {
   min-height: 28px;
 }
