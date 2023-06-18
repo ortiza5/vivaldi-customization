@@ -1,0 +1,25 @@
+/* Adds text after the Vivaldi menu button icon */
+/* https://forum.vivaldi.net/post/676295 */
+#browser {
+  --menuText: "Menu";
+  --menuWidth: 74px;
+}
+
+#tabs-container:not(.none).top {
+  padding-left: calc(var(--menuWidth) / var(--uiZoomLevel)) !important;
+}
+
+span.vivaldi-v::after {
+  content: var(--menuText);
+  position: absolute;
+  left: 34px;
+}
+
+.vivaldi span {
+  padding-left: 6px;
+  justify-content: unset;
+}
+
+.vivaldi {
+  width: var(--menuWidth);
+}
