@@ -93,6 +93,10 @@
 .BookmarkButton .button-on .bookmark-animated-fill {
   fill: var(--bookmarkColorFill) !important;
 }
+/* Remove shadow from half of bookmark button icon */
+.BookmarkButton .add-bookmark-shadow {
+  display: none;
+}
 
 /* Hide address field dropdown items after 7 */
 .OmniLinkItem:nth-child(n + 7) {
