@@ -2,26 +2,29 @@
 @import "css-mods/global-vars.css";
 
 /* UI Specific Components */
-@import "css-mods/private-mode.css";
-@import "css-mods/address-bar.css";
-@import "css-mods/tab-bar.css";
-@import "css-mods/title-bar.css";
-@import "css-mods/bookmark-bar.css";
-@import "css-mods/extension-bar.css";
-@import "css-mods/status-bar.css";
-@import "css-mods/speed-dial.css";
-@import "css-mods/quick-commands.css";
+@import "css-mods/ui-components/private-mode.css";
+@import "css-mods/ui-components/address-bar.css";
+@import "css-mods/ui-components/bookmark-bar.css";
+@import "css-mods/ui-components/extension-bar.css";
+@import "css-mods/ui-components/panels.css";
+@import "css-mods/ui-components/popups.css";
+@import "css-mods/ui-components/quick-commands.css";
+@import "css-mods/ui-components/speed-dial.css";
+@import "css-mods/ui-components/status-bar.css";
+@import "css-mods/ui-components/tab-bar.css";
+@import "css-mods/ui-components/title-bar.css";
+
+/* Misc. */
 @import "css-mods/icons.css";
-@import "css-mods/panels.css";
-@import "css-mods/popups.css";
 
 /* Standalone Mods */
-@import "css-mods/startpage-navigation-mod.css";
-@import "css-mods/make-ui-text-selectable.css";
-/* @import "css-mods/custom-buttons-js-mod.css"; */
-/* @import "css-mods/opera-style-tab-borders-js-mod.css"; */
-/* @import "css-mods/slide-out-zoom-js-mod.css"; */
-/* @import "css-mods/tabs-below-addressbar.css"; */
-/* @import "css-mods/multi-row-tabs.css"; */
-/* @import "css-mods/menu-button-text.css"; */
-@import "css-mods/uniform-UI-scaling.css";
+@import "css-mods/standalone/make-ui-text-selectable.css";
+@import "css-mods/standalone/menu-button-text.css";
+/* @import "css-mods/standalone/multi-row-tabs.css"; */
+@import "css-mods/standalone/scrollbar-slim.css";
+@import "css-mods/standalone/startpage-navigation-mod.css";
+/* @import "css-mods/standalone/tabs-below-addressbar.css"; */
+@import "css-mods/standalone/uniform-UI-scaling.css";
+/* @import "js-mods/custom-buttons-js-mod.css"; */
+/* @import "js-mods/opera-style-tab-borders-js-mod.css"; */
+/* @import "js-mods/slide-out-zoom-js-mod.css"; */
