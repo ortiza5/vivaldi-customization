@@ -1,0 +1,70 @@
+/* Adds borders between tabs */
+#browser {
+  /* Change to "0" (to hide) or "1" (to show) */
+  --showBordersActiveTab: 0;
+  --showBordersHoveredTab: 0;
+  --showFirstBorder: 0;
+  --showLastBorder: 0;
+}
+
+/* Create the border elements */
+.tab-strip span:first-of-type .tab-position::before,
+.tab-strip span .tab-position::after {
+  --borderOpacity: 0.5;
+  content: "";
+  position: absolute;
+  overflow: hidden;
+  background-color: var(--colorAccentFgFaded);
+  opacity: var(--borderOpacity);
+  transition: 0.15s;
+}
+
+/* For tab bars set to the top or bottom position */
+#tabs-tabbar-container:is(.top, .bottom) span:first-of-type .tab-position::before,
+#tabs-tabbar-container:is(.top, .bottom) span .tab-position::after {
+  width: 1px;
+  height: 60%;
+  bottom: 20%;
+  right: -0.5px;
+}
+#tabs-tabbar-container:is(.top, .bottom) span:first-of-type .tab-position::before {
+  right: unset;
+  left: -0.5px;
+}
+
+/* For tab bars set to the left or right position */
+#tabs-tabbar-container:is(.left, .right) span:first-of-type .tab-position::before,
+#tabs-tabbar-container:is(.left, .right) span .tab-position::after {
+  width: 80%;
+  height: 1px;
+  left: 10%;
+  bottom: -0.5px;
+}
+#tabs-tabbar-container:is(.left, .right) span:first-of-type .tab-position::before {
+  bottom: unset;
+  top: 0;
+}
+
+/* Hide the borders around the active tab */
+.tab-strip span .tab-position:has(.active)::before,
+.tab-strip span:has(+ span .active) .tab-position::after,
+.tab-strip span .tab-position:has(.active)::after {
+  opacity: calc(var(--showBordersActiveTab) * var(--borderOpacity));
+}
+
+/* Hide the borders around hovered tabs */
+.tab-strip span:has(.tab:hover) .tab-position::before,
+.tab-strip span:has(.tab:hover) .tab-position::after,
+.tab-strip span:has(+ span .tab:hover) .tab-position::after {
+  opacity: calc(var(--showBordersHoveredTab) * var(--borderOpacity));
+}
+
+/* Hide the first border next to the workspaces button */
+.tab-strip span:first-of-type .tab-position::before {
+  opacity: calc(var(--showFirstBorder) * var(--borderOpacity));
+}
+
+/* Hide the last border next to the new tab button */
+.tab-strip span:last-of-type .tab-position::after {
+  opacity: calc(var(--showLastBorder) * var(--borderOpacity));
+}
