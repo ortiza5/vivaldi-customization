@@ -68,3 +68,14 @@
 .tab-strip span:last-of-type .tab-position::after {
   opacity: calc(var(--showLastBorder) * var(--borderOpacity));
 }
+
+/* Hide last border after pinned tabs in vertical view */
+.tab-strip span:has(+ .separator) .tab-position::after {
+  opacity: 0;
+}
+
+/* Make better border between pinned and regular tabs */
+.tab-strip .separator,
+.tab-strip .separator hr {
+  width: 100%;
+}
