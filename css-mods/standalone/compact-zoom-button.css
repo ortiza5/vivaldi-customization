@@ -1,0 +1,28 @@
+.button-textonly:has(.page-zoom-controls)::before {
+  content: "";
+  -webkit-mask: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="black" stroke-linecap="round" stroke-width="1"><path d="M8.54 20.06 12.6 16"/><circle cx="15.58" cy="12.8" r="4.25"/><path id="plus" d="M15.58 11.3v3"/><path id="minus" d="M17.08 12.8h-3"/></svg>');
+  background-color: currentColor;
+  height: 34px;
+  min-width: 34px;
+  display: flex;
+  flex: 1 1 100%;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+  fill: currentColor;
+}
+
+.button-textonly .page-zoom-controls {
+  transition: 0.5s ease 2s;
+  margin: 0;
+  max-width: 0;
+  opacity: 0;
+  overflow: hidden;
+}
+
+.button-textonly:hover .page-zoom-controls {
+  margin: 0 3px;
+  max-width: 300px;
+  opacity: 1;
+  transition: 0.5s ease 0s;
+}
