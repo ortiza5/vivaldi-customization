@@ -34,7 +34,7 @@
 }
 
 /* Prevent new tab button from shifting up */
-.toolbar .button-toolbar.newtab {
+#tabs-container.top .toolbar .button-toolbar.newtab {
   top: unset !important;
 }
 
