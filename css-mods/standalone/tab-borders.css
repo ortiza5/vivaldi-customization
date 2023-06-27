@@ -1,4 +1,5 @@
-/* Adds borders between tabs */
+/* == Borders Between Tabs Mod - made by nomadic on the Vivaldi Forums == */
+/* Adds borders between tabs - https://forum.vivaldi.net/post/676620 */
 #browser {
   /* Change to "0" (to hide) or "1" (to show) */
   --showBordersActiveTab: 0;
@@ -46,9 +47,9 @@
 }
 
 /* Hide the borders around the active tab */
-.tab-strip span .tab-position:has(.active)::before,
-.tab-strip span:has(+ span .active) .tab-position::after,
-.tab-strip span .tab-position:has(.active)::after {
+.tab-strip span .tab-position:has(> .tab.active)::before,
+.tab-strip span:has(+ span > .tab.active) .tab-position::after,
+.tab-strip span .tab-position:has(> .tab.active)::after {
   opacity: calc(var(--showBordersActiveTab) * var(--borderOpacity));
 }
 
