@@ -1,0 +1,31 @@
+/* == Chromium Style "Other bookmarks" Bookmark Bar Folder Mod - made by nomadic on the Vivaldi Forums == */
+/* Moves the first bookmark bar folder to the far right side. Requires the first bookmark bar item to be a folder - https://forum.vivaldi.net/post/678435*/
+#browser {
+  /* You may need to adjust to fit the entire text "Other bookmarks" */
+  --overallFolderWidth: 125px;
+}
+
+/* Push the first folder to the far right and increase its width */
+.bookmark-bar button.folder:first-of-type {
+  max-width: var(--overallFolderWidth);
+  position: absolute;
+  right: 0;
+  height: 100%;
+  z-index: 1;
+}
+
+/* Border in front of folder icon */
+.bookmark-bar button.folder:first-of-type::before {
+  content: "";
+  position: absolute;
+  left: -5px;
+  top: 20%;
+  width: 1px;
+  height: 60%;
+  background-color: var(--colorFgFadedMost);
+}
+
+/* Leave space on the right for the folder */
+.bookmark-bar .observer {
+  padding-right: var(--overallFolderWidth);
+}
