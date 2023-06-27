@@ -12,6 +12,12 @@
   fill: currentColor;
 }
 
+/* @media screen and (min-zoom: 10%) and (max-zoom: 100%) {
+  .button-textonly:has(.page-zoom-controls)::before {
+    -webkit-mask: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" id="svg8" width="34" height="34" fill="none" stroke="black" stroke-linecap="round" stroke-width="1" viewBox="0 0 28 28"><path d="M8.54 20.06 12.6 16"/><circle cx="15.58" cy="12.8" r="4.25"/><path id="minus" d="M17.08 12.8h-3"/></svg>');
+  }
+} */
+
 .button-textonly .page-zoom-controls {
   transition: 0.5s ease 2s;
   margin: 0;
