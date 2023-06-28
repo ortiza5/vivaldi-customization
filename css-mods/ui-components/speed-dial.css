@@ -16,21 +16,14 @@
 
 /* Speed dial title style */
 .startpage .dials .dial .button-title {
-  background-color: unset;
   color: white;
   text-shadow: 0 0 2px #000, 0 0 3px #000, 0 0 5px #000;
-  opacity: 1;
   text-align: center;
+  max-height: 16.9px;
+  /* max-width: calc(100% - 26px); */
 }
 .speeddial .dial > .thumbnail-title {
-  flex-flow: column;
-}
-
-/* Fix title color that was broken by overriding the fg intense color */
-.dials .dial .edit .button-title,
-.dials-wrapper:not(.dragging-disabled) .dials .dial:hover .button-title,
-.dials .dial:focus-within .button-title {
-  color: var(--colorAccentFg);
+  justify-content: center;
 }
 
 /* Focus indicator for speed dial titles */
@@ -38,12 +31,12 @@
 .startpage .dials .dial .button-title:active,
 .dials .dial:focus-within .editable-title-container .button-title {
   background-color: var(--colorHighlightFgAlphaHeavy);
-  width: unset;
-  border-radius: 10px;
+  border-radius: calc(16.9px / 2);
   margin: 0 auto;
   padding: 0 13px;
-  transition: 0.2s;
-  /* white-space: normal; */
+  transition: 0.5s;
+  white-space: unset;
+  max-height: calc(16.9px * 4);
 }
 
 .dial .thumbnail-image {
