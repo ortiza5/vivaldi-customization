@@ -1,11 +1,16 @@
+/* == Tabs Below Address Bar Mod - made by nomadic on the Vivaldi Forums == */
+/* Moves the tab bar below the address bar - https://forum.vivaldi.net/post/446311 */
 #browser {
   --addressBarPaddingRight: 137px;
+  --addressBarPaddingLeft: 34px;
   --headerElementsHeight: 34px;
   --tabBarPaddingRightToSeeTrashAndSync: 92px;
-  /* uncomment the line below to unify tab bar color with the address bar's */
+  /* comment out the line below to NOT unify tab bar color with the address bar and bookmark bar*/
   --unified: transparent;
   --backgroundColor: var(--unified, var(--colorBg));
   --backgroundColorAccent: var(--unified, var(--colorAccentBg));
+  /* comment out the line below to remove the drag region on the bookmark bar and tab bar */
+  --allowWindowDrag: 1;
 }
 
 /* top addressbar above top tabbar */
@@ -22,9 +27,8 @@
 .mainbar {
   position: absolute;
   top: 0;
-  padding-left: 34px;
-  padding-right: var(--addressBarPaddingRight);
-  width: 100%;
+  left: var(--addressBarPaddingLeft);
+  width: calc(100% - var(--addressBarPaddingLeft) - var(--addressBarPaddingRight));
   z-index: 2 !important;
 }
 
@@ -60,6 +64,17 @@
 #browser.tabs-top.address-top.bookmark-bar-top.maximized:not(.tabs-at-edge) .bookmark-bar {
   top: 41px;
 }
+.color-behind-tabs-off .bookmark-bar,
+.color-behind-tabs-off .bookmark-bar button {
+  background-color: var(--backgroundColorAccent);
+}
+.color-behind-tabs-on .bookmark-bar,
+.color-behind-tabs-on .bookmark-bar button {
+  background-color: var(--backgroundColor);
+}
+.bookmark-bar {
+  border-color: var(--unified, var(--colorAccentBgDark)) !important;
+}
 
 /* horizontal menu enabled */
 #browser.tabs-top.address-top.horizontal-menu #header {
@@ -81,7 +96,8 @@
   padding-top: 0;
 }
 #browser.tabs-top.address-top.horizontal-menu .mainbar {
-  padding: unset;
+  left: 0;
+  width: 100%;
   transform: translateY(24px);
 }
 
@@ -124,14 +140,12 @@
 #titlebar button.vivaldi,
 .window-buttongroup {
   background-color: var(--backgroundColor);
-  z-index: 3 !important;
 }
 .color-behind-tabs-off #titlebar button.vivaldi,
 .color-behind-tabs-off .window-buttongroup {
   background-color: var(--backgroundColorAccent);
 }
-.toolbar-mainbar .toolbar-extensions,
-.toolbar-mainbar {
+.mainbar > .toolbar-mainbar {
   background-color: var(--backgroundColor);
 }
 .color-behind-tabs-off .toolbar-mainbar .toolbar-extensions,
@@ -145,21 +159,26 @@
 }
 
 /* Remove line under address bar and extensions bar */
-.address-top .mainbar > .toolbar-mainbar .toolbar-extensions:before,
-.address-top .mainbar > .toolbar-mainbar:before {
-  content: unset;
+.address-top .mainbar > .toolbar-mainbar {
+  border-bottom: unset;
 }
 
 /* Move extension popups down to avoid crossing drag region which leads to dead zone */
+/* Horizontal menu needs -24px margin when drag is disabled */
 .extension-popup.top {
-  margin-top: 29px;
+  margin-top: calc(var(--allowWindowDrag) * 29px);
 }
 #browser.tabs-top.address-top.horizontal-menu .extension-popup.top {
-  margin-top: 7px;
+  margin-top: calc(var(--allowWindowDrag, -3.43) * 7px);
 }
 #browser.tabs-top.address-top.bookmark-bar-top .extension-popup.top {
-  margin-top: 58px;
+  margin-top: calc(var(--allowWindowDrag) * 58px);
 }
 #browser.tabs-top.address-top.bookmark-bar-top.horizontal-menu .extension-popup.top {
-  margin-top: 2px;
+  margin-top: calc(var(--allowWindowDrag, -0.71) * 34px);
+}
+
+#tabs-tabbar-container,
+.bookmark-bar {
+  app-region: var(--allowWindowDrag, no-drag);
 }
