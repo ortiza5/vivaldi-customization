@@ -48,7 +48,7 @@
 
 /* Hide the borders around the active tab */
 .tab-strip span .tab-position:has(> .tab.active)::before,
-.tab-strip span:has(+ span > .tab.active) .tab-position::after,
+.tab-strip span:has(+ span .tab.active) .tab-position::after,
 .tab-strip span .tab-position:has(> .tab.active)::after {
   opacity: calc(var(--showBordersActiveTab) * var(--borderOpacity));
 }
