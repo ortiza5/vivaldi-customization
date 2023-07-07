@@ -1,0 +1,16 @@
+/* ==UserStyle==
+@name           Transparent Image Background
+@namespace      github.com/openstyles/stylus
+@version        1.0.0
+@description    Make opened transparent images have a custom background color
+@author         nomadic
+==/UserStyle== */
+html > body:has(> img:only-child) {
+    /* Change the below variable to whatever background color you want */
+    --transparentImageBackgroundColor: hsl(0 0% 20% / 1);
+    /* */
+    background-color: var(--transparentImageBackgroundColor) !important;
+}
+html > body > img:only-child {
+    background-color: var(--transparentImageBackgroundColor) !important;
+}
