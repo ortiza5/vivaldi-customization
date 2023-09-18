@@ -125,6 +125,7 @@
   padding-top: 0;
 }
 
+/* Remove empty space above tabs*/
 #tabs-tabbar-container.top {
   padding-top: unset !important;
 }
@@ -184,3 +185,7 @@
   background-color: var(--backgroundColor);
 }
 
+/* Prevent menu button from shifting down */
+.vivaldi {
+  margin-top: unset;
+}
