@@ -36,20 +36,16 @@
 
       // create the button if it isn't already there
       let alreadyExists = document.getElementById("zoom-hover-target");
-      if (alreadyExists) {
-        alreadyExists.remove();
-        document.getElementById("el2left").remove();
-      }
+      if (!alreadyExists) {
+        // CHANGE: Added in Update #4
+        // a guaranteed div to the left of the button
+        let elementToTheLeft = document.createElement("div");
+        elementToTheLeft.style.transition = "0.5s";
+        elementToTheLeft.id = "el2left";
 
-      // CHANGE: Added in Update #4
-      // a guaranteed div to the left of the button
-      let elementToTheLeft = document.createElement("div");
-      elementToTheLeft.style.transition = "0.5s";
-      elementToTheLeft.id = "el2left";
-
-      let zoomBtn = document.createElement("div");
-      zoomBtn.id = "zoom-hover-target";
-      zoomBtn.innerHTML = `
+        let zoomBtn = document.createElement("div");
+        zoomBtn.id = "zoom-hover-target";
+        zoomBtn.innerHTML = `
           <div class="zoom-parent">
             <div class="zoom-panel">
               <div class="page-zoom-controls-c">
@@ -58,9 +54,9 @@
                     <span class="button-title-c">Reset</span>
                   </button>
                 </div>
-                <div class="button-toolbar button-toolbar-c" title="Zoom Out">
-                  <button tabindex="-1" id="zoom-out-c">
-                    <span>
+                <div class="button-toolbar button-toolbar-c">
+                  <button tabindex="-1" title="Zoom Out" type="button" class="ToolbarButton-Button" id="zoom-out-c">
+                    <span class="button-icon">
                       <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
                         <path d="M4 8C4 8.55228 4.44772 9 5 9H11C11.5523 9 12 8.55228 12 8C12 7.44772 11.5523 7 11 7H5C4.44772 7 4 7.44772 4 8Z"></path>
                       </svg>
@@ -68,9 +64,9 @@
                   </button>
                 </div>
                 <span id="zoom-percent-c"></span>
-                <div class="button-toolbar button-toolbar-c" title="Zoom In">
-                  <button tabindex="-1" id="zoom-in-c">
-                    <span>
+                <div class="button-toolbar button-toolbar-c">
+                  <button tabindex="-1" title="Zoom In" type="button" class="ToolbarButton-Button" id="zoom-in-c">
+                    <span class="button-icon">
                       <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
                         <path d="M7 7V5C7 4.44772 7.44772 4 8 4C8.55228 4 9 4.44772 9 5V7H11C11.5523 7 12 7.44772 12 8C12 8.55228 11.5523 9 11 9H9V11C9 11.5523 8.55228 12 8 12C7.44772 12 7 11.5523 7 11V9H5C4.44772 9 4 8.55228 4 8C4 7.44772 4.44772 7 5 7H7Z"></path>
                       </svg>
@@ -90,48 +86,51 @@
           </div>
         `;
 
-      // inserts the button to the left of the bookmark icon
-      const addressBarEnd = document.querySelector(".UrlBar-AddressField .toolbar-insideinput:last-of-type");
-      const bookmarkBtn = addressBarEnd.getElementsByClassName("BookmarkButton")[0];
-      if (!bookmarkBtn) {
-        addressBarEnd.appendChild(zoomBtn);
-      } else {
-        addressBarEnd.insertBefore(zoomBtn, bookmarkBtn);
-      }
-      // CHANGE:Added in Update #4
-      // divs next to the button aren't static,so created my own div to push
-      addressBarEnd.insertBefore(elementToTheLeft, zoomBtn);
+        // Currently broken, but always gets added to the end of the bar now
+        // inserts the button to the left of the bookmark icon
+        const addressBarEnd = document.querySelector(".UrlBar-AddressField .toolbar-insideinput:last-of-type");
+        const bookmarkBtn = addressBarEnd.getElementsByClassName("BookmarkButton")[0];
+        console.log(bookmarkBtn);
+        if (!bookmarkBtn) {
+          addressBarEnd.appendChild(zoomBtn);
+        } else {
+          addressBarEnd.insertBefore(zoomBtn, bookmarkBtn);
+        }
+        // CHANGE:Added in Update #4
+        // divs next to the button aren't static,so created my own div to push
+        addressBarEnd.insertBefore(elementToTheLeft, zoomBtn);
 
-      // listener for the magnifying glass button to expand or collapse the control panel
-      document.getElementById("zoom-panel-btn").addEventListener("click", function () {
-        let nav = document.getElementsByClassName("zoom-panel")[0];
-        navToggle(nav, elementToTheLeft);
-      });
+        // listener for the magnifying glass button to expand or collapse the control panel
+        document.getElementById("zoom-panel-btn").addEventListener("click", function () {
+          let nav = document.getElementsByClassName("zoom-panel")[0];
+          navToggle(nav, elementToTheLeft);
+        });
 
-      // listener for the zoom in button in the zoom control panel
-      document.getElementById("zoom-in-c").addEventListener("click", incrementPercent);
+        // listener for the zoom in button in the zoom control panel
+        document.getElementById("zoom-in-c").addEventListener("click", incrementPercent);
 
-      // listener for the zoom out button in the zoom control panel
-      document.getElementById("zoom-out-c").addEventListener("click", decrementPercent);
+        // listener for the zoom out button in the zoom control panel
+        document.getElementById("zoom-out-c").addEventListener("click", decrementPercent);
 
-      // listener for the zoom reset button in the zoom control panel
-      document.getElementById("zoom-reset-c").addEventListener("click", resetZoom);
+        // listener for the zoom reset button in the zoom control panel
+        document.getElementById("zoom-reset-c").addEventListener("click", resetZoom);
 
-      // starts esentially a hover listener that modes 1 and 2 need
-      if (MODE === 1 || MODE === 2) {
-        zoomPanelHoverTracker();
+        // starts esentially a hover listener that modes 1 and 2 need
+        if (MODE === 1 || MODE === 2) {
+          zoomPanelHoverTracker();
+        }
       }
 
       // set the icon based on the new zoom level
       if (newZoom < RESET_ZOOM_LEVEL / 100) {
         // zoomed in
         zoomIconPath = `
-          <path d="M5.83 9.65a.5.5 0 00-.29.13L1.32 14c-.46.47.23 1.17.7.7l4.22-4.22a.5.5 0 00-.42-.83zm3.6-8.5a5.41 5.41 0 00-5.4 5.4 5.4 5.4 0 105.4-5.4zm0 .99a4.4 4.4 0 11-4.41 4.41 4.4 4.4 0 014.42-4.42zM7.16 6.06c-.66 0-.66.98 0 .98h4.57c.65 0 .65-.98 0-.98z"/>
+        <path d="M5.83 9.65a.5.5 0 00-.29.13L1.32 14c-.46.47.23 1.17.7.7l4.22-4.22a.5.5 0 00-.42-.83zm3.6-8.5a5.41 5.41 0 00-5.4 5.4 5.4 5.4 0 105.4-5.4zm0 .99a4.4 4.4 0 11-4.41 4.41 4.4 4.4 0 014.42-4.42zM7.16 6.06c-.66 0-.66.98 0 .98h4.57c.65 0 .65-.98 0-.98z"/>
         `;
       } else if (newZoom > RESET_ZOOM_LEVEL / 100) {
         // zoomed out
         zoomIconPath = `
-          <path d="M5.83 9.65a.5.5 0 00-.3.13L1.31 14c-.46.47.23 1.17.7.7l4.22-4.22a.5.5 0 00-.4-.84zm3.6-8.5a5.41 5.41 0 00-5.4 5.4 5.4 5.4 0 0010.81 0 5.4 5.4 0 00-5.4-5.4zm0 .98a4.4 4.4 0 014.42 4.41 4.41 4.41 0 11-4.41-4.4zm-.06 1.63a.5.5 0 00-.43.5v1.79h-1.8c-.65 0-.65.98 0 .98h1.8v1.81c0 .66.99.66.99 0v-1.8h1.79c.65 0 .65-.99 0-1h-1.8V4.27a.5.5 0 00-.55-.5z"/>
+        <path d="M5.83 9.65a.5.5 0 00-.3.13L1.31 14c-.46.47.23 1.17.7.7l4.22-4.22a.5.5 0 00-.4-.84zm3.6-8.5a5.41 5.41 0 00-5.4 5.4 5.4 5.4 0 0010.81 0 5.4 5.4 0 00-5.4-5.4zm0 .98a4.4 4.4 0 014.42 4.41 4.41 4.41 0 11-4.41-4.4zm-.06 1.63a.5.5 0 00-.43.5v1.79h-1.8c-.65 0-.65.98 0 .98h1.8v1.81c0 .66.99.66.99 0v-1.8h1.79c.65 0 .65-.99 0-1h-1.8V4.27a.5.5 0 00-.55-.5z"/>
         `;
       } else {
         // default zoom icon
