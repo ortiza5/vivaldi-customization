@@ -138,10 +138,10 @@
 .color-behind-tabs-off .window-buttongroup {
   background-color: var(--backgroundColorAccent);
 }
+.toolbar-mainbar .toolbar-extensions,
 .mainbar > .toolbar-mainbar {
   background-color: var(--backgroundColor);
 }
-.color-behind-tabs-off .toolbar-mainbar .toolbar-extensions,
 .color-behind-tabs-off .toolbar-mainbar {
   background-color: var(--backgroundColorAccent);
 }
@@ -175,3 +175,12 @@
 .bookmark-bar {
   app-region: var(--allowWindowDrag, no-drag);
 }
+
+/* Fix broken unified color in 6.2 */
+.color-behind-tabs-off.address-top .mainbar {
+  background-color: var(--backgroundColorAccent);
+}
+.color-behind-tabs-on.address-top .mainbar {
+  background-color: var(--backgroundColor);
+}
+
