@@ -30,6 +30,7 @@
     function updateZoomIcon(zoomInfo) {
       let newZoom = zoomInfo.newZoomFactor;
       let zoomIconPath;
+      let zoomIconState;
       const isMailBar = document.querySelector(".toolbar-mailbar");
 
       if (isMailBar) return;
@@ -124,16 +125,19 @@
       // set the icon based on the new zoom level
       if (newZoom < RESET_ZOOM_LEVEL / 100) {
         // zoomed in
+        zoomIconState = "zoomed-in";
         zoomIconPath = `
         <path d="M5.83 9.65a.5.5 0 00-.29.13L1.32 14c-.46.47.23 1.17.7.7l4.22-4.22a.5.5 0 00-.42-.83zm3.6-8.5a5.41 5.41 0 00-5.4 5.4 5.4 5.4 0 105.4-5.4zm0 .99a4.4 4.4 0 11-4.41 4.41 4.4 4.4 0 014.42-4.42zM7.16 6.06c-.66 0-.66.98 0 .98h4.57c.65 0 .65-.98 0-.98z"/>
         `;
       } else if (newZoom > RESET_ZOOM_LEVEL / 100) {
         // zoomed out
+        zoomIconState = "zoomed-out";
         zoomIconPath = `
         <path d="M5.83 9.65a.5.5 0 00-.3.13L1.31 14c-.46.47.23 1.17.7.7l4.22-4.22a.5.5 0 00-.4-.84zm3.6-8.5a5.41 5.41 0 00-5.4 5.4 5.4 5.4 0 0010.81 0 5.4 5.4 0 00-5.4-5.4zm0 .98a4.4 4.4 0 014.42 4.41 4.41 4.41 0 11-4.41-4.4zm-.06 1.63a.5.5 0 00-.43.5v1.79h-1.8c-.65 0-.65.98 0 .98h1.8v1.81c0 .66.99.66.99 0v-1.8h1.79c.65 0 .65-.99 0-1h-1.8V4.27a.5.5 0 00-.55-.5z"/>
         `;
       } else {
         // default zoom icon
+        zoomIconState = "default-zoom";
         zoomIconPath = `
           <path d="M5.87 9.71c-.11.01-.2.06-.29.14l-4.37 4.37c-.46.45.23 1.14.7.68l4.36-4.37a.48.48 0 00-.41-.82zm3.55-8.36A5.33 5.33 0 004.1 6.67a5.32 5.32 0 105.32-5.32zm0 .97a4.33 4.33 0 11-4.34 4.34 4.33 4.33 0 014.34-4.35z"/>
         `;
@@ -141,6 +145,7 @@
 
       // insert the new icon
       let zoomSVG = document.getElementById("zoomIcon-c");
+      zoomSVG.setAttribute("data-zoomState", zoomIconState);
       zoomSVG.innerHTML = zoomIconPath;
 
       // make the percent in the controls match the current zoom level
