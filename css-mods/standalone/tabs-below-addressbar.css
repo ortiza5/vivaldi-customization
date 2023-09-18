@@ -4,7 +4,6 @@
   --addressBarPaddingRight: 137px;
   --addressBarPaddingLeft: 50px;
   --headerElementsHeight: 34px;
-  --tabBarPaddingRightToSeeTrashAndSync: 92px;
   /* comment out the line below to NOT unify tab bar color with the address bar and bookmark bar*/
   --unified: transparent;
   --backgroundColor: var(--unified, var(--colorBg));
@@ -43,12 +42,10 @@
 }
 
 /* Sets tabs to fill entire bar */
-#tabs-tabbar-container.top {
-  margin-left: 0px !important;
-  margin-right: -90px !important;
-}
-#browser.tabs-top.address-top #tabs-tabbar-container > div {
+#browser.tabs-top.address-top #tabs-tabbar-container.top > #tabs-container,
+#browser.tabs-top.address-top #tabs-tabbar-container.top > #tabs-subcontainer {
   padding-left: 2px;
+  padding-right: 2px;
 }
 
 /* bookmark bar enabled */
@@ -128,10 +125,6 @@
   padding-top: 0;
 }
 
-/* Remove empty space to the right of tabs and above tabs*/
-#tabs-container {
-  padding-right: var(--tabBarPaddingRightToSeeTrashAndSync) !important;
-}
 #tabs-tabbar-container.top {
   padding-top: unset !important;
 }
