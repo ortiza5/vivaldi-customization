@@ -1,0 +1,82 @@
+/* == Traffic Light Window Buttons - made by nomadic on the Vivaldi Forums == */
+/* Makes the window minimize, maximize, and close buttons look like the macOS traffic light style */
+
+/* Variables for configuring the size and spacing of the buttons */
+#browser {
+  --windowButtonDiameter: 15px;
+  --windowButtonSideMargins: 6px;
+  --windowButtonContainerSideMargins: 8px;
+  /* --- */
+  --windowButtonTotalWidth: calc((2 * var(--windowButtonSideMargins)) + var(--windowButtonDiameter));
+}
+
+/* Set the side margins of the overall button container */
+#browser .window-buttongroup {
+  margin-inline: var(--windowButtonContainerSideMargins);
+}
+
+/* Set the button hover target size */
+#browser .window-buttongroup button {
+  width: var(--windowButtonTotalWidth) !important;
+  padding-inline: var(--windowButtonSideMargins);
+  /* Push the icons to the center of the button */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Give appropriate space for the buttons next to the tab bar / address bar */
+#browser #tabs-container:not(.none).top,
+#browser.address-top .toolbar:has(.window-buttongroup.on-mainbar) {
+  padding-right: calc(((3 * var(--windowButtonTotalWidth)) + (2 * var(--windowButtonContainerSideMargins))) / var(--uiZoomLevel)) !important;
+}
+
+/* Make the icons circles */
+#browser .window-buttongroup button svg {
+  border-radius: 50%;
+  height: var(--windowButtonDiameter);
+  width: var(--windowButtonDiameter);
+}
+
+/* Hide the buttons' default colors */
+#browser .window-buttongroup button,
+#browser .window-buttongroup button:hover {
+  background-color: unset !important;
+}
+
+/* Custom icon for window minimize control button */
+.window-minimize svg path {
+  d: path("");
+}
+#browser .window-buttongroup button.window-minimize svg {
+  background-color: #ffc200 !important;
+}
+#browser .window-buttongroup button.window-minimize:hover svg {
+  background-color: #ffd600 !important;
+}
+
+/* Custom icon for window maximize control button */
+.window-maximize svg .window-maximize-glyph path {
+  d: path("");
+}
+/* Custom icon for window restore control button */
+.window-maximize svg .window-restore-glyph path {
+  d: path("");
+}
+#browser .window-buttongroup button.window-maximize svg {
+  background-color: #00c400 !important;
+}
+#browser .window-buttongroup button.window-maximize:hover svg {
+  background-color: #00d800 !important;
+}
+
+/* Custom icon for window close control button */
+.window-close svg path {
+  d: path("");
+}
+#browser .window-buttongroup button.window-close svg {
+  background-color: #ff5950 !important;
+}
+#browser .window-buttongroup button.window-close:hover svg {
+  background-color: #ff6e66 !important;
+}
