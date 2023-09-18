@@ -2,7 +2,7 @@
 /* Moves the tab bar below the address bar - https://forum.vivaldi.net/post/446311 */
 #browser {
   --addressBarPaddingRight: 137px;
-  --addressBarPaddingLeft: 34px;
+  --addressBarPaddingLeft: 50px;
   --headerElementsHeight: 34px;
   --tabBarPaddingRightToSeeTrashAndSync: 92px;
   /* comment out the line below to NOT unify tab bar color with the address bar and bookmark bar*/
