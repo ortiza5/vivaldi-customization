@@ -152,7 +152,7 @@
 }
 
 /* Remove line under address bar and extensions bar */
-.address-top .mainbar > .toolbar-mainbar {
+.address-top .mainbar {
   border-bottom: unset;
 }
 
