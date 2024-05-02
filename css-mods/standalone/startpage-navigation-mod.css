@@ -46,7 +46,7 @@
   margin: 0 var(--startpageNavBtnMargin) !important;
   text-shadow: var(--startpageNavTextShadow);
   box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2);
-  transition: 0.1s;
+  transition: 0.3s;
   font-size: 11px;
   font-weight: 500;
   -webkit-mask-image: unset;

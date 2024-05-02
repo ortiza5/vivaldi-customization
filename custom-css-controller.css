@@ -18,6 +18,7 @@
 @import "css-mods/icons.css";
 
 /* Standalone Mods */
+@import "css-mods/standalone/address-field-progress-bar.css";
 /* @import "css-mods/standalone/chromium-other-bookmarks.css"; */
 /* @import "css-mods/standalone/compact-zoom-button.css"; */
 @import "css-mods/standalone/make-ui-text-selectable.css";

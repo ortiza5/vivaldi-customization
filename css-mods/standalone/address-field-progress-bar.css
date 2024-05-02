@@ -1,0 +1,22 @@
+/* Address field progress bar foreground */
+.UrlBar-AddressField .pageload .pageload-indicator::-webkit-progress-value {
+  background-color: var(--colorHighlightBg);
+  transition: width 0.5s;
+}
+/* Address field progress bar background */
+.UrlBar-AddressField .pageload .pageload-indicator::-webkit-progress-bar {
+  background-color: transparent;
+}
+
+/* Restyle address field progress bar */
+.UrlBar-AddressField .pageload .pageload-indicator {
+  opacity: 1;
+  height: 2.4px;
+  top: unset;
+  bottom: 0;
+  transition: opacity 0.2s;
+  background-color: transparent !important;
+}
+.UrlBar-AddressField .pageload.progress-done .pageload-indicator {
+  transition: opacity 1s;
+}

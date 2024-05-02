@@ -19,11 +19,19 @@
   color: white;
   text-shadow: 0 0 2px #000, 0 0 3px #000, 0 0 5px #000;
   text-align: center;
-  max-height: 16.9px;
-  /* max-width: calc(100% - 26px); */
+  max-width: 100%;
 }
 .speeddial .dial > .thumbnail-title {
   justify-content: center;
+  align-items: unset;
+  height: unset;
+  max-height: calc(16.9px * 4);
+  min-height: 33px;
+  transition: 0.5s;
+  margin-top: 7px;
+}
+.speeddial .dial > .thumbnail-title .editable-title-container {
+  max-width: 100%;
 }
 
 /* Focus indicator for speed dial titles */
@@ -32,7 +40,6 @@
 .dials .dial:focus-within .editable-title-container .button-title {
   background-color: var(--colorHighlightFgAlphaHeavy);
   border-radius: calc(16.9px / 2);
-  margin: 0 auto;
   padding: 0 13px;
   transition: 0.5s;
   white-space: unset;
@@ -142,6 +149,9 @@
 .dials .dial.folder .preview {
   padding: 5% 5%;
   background-color: var(--colorAccentBg);
+}
+.dials .dial .preview .Mini-Thumbnail {
+  max-height: 43.23px;
 }
 
 /* Remove slight movement of dials on hover/focus */
