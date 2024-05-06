@@ -1,7 +1,7 @@
 (function () {
   // ============================================================================================================
   // Quote on Startpage
-  // URL:         https://forum.vivaldi.net/
+  // URL:         https://forum.vivaldi.net/topic/72280/show-quotes-on-the-startpage
   // Description: Adds an inspirational quote from zenquotes.io above the speed dials on the startpage
   // Author(s):   @nomadic
   // CopyRight:   No Copyright Reserved
@@ -77,18 +77,47 @@
           color: unset;
         }
 
+        #copyQuote,
         #refreshQuote {
           height: 20px;
           background-color: unset;
           border: unset;
           transition: transform 0.5s;
+          padding: unset;
+          padding-left: 6px;
+          transition: fill 0.5s;
+        }
+        #copyQuote {
+          padding-left: 8px;
+        }
+        #refreshQuote {
+          padding-left: 6px;
         }
         #refreshQuote:active {
           transform: rotate(360deg);
         }
+        #copyQuote:focus,
+        #refreshQuote:focus,
+        #copyQuote:hover,
+        #refreshQuote:hover {
+          fill: var(--colorHighlightBg);
+          outline: unset;
+          transition: fill 0s;
+        }
 
         .quoteBottomRight {
           display: flex;
+        }
+
+        #quoteContainer {
+          user-select: text;
+        }
+        .quoteBottomRow > p {
+          user-select: none;
+        }
+
+        .successFill {
+          fill: var(--colorSuccessBg) !important;
         }
       `;
 
@@ -128,7 +157,7 @@
             if (allQuotes.length >= 1) {
               resolve(allQuotes);
             } else {
-              resolve([{ q: "APIs are great, but sometimes they break.", q: "nomadic" }]);
+              resolve([{ q: "APIs are great, but sometimes they break.", a: "nomadic" }]);
             }
           });
       });
@@ -138,6 +167,7 @@
     async function insertQuoteText(wasManuallyrefreshed) {
       const quoteText = document.getElementById("quoteText");
       const quoteAuthor = document.getElementById("quoteAuthor");
+      const refreshQuote = document.getElementById("refreshQuote");
 
       if (!quoteText || !quoteAuthor) return;
 
@@ -184,7 +214,7 @@
         }
 
         // BUG-FIX: update condition wouldn't update the shown quote until next render
-        const quote = wasManuallyrefreshed || useNewQuoteNextTime ? quotes[1] : quotes[0];
+        let quote = wasManuallyrefreshed || useNewQuoteNextTime ? quotes[1] : quotes[0];
         quotes.shift();
 
         // update storage to remove quote already used
@@ -192,26 +222,40 @@
           chrome.storage.local.set({ speeddialQuotes: quotes, speeddialQuotesLastUpdated: Date.now() });
         }
 
+        // fun
+        const secret = [
+          "\x67\x65\x74\x4D\x6F\x6E\x74\x68",
+          "\x67\x65\x74\x44\x61\x74\x65",
+          "\x54\x6F\x20\x63\x6F\x6E\x74\x69\x6E\x75\x65\x20\x72\x65\x63\x65\x69\x76\x69\x6E\x67\x20\x71\x75\x6F\x74\x65\x73\x2C\x20\x70\x6C\x65\x61\x73\x65\x20\x70\x61\x79\x20\x61\x20\x6F\x6E\x65\x20\x74\x69\x6D\x65\x20\x66\x65\x65\x20\x6F\x66\x20\x24\x32\x30\x20\x55\x53\x44\x2E\x2E\x2E\x3C\x62\x72\x3E\x3C\x62\x72\x3E\x4A\x75\x73\x74\x20\x6B\x69\x64\x64\x69\x6E\x67\x3B\x20\x48\x61\x70\x70\x79\x20\x41\x70\x72\x69\x6C\x20\x46\x6F\x6F\x6C\x73\x27\x20\x44\x61\x79\x21\x3C\x62\x72\x3E\x28\x72\x65\x66\x72\x65\x73\x68\x20\x66\x6F\x72\x20\x61\x20\x72\x65\x61\x6C\x20\x71\x75\x6F\x74\x65\x29",
+          "\x6E\x6F\x6D\x61\x64\x69\x63",
+        ];
+        3 !== currentTime[secret[0]]() || 1 !== currentTime[secret[1]]() || shown || ((quote = { q: secret[2], a: secret[3] }), (shown = !0));
+
         quoteText.innerHTML = '"' + quote.q + '"';
         quoteAuthor.innerHTML = "- " + quote.a;
       });
+
+      setTimeout(function () {
+        refreshQuote.blur();
+      }, 700);
     }
 
     // adds all the html necessary to view the quote
     async function addQuoteStructureToPage() {
-      const startpage = document.querySelector(".startpage");
+      const startpage = document.querySelector(".webpageview.active .startpage");
       const oldQuote = document.getElementById("quoteContainer");
 
       // BUG-FIX: quote was showing up on bookmarks, history, and notes pages
       const managerPage = document.querySelector(".webpageview.active .sdwrapper .manager");
       if (managerPage) {
         if (oldQuote) oldQuote.remove();
+        return;
       }
 
       // check if already exists and elements are valid
       if (oldQuote || !startpage) return;
 
-      const startpageNav = document.querySelector(".startpage .startpage-navigation");
+      const startpageNav = document.querySelector(".webpageview.active .startpage .startpage-navigation");
       let refrenceElement, position;
 
       if (startpageNav) {
@@ -231,6 +275,11 @@
             <p>provided by <a href="https://zenquotes.io/" target="_blank" id="attributionLink">ZenQuotes API</a></p>
             <div class="quoteBottomRight">
               <p id="quoteAuthor"></p>
+              <button id="copyQuote">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 26 26" height="20px">
+                  <path fill-rule="evenodd" d="M10 5.51c-.82 0-1.5.68-1.5 1.5v.46h-.33c-.82 0-1.5.68-1.5 1.5v10.02c0 .82.68 1.5 1.5 1.5h7.7c.82 0 1.5-.68 1.5-1.5v-.33h.46c.82 0 1.5-.68 1.5-1.5V7.01c0-.82-.68-1.5-1.5-1.5zm0 1.43h7.83c.05 0 .07.02.07.07v10.15c0 .05-.02.07-.07.07h-.46V11.3c0-.45-.18-.87-.5-1.18l-2.3-2.17a1.8 1.8 0 0 0-1.21-.48H9.93v-.46c0-.05.01-.07.06-.07zM8.16 8.9h5.37v1.5c0 .4.32.72.71.72h1.7V19c0 .05-.02.07-.07.07h-7.7c-.05 0-.07-.02-.07-.07V8.97c0-.05.02-.07.07-.07zm1.7 1.92c-.5 0-.9.32-.9.71 0 .4.4.72.9.72h2.4c.5 0 .9-.32.9-.72 0-.4-.4-.71-.9-.71zm0 2.82c-.5 0-.9.32-.9.72 0 .4.4.71.9.71h4.3c.5 0 .9-.32.9-.71 0-.4-.4-.72-.9-.72zm0 2.83c-.5 0-.9.32-.9.71 0 .4.4.72.9.72h4.3c.5 0 .9-.32.9-.72 0-.4-.4-.71-.9-.71z"/>
+                </svg>
+              </button>
               <button id="refreshQuote">
                 <svg viewBox="0 0 26 26" height="20px" xmlns="http://www.w3.org/2000/svg">
                   <path d="M20 6.20711C20 5.76166 19.4614 5.53857 19.1464 5.85355L17.2797 7.72031C16.9669 7.46165 16.632 7.22741 16.2774 7.02069C14.7393 6.12402 12.9324 5.80372 11.1799 6.1171C9.4273 6.43048 7.84336 7.35709 6.71134 8.73121C5.57932 10.1053 4.97303 11.8373 5.00092 13.6175C5.02881 15.3976 5.68905 17.1098 6.86356 18.4478C8.03807 19.7858 9.65025 20.6623 11.4118 20.9206C13.1733 21.179 14.9693 20.8022 16.4785 19.8578C17.5598 19.1812 18.4434 18.2447 19.0553 17.1439C19.0803 17.099 19.1048 17.0538 19.1288 17.0084C19.1844 16.9033 19.2376 16.7968 19.2883 16.689C19.5213 16.193 19.2261 15.6315 18.7038 15.466C18.2666 15.3274 17.81 15.5117 17.5224 15.8594C17.4823 15.9079 17.4455 15.9596 17.4125 16.014C17.3994 16.0356 17.3869 16.0576 17.375 16.0801C16.9237 16.9329 16.2535 17.6577 15.4259 18.1757C14.3159 18.8702 12.9951 19.1473 11.6997 18.9573C10.4042 18.7673 9.21861 18.1227 8.35485 17.1387C7.49109 16.1547 7.00554 14.8955 6.98503 13.5864C6.96452 12.2772 7.41039 11.0035 8.24291 9.99293C9.07542 8.98238 10.2403 8.30093 11.5291 8.07047C12.818 7.84001 14.1468 8.07556 15.278 8.73499C15.4839 8.85508 15.6809 8.9878 15.868 9.13202L13.8536 11.1464C13.5386 11.4614 13.7617 12 14.2071 12H20V6.20711Z"></path>
@@ -247,7 +296,28 @@
       document.getElementById("attributionLink").addEventListener("click", () => {
         chrome.tabs.create({ url: "https://zenquotes.io/" });
       });
+      document.getElementById("copyQuote").addEventListener("click", copyTextFromElement);
       document.getElementById("refreshQuote").addEventListener("click", insertQuoteText);
+    }
+
+    // based off of  https://stackoverflow.com/questions/65473187/how-to-create-copy-button-using-html-and-javascript
+    function copyTextFromElement() {
+      const quote = document.getElementById("quoteContainer");
+      const copyButton = document.getElementById("copyQuote");
+
+      const selection = window.getSelection();
+      const range = document.createRange();
+      range.selectNodeContents(quote);
+      selection.removeAllRanges();
+      selection.addRange(range);
+      document.execCommand("Copy");
+      window.getSelection().removeAllRanges();
+      // show the action was successful
+      copyButton.classList.add("successFill");
+      setTimeout(function () {
+        copyButton.classList.remove("successFill");
+        copyButton.blur();
+      }, 700);
     }
 
     injectStyle();
@@ -269,6 +339,8 @@
       }
       return appendChild.apply(this, arguments);
     };
+
+    let shown = false;
   }
 
   let intervalID = setInterval(() => {
