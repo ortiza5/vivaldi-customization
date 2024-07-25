@@ -1,6 +1,7 @@
 /* Remove speed dial backgrounds */
 .startpage .dial {
   background-color: transparent;
+  backdrop-filter: unset;
   overflow: unset;
 }
 
