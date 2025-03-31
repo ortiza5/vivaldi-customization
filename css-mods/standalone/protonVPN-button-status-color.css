@@ -1,0 +1,15 @@
+/* Give ProtonVPN button different colors to indicate status of the VPN connection */
+/* https://forum.vivaldi.net/post/825267 */
+.protonVPN:not(.offline) svg .inactive {
+  opacity: 1 !important;
+}
+.protonVPN.online svg .online {
+  fill: green !important;
+  mix-blend-mode: color;
+}
+.protonVPN.offline svg .offline {
+  fill: yellow !important;
+}
+.protonVPN svg .inactive rect {
+  fill: red !important;
+}
