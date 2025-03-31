@@ -28,11 +28,12 @@
   box-shadow: 0 0 0 1px var(--colorBorder), 0 2px 8px rgba(0, 0, 0, 0.25), 0 0 0 1px var(--colorBorder) inset;
 }
 
+/* Now implemented in icon with var(--extensionsExpanded) */
 /* Extensions button expanded*/
-.toolbar-extensions .button-toolbar.ExtensionIcon--Hidden + .button-toolbar svg path {
+/* .toolbar-extensions .button-toolbar.ExtensionIcon--Hidden + .button-toolbar svg path {
   transform-origin: center;
   transform: scaleX(-1);
-}
+} */
 
 /* Extensions popup button expanded */
 .toolbar-extensions .extensionPopupIcons .button-pressed svg path {
